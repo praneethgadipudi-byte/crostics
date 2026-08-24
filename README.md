@@ -6,7 +6,7 @@ A playable acrostic word game in a single self-contained HTML file.
 
 Anyone can open this in a browser (phone or desktop). No install.
 
-**Play here:** https://praneethgadipudi.github.io/crostics/
+**Play here:** https://praneethgadipudi-byte.github.io/crostics/
 
 That URL is the shareable link. Progress is saved only in the player's own
 browser, so testers do not overwrite each other. Ads are placeholders. Hints are
