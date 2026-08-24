@@ -341,7 +341,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .clueWrap{position:relative;flex:1;min-height:0;margin:0 14px;display:flex}
 .clueScroll{
   flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;
-  padding:2px 14px 118px 0;
+  padding:2px 58px 12px 58px;
 }
 .clueScroll::-webkit-scrollbar{display:none}
 
@@ -379,18 +379,25 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .ansCells .cell{--cw:26px;--cf:14px;--ixf:8px}
 
 .hintBtn{
-  display:flex;align-items:center;gap:7px;
+  display:flex;align-items:center;justify-content:center;
   background:var(--card);border:2px solid var(--line);
-  padding:10px 15px;border-radius:999px;font-weight:900;font-size:14px;
+  width:52px;height:52px;padding:0;border-radius:16px;
+  font-weight:900;font-size:26px;line-height:1;
   box-shadow:0 4px 14px rgba(59,47,42,.14);
 }
 .hintStack{
-  position:absolute;right:14px;bottom:12px;z-index:3;
-  display:flex;flex-direction:column;align-items:stretch;gap:8px;
+  position:absolute;bottom:12px;z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
 }
+.hintStack.left{left:8px}
+.hintStack.right{right:8px}
 .hintBtn:active{transform:translateY(2px)}
 .hintBtn.empty{color:var(--muted)}
-.hintBtn .bolt{width:14px;height:16px}
+.hintBtn .w2eMark{
+  display:flex;flex-direction:column;align-items:center;gap:1px;
+  font-size:11px;font-weight:900;letter-spacing:.04em;color:var(--primary-dk);line-height:1;
+}
+.hintBtn .w2eMark b{font-size:16px;line-height:1}
 
 /* keyboard */
 .kb{flex:none;padding:8px 6px 6px;display:flex;flex-direction:column;gap:6px}
@@ -618,8 +625,6 @@ const ART = {
 const HEART_FULL = `<svg class="full" viewBox="0 0 24 22"><path fill="#C45C4A" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3C13.1 2.9 14.6 2 16.4 2c3 0 5.4 2.4 5.4 5.6C21.8 13.4 12 20 12 20z"/></svg>`;
 const HEART_EMPTY = `<svg class="empty" viewBox="0 0 24 22"><path fill="#D5CEC6" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3C13.1 2.9 14.6 2 16.4 2c3 0 5.4 2.4 5.4 5.6C21.8 13.4 12 20 12 20z"/></svg>`;
 const HEARTBREAK = `<span class="breakMark"><svg viewBox="0 0 24 22"><path fill="#C45C4A" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3V11l2.2-1.6L16 12.2V4.3C17.1 2.9 18.6 2 20.4 2c.4 0 .8 0 1.2.1C19.4 3.6 18 5.6 18 7.6 18 12 12 20 12 20z"/><path fill="#8E3B32" d="M12 4.3 14.2 9.4 12 11.2 14.4 14.1 12 20V4.3z"/></svg></span>`;
-const BOLT = `<svg class="bolt" viewBox="0 0 16 20" fill="none"><path d="M9.2 1.2 2.4 11h5.2L6.6 18.8 14 8.4H8.6L9.2 1.2z" fill="#FF8A3D" stroke="#C85A12" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
-
 /* ============================================================== storage */
 
 function blankProfile() {
@@ -1002,8 +1007,8 @@ function missLetter(s) {
       S.busy = false;
       if (p.strikes === 0) return showFail();
       advance();
-    }, 420);
-  }, 280);
+    }, 780);
+  }, 520);
 }
 
 function backspace() {
@@ -1133,8 +1138,6 @@ function useHint() {
   saveProgress();
   save();
   syncCells();
-  const hb = app.querySelector(".hintBtn span");
-  if (hb) hb.textContent = hintLabel();
   if (isWon()) return void setTimeout(win, 260);
   celebrate(fresh, quoteWasDone);
   advance();
@@ -1151,12 +1154,14 @@ function useBurst() {
     picks.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
   }
   const quoteWasDone = S.p.quoteHailed;
-  picks.forEach(s => fillLetter(s));
-  const fresh = lockCompletedWords();
-  saveProgress();
-  syncCells();
-  if (isWon()) return void setTimeout(win, 260);
-  celebrate(fresh, quoteWasDone);
+  playAd("w2e", () => {
+    picks.forEach(s => fillLetter(s));
+    const fresh = lockCompletedWords();
+    saveProgress();
+    syncCells();
+    if (isWon()) return void setTimeout(win, 260);
+    celebrate(fresh, quoteWasDone);
+  });
 }
 
 const bumps = {};
@@ -1685,11 +1690,13 @@ function puzzleHtml() {
     <div class="clueWrap">
       <div class="clueScroll">${rows}</div>
       <div class="rail"><div class="thumb"></div></div>
-      <div class="hintStack">
-        <button class="hintBtn ${UNLIMITED_HINTS || S.profile.hints ? "" : "empty"}" data-act="hint">
-          &#128161; <span>${hintLabel()}</span>
+      <div class="hintStack left">
+        <button class="hintBtn" data-act="burst" aria-label="Letter burst">
+          <span class="w2eMark"><b>&#9654;</b>W2E</span>
         </button>
-        <button class="hintBtn" data-act="burst">${BOLT} Burst</button>
+      </div>
+      <div class="hintStack right">
+        <button class="hintBtn ${S.profile.hints ? "" : "empty"}" data-act="hint" aria-label="Hint">&#128161;</button>
       </div>
     </div>
 
@@ -1786,7 +1793,8 @@ function syncCells() {
   app.querySelectorAll(".life").forEach((n, i) => n.classList.toggle("spent", i < spent));
 
   app.querySelectorAll(".key.hot").forEach(n => n.classList.remove("hot"));
-  if (S.glow && sel && !sel.locked) {
+  /* glow names a letter only after the player has already put it on the board */
+  if (S.glow && sel && sel.locked) {
     const key = app.querySelector('.key[data-key="' + sel.correct + '"]');
     if (key) key.classList.add("hot");
   }
