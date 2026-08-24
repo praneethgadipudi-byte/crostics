@@ -83,8 +83,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;
 }
 .pill.easy{background:#E4F7ED;color:#279C67}
-.pill.medium,.pill.hard{background:#FFF1D9;color:#C88914}
-.pill.vhard{background:#FFE6E6;color:#D9534F}
+.pill.medium{background:#FFF1D9;color:#C88914}
+.pill.hard{background:#FFE6E6;color:#D9534F}
 
 .chip{
   display:inline-flex;align-items:center;gap:6px;
@@ -124,7 +124,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .homeHead{padding:22px 20px 14px}
 .homeHead h1{margin:0;font-size:30px;font-weight:900;letter-spacing:-.02em}
 .homeHead p{margin:5px 0 0;color:var(--ink-soft);font-size:14px;font-weight:600}
-.homeStats{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.homeStats{display:flex;gap:8px;margin-top:14px}
 
 .cardGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:4px 20px 18px}
 .pcard{
@@ -183,7 +183,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .introHead .iconbtn{background:rgba(255,255,255,.16);color:#fff;box-shadow:none}
 .introMain{
   flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:8px;padding:4px 18px 10px;text-align:center;color:#fff;
+  justify-content:center;gap:13px;padding:4px 24px 12px;text-align:center;color:#fff;
 }
 .introKicker{font-size:11px;font-weight:900;letter-spacing:.16em;color:rgba(255,255,255,.6)}
 .introTitle{margin:0;font-size:29px;font-weight:900;line-height:1.1;letter-spacing:-.02em}
@@ -198,15 +198,13 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .introStreak .l{font-size:9px;font-weight:900;letter-spacing:.11em;
   color:rgba(255,255,255,.72);text-align:left;line-height:1.2}
 .introProof{font-size:12px;font-weight:800;color:#9BE6BE;line-height:1.35;max-width:280px}
-.introCoins{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);color:#fff}
-.powerRow{display:flex;gap:10px;justify-content:center;width:100%}
 
 /* the powerup, off by default: turning it on costs an ad watch */
 .powerSquare{
-  width:148px;aspect-ratio:1;flex:none;
-  background:var(--card);border:2px solid var(--line);border-radius:22px;
+  width:172px;aspect-ratio:1;flex:none;
+  background:var(--card);border:2px solid var(--line);border-radius:24px;
   box-shadow:0 14px 34px rgba(0,0,0,.34);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
   transition:border-color .18s ease, background .18s ease;
 }
 .powerSquare.on{border-color:var(--primary);background:#FFFBF6}
@@ -260,18 +258,56 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .topbar .t1{font-size:15px;font-weight:900;line-height:1.1}
 .topbar .t2{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:.04em;margin-top:2px}
 
-.lives{display:flex;gap:6px;flex:none;align-items:center}
-.life{width:22px;height:20px;display:grid;place-items:center;position:relative}
-.life svg{width:22px;height:20px;display:block}
-.life .empty{display:none}
-.life.spent .full{display:none}
-.life.spent .empty{display:block}
+.lives{display:flex;gap:5px;flex:none}
+/* an empty box per life, stamped with a cross left to right as they are spent */
+.life{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;
+  background:transparent;border:2px solid var(--line);position:relative;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease}
+.life svg{width:13px;height:13px;stroke:var(--bad);stroke-width:3;stroke-linecap:round;
+  opacity:0;transform:scale(.3);transition:opacity .18s ease, transform .18s ease}
+.life.spent{background:var(--bad-bg);border-color:#F3AFAF}
+.life.spent svg{opacity:1;transform:scale(1)}
 .life.pop{animation:lifePop .45s ease}
 @keyframes lifePop{0%{transform:scale(1)}35%{transform:scale(1.45)}100%{transform:scale(1)}}
-.cell.broke{background:var(--bad-bg);border-color:#F3AFAF}
-.cell.broke b{display:none}
-.cell.broke .breakMark{position:absolute;inset:0;display:grid;place-items:center}
-.cell.broke .breakMark svg{width:70%;height:70%}
+
+/* losing a strike has to be impossible to miss, so four cues fire at once: the
+   board flashes red at the edges, the row of boxes flinches, the box just
+   stamped throws off a -1, and a line of copy names what it cost */
+.lives.hit{animation:livesHit .44s ease}
+@keyframes livesHit{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-3px) scale(1.08)}
+  60%{transform:translateX(3px) scale(1.08)}
+}
+.minus{
+  position:absolute;left:50%;top:-2px;pointer-events:none;
+  font-size:12.5px;font-weight:900;color:var(--bad);
+  animation:minusUp .8s ease-out both;
+}
+@keyframes minusUp{
+  0%{opacity:0;transform:translate(-50%,4px) scale(.7)}
+  25%{opacity:1;transform:translate(-50%,-11px) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-27px) scale(1)}
+}
+.strikeFlash{
+  position:absolute;inset:0;z-index:44;pointer-events:none;
+  box-shadow:inset 0 0 0 4px rgba(255,95,95,.85), inset 0 0 70px 26px rgba(255,95,95,.3);
+  animation:strikeFlash .52s ease both;
+}
+@keyframes strikeFlash{0%{opacity:0}16%{opacity:1}100%{opacity:0}}
+.strikeMsg{
+  position:absolute;left:50%;top:56px;z-index:45;pointer-events:none;white-space:nowrap;
+  background:var(--bad);color:#fff;padding:9px 17px;border-radius:999px;
+  font-size:13.5px;font-weight:900;box-shadow:0 8px 20px rgba(255,95,95,.42);
+  animation:strikeMsg 1.5s ease both;
+}
+.strikeMsg.final{background:#D93A3A}
+@keyframes strikeMsg{
+  0%{opacity:0;transform:translate(-50%,-9px) scale(.9)}
+  12%{opacity:1;transform:translate(-50%,0) scale(1)}
+  76%{opacity:1;transform:translate(-50%,0) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-6px) scale(1)}
+}
 
 .quoteCard{
   flex:none;margin:2px 14px 12px;padding:14px 12px;
@@ -341,7 +377,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .clueWrap{position:relative;flex:1;min-height:0;margin:0 14px;display:flex}
 .clueScroll{
   flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;
-  padding:2px 14px 118px 0;
+  padding:2px 14px 72px 0;
 }
 .clueScroll::-webkit-scrollbar{display:none}
 
@@ -379,18 +415,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .ansCells .cell{--cw:26px;--cf:14px;--ixf:8px}
 
 .hintBtn{
+  position:absolute;right:14px;bottom:12px;z-index:3;
   display:flex;align-items:center;gap:7px;
   background:var(--card);border:2px solid var(--line);
   padding:10px 15px;border-radius:999px;font-weight:900;font-size:14px;
   box-shadow:0 4px 14px rgba(59,47,42,.14);
 }
-.hintStack{
-  position:absolute;right:14px;bottom:12px;z-index:3;
-  display:flex;flex-direction:column;align-items:stretch;gap:8px;
-}
 .hintBtn:active{transform:translateY(2px)}
 .hintBtn.empty{color:var(--muted)}
-.hintBtn .bolt{width:14px;height:16px}
 
 /* keyboard */
 .kb{flex:none;padding:8px 6px 6px;display:flex;flex-direction:column;gap:6px}
@@ -402,7 +434,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 }
 .key:active{transform:translateY(2px);box-shadow:0 0 0 #E3D4C4}
 .key.wide{max-width:56px;background:#F3E7DA}
-.key.hot{background:var(--primary);color:#fff;box-shadow:0 2px 0 var(--primary-sh)}
 
 /* ==========================================================================
    overlays
@@ -489,13 +520,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 @keyframes flameIn{from{opacity:0;transform:scale(.4) rotate(-14deg)}to{opacity:1;transform:none}}
 .streakN{font-size:58px;font-weight:900;line-height:1;color:var(--primary)}
 .streakL{font-size:13px;font-weight:900;letter-spacing:.16em;color:var(--ink-soft)}
-.streakHero{display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0 4px}
-.streakHero .chest{
-  width:64px;height:64px;border-radius:18px;background:#FFF6E8;border:2px solid #FFE3BE;
-  display:grid;place-items:center;font-size:32px;
-}
-.streakHero .chest.on{border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,176,32,.22)}
-.streakHead{font-size:22px;font-weight:900;letter-spacing:-.02em}
 /* the wording has to say wins, not days, or the run reads like a calendar */
 .streakNote{margin-top:6px;max-width:300px;font-size:12.5px;font-weight:700;
   line-height:1.4;color:var(--ink-soft)}
@@ -594,8 +618,6 @@ const HAPTICS = true;
 /* v2 keys progress by theme and puzzle, so a v1 save cannot be read back */
 const STORE_KEY = "crostics.v2";
 const START_HINTS = 3;
-const START_COINS = 1000;
-const GLOW_COST = 5;
 const STRIKES = 3;
 const RETRY_COST = 20;
 const HINT_EVERY = 5;
@@ -615,28 +637,20 @@ const ART = {
   pepper: `<svg viewBox="0 0 120 96"><path d="M42 22h36l-4 12H46z" fill="#8A4A25"/><path d="M44 34h32l6 34a10 10 0 0 1-10 12H48a10 10 0 0 1-10-12z" fill="#C98A5E"/><path d="M44 34h32l6 34a10 10 0 0 1-10 12H48a10 10 0 0 1-10-12z" fill="none" stroke="#9E6739" stroke-width="3"/><rect x="52" y="12" width="16" height="10" rx="5" fill="#5B3A22"/><g fill="#3B2F2A"><circle cx="34" cy="82" r="5"/><circle cx="48" cy="88" r="4"/><circle cx="86" cy="84" r="5"/></g></svg>`
 };
 
-const HEART_FULL = `<svg class="full" viewBox="0 0 24 22"><path fill="#C45C4A" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3C13.1 2.9 14.6 2 16.4 2c3 0 5.4 2.4 5.4 5.6C21.8 13.4 12 20 12 20z"/></svg>`;
-const HEART_EMPTY = `<svg class="empty" viewBox="0 0 24 22"><path fill="#D5CEC6" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3C13.1 2.9 14.6 2 16.4 2c3 0 5.4 2.4 5.4 5.6C21.8 13.4 12 20 12 20z"/></svg>`;
-const HEARTBREAK = `<span class="breakMark"><svg viewBox="0 0 24 22"><path fill="#C45C4A" d="M12 20S2.2 13.4 2.2 7.6C2.2 4.4 4.6 2 7.6 2c1.8 0 3.3.9 4.4 2.3V11l2.2-1.6L16 12.2V4.3C17.1 2.9 18.6 2 20.4 2c.4 0 .8 0 1.2.1C19.4 3.6 18 5.6 18 7.6 18 12 12 20 12 20z"/><path fill="#8E3B32" d="M12 4.3 14.2 9.4 12 11.2 14.4 14.1 12 20V4.3z"/></svg></span>`;
-const BOLT = `<svg class="bolt" viewBox="0 0 16 20" fill="none"><path d="M9.2 1.2 2.4 11h5.2L6.6 18.8 14 8.4H8.6L9.2 1.2z" fill="#FF8A3D" stroke="#C85A12" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
+const XMARK = `<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
 
 /* ============================================================== storage */
 
 function blankProfile() {
-  return {
-    streak: 0, best: 0, hints: START_HINTS, coins: START_COINS,
-    done: {}, progress: {}, power: {}, glow: {}
-  };
+  return { streak: 0, best: 0, hints: START_HINTS, done: {}, progress: {}, power: {} };
 }
 
 function load() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
     if (!raw) return blankProfile();
-    const p = Object.assign(blankProfile(), JSON.parse(raw));
-    if (typeof p.coins !== "number") p.coins = START_COINS;
-    if (!p.glow) p.glow = {};
-    return p;
+    const p = JSON.parse(raw);
+    return Object.assign(blankProfile(), p);
   } catch (e) {
     return blankProfile();
   }
@@ -656,11 +670,8 @@ const S = {
   sel: null,
   ctx: "clue",
   overlay: null,
-  busy: false,
   power: false,
   powerPick: false,
-  glow: false,
-  glowPick: false,
   reviewTab: "fact",
   streakInfo: null,
   profile: load()
@@ -783,20 +794,11 @@ function buildPuzzle(data) {
  * up front because it shows through behind the overlay. A powerup already paid
  * for on this puzzle comes back switched on and is not charged again.
  */
-function bandLabel(band) {
-  if (band === "hard") return { cls: "vhard", text: "very hard" };
-  if (band === "medium") return { cls: "hard", text: "hard" };
-  return { cls: "easy", text: "easy" };
-}
-
 function enterPuzzle(index) {
   S.pi = index;
   S.p = buildPuzzle(puzzles[index]);
-  const id = keyOf(puzzles[index]);
-  S.power = !!S.profile.power[id];
+  S.power = !!S.profile.power[keyOf(puzzles[index])];
   S.powerPick = S.power;
-  S.glow = !!S.profile.glow[id];
-  S.glowPick = S.glow;
   restoreProgress();
   S.sel = firstOpenSlot();
   S.ctx = "clue";
@@ -807,21 +809,6 @@ function enterPuzzle(index) {
 
 function startPuzzle() {
   const id = keyOf(puzzles[S.pi]);
-  if (S.glowPick && !S.profile.glow[id]) {
-    if (S.profile.coins < GLOW_COST) {
-      S.glowPick = false;
-      toast("Not enough coins");
-      render();
-      return;
-    }
-    S.profile.coins -= GLOW_COST;
-    S.profile.glow[id] = true;
-    save();
-  }
-  if (!S.glowPick && S.profile.glow[id]) {
-    delete S.profile.glow[id];
-    save();
-  }
   if (S.powerPick && !S.profile.power[id]) {
     return playAd("w2e", () => {
       S.profile.power[id] = true;
@@ -840,13 +827,10 @@ function startPuzzle() {
 function openPuzzle(index) {
   S.pi = index;
   S.p = buildPuzzle(puzzles[index]);
-  const id = keyOf(puzzles[index]);
-  S.power = !!S.profile.power[id];
-  S.glow = !!S.profile.glow[id];
+  S.power = !!S.profile.power[keyOf(puzzles[index])];
   restoreProgress();
   S.sel = firstOpenSlot();
   S.ctx = "clue";
-  S.busy = false;
   S.screen = "puzzle";
   /* closing the tab on the fail popup must not hand back three fresh strikes */
   S.overlay = S.p.strikes <= 0 ? "fail" : null;
@@ -963,7 +947,7 @@ function retreat() {
 
 function typeLetter(ch) {
   const p = S.p;
-  if (!p || S.overlay || S.busy) return;
+  if (!p || S.overlay) return;
   const s = slotOf(S.sel);
   if (!s || s.locked) return;
 
@@ -979,31 +963,14 @@ function typeLetter(ch) {
     celebrate(fresh, quoteWasDone);
     advance();
   } else {
-    missLetter(s);
-  }
-}
-
-function missLetter(s) {
-  const p = S.p;
-  S.busy = true;
-  bump(s, "shake");
-  syncCells();
-  setTimeout(() => {
-    bumps[s.id] = "broke";
     p.strikes = Math.max(0, p.strikes - 1);
+    bump(s, "shake");
     saveProgress();
     syncCells();
     flashLife();
-    setTimeout(() => {
-      s.value = "";
-      delete bumps[s.id];
-      saveProgress();
-      syncCells();
-      S.busy = false;
-      if (p.strikes === 0) return showFail();
-      advance();
-    }, 420);
-  }, 280);
+    if (p.strikes === 0) return void setTimeout(showFail, 420);
+    advance();
+  }
 }
 
 function backspace() {
@@ -1025,21 +992,18 @@ function backspace() {
 }
 
 /*
- * With the auto-fill powerup a correct letter settles that cell and every
- * matching cell in the quote. Clue-word peers stay empty unless the player
- * types them, which is what the powerup no longer buys.
+ * With the auto-fill powerup one correct letter settles every place that letter
+ * appears, in the quote and in every answer. A group fill can never be wrong,
+ * because a cell's correct value is simply its letter. Without the powerup only
+ * the cell the player is on settles, and the rest are merely highlighted.
  */
 function fillLetter(slot) {
   const ch = slot.correct;
-  const same = [slot];
-  if (S.power) {
-    S.p.slots.forEach(s => {
-      if (s.id !== slot.id && s.clue < 0 && s.correct === ch) same.push(s);
-    });
-  }
+  const same = S.power ? S.p.slots.filter(s => s.correct === ch) : [slot];
   same.forEach((s, i) => {
     s.value = ch;
     s.locked = true;
+    /* the pops run left to right so the spread is legible rather than a flash */
     const wait = Math.min(i * 25, 200);
     setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
   });
@@ -1140,25 +1104,6 @@ function useHint() {
   advance();
 }
 
-function useBurst() {
-  const p = S.p;
-  if (!p || S.overlay || S.busy) return;
-  const open = p.slots.filter(s => s.clue >= 0 && !s.locked);
-  if (!open.length) return toast("Nothing left to burst");
-  const picks = [];
-  const pool = open.slice();
-  while (picks.length < 3 && pool.length) {
-    picks.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
-  }
-  const quoteWasDone = S.p.quoteHailed;
-  picks.forEach(s => fillLetter(s));
-  const fresh = lockCompletedWords();
-  saveProgress();
-  syncCells();
-  if (isWon()) return void setTimeout(win, 260);
-  celebrate(fresh, quoteWasDone);
-}
-
 const bumps = {};
 function bump(slot, cls) {
   bumps[slot.id] = cls;
@@ -1193,14 +1138,45 @@ function vibrate(pattern) {
  */
 function flashLife() {
   const nodes = app.querySelectorAll(".life");
+  /* called after the strike is deducted, so this is the box just stamped */
   const idx = STRIKES - S.p.strikes - 1;
   const box = nodes[idx];
   if (box) {
     box.classList.add("pop");
     setTimeout(() => box.classList.remove("pop"), 460);
+    const chip = document.createElement("span");
+    chip.className = "minus";
+    chip.textContent = "-1";
+    box.appendChild(chip);
+    setTimeout(() => chip.remove(), 820);
   }
+
+  const row = app.querySelector(".lives");
+  if (row) {
+    row.classList.add("hit");
+    setTimeout(() => row.classList.remove("hit"), 460);
+  }
+
+  const flash = document.createElement("div");
+  flash.className = "strikeFlash";
+  app.appendChild(flash);
+  setTimeout(() => flash.remove(), 540);
+
+  const left = S.p.strikes;
+  strikeMsg(left);
   buzz(150, 220);
-  vibrate(S.p.strikes ? 70 : [50, 60, 110]);
+  vibrate(left ? 70 : [50, 60, 110]);
+}
+
+function strikeMsg(left) {
+  app.querySelectorAll(".strikeMsg").forEach(n => n.remove());
+  const el = document.createElement("div");
+  el.className = "strikeMsg" + (left <= 1 ? " final" : "");
+  el.textContent = left === 0 ? "Out of strikes"
+    : left === 1 ? "Wrong letter. Last strike!"
+    : "Wrong letter. " + left + " strikes left";
+  app.appendChild(el);
+  setTimeout(() => el.remove(), 1500);
 }
 
 /* ============================================================ flow: fail */
@@ -1233,7 +1209,6 @@ function doRetry() {
 function abandon() {
   S.profile.streak = 0;
   delete S.profile.power[keyOf(S.p.data)];
-  delete S.profile.glow[keyOf(S.p.data)];
   clearProgress(keyOf(S.p.data));
   save();
   S.overlay = null;
@@ -1249,7 +1224,6 @@ function win() {
   S.profile.best = Math.max(S.profile.best, S.profile.streak);
 
   delete S.profile.power[keyOf(p.data)];
-  delete S.profile.glow[keyOf(p.data)];
   const reward = S.profile.streak % HINT_EVERY === 0;
   if (reward) S.profile.hints++;
   S.streakInfo = { streak: S.profile.streak, reward: reward };
@@ -1470,7 +1444,7 @@ function homeHtml() {
           <div class="nm">${p.title}</div>
         </div>
         <div class="foot">
-          <span class="pill ${bandLabel(p.band).cls}">${bandLabel(p.band).text}</span>
+          <span class="pill ${p.band}">${p.band}</span>
           ${done ? `<span class="tick">&#10003;</span>`
                  : started ? `<span class="resume">RESUME</span>`
                  : locked ? `<span class="resume" style="color:var(--muted)">&#128274;</span>` : ``}
@@ -1494,8 +1468,6 @@ function homeHtml() {
       <div class="homeStats">
         <span class="chip">&#128293; ${S.profile.streak}<span
           style="font-weight:800;color:var(--muted);font-size:11px">WIN STREAK</span></span>
-        <span class="chip">&#129689; ${S.profile.coins}<span
-          style="font-weight:800;color:var(--muted);font-size:11px">COINS</span></span>
         <span class="chip">&#128161; ${hintLabel()}<span
           style="font-weight:800;color:var(--muted);font-size:11px">HINTS</span></span>
       </div>
@@ -1520,7 +1492,7 @@ function soonCards() {
         <div class="no">PUZZLE ${i + 1}</div>
         <div class="nm">Coming soon</div>
       </div>
-      <div class="foot"><span class="pill ${bandLabel(band).cls}">${bandLabel(band).text}</span></div>
+      <div class="foot"><span class="pill ${band}">${band}</span></div>
     </div>`).join("");
 }
 
@@ -1528,40 +1500,27 @@ function soonCards() {
 
 function powerCopy() {
   return S.powerPick
-    ? "A correct letter fills every matching cell in the quote."
-    : "Turn it on and a correct letter fills matching cells in the quote.";
+    ? "One correct letter fills every place it appears. Make every guess count!"
+    : "Turn it on and one correct letter fills every place it appears.";
 }
 
-function glowCopy() {
-  return S.glowPick
-    ? "The right key lights up for the cell you are on."
-    : "Spend 5 coins and the right key lights up for the cell you are on.";
-}
-
+/* placeholder social proof, to be swapped for a real figure once there is one */
 function socialProof(d) {
   return `&#127881; Over ${38 + d.id * 7},000 players enjoyed this puzzle`;
 }
 
+/* patched in place rather than re-rendered so the switch keeps its slide */
 function togglePower(card) {
   S.powerPick = !S.powerPick;
   card.classList.toggle("on", S.powerPick);
   const lbl = card.querySelector(".sw span");
   if (lbl) lbl.textContent = S.powerPick ? "W2E" : "Off";
-}
-
-function toggleGlow(card) {
-  if (!S.glowPick && !S.profile.glow[keyOf(puzzles[S.pi])] && S.profile.coins < GLOW_COST) {
-    return toast("Not enough coins");
-  }
-  S.glowPick = !S.glowPick;
-  card.classList.toggle("on", S.glowPick);
-  const lbl = card.querySelector(".sw span");
-  if (lbl) lbl.textContent = S.glowPick ? "On" : "Off";
+  const why = app.querySelector(".introBenefit");
+  if (why) why.innerHTML = powerCopy();
 }
 
 function introHtml() {
   const d = puzzles[S.pi];
-  const band = bandLabel(d.band);
   return `
     <div class="introHead">
       <button class="iconbtn" data-act="home">&#8592;</button>
@@ -1570,33 +1529,26 @@ function introHtml() {
     <div class="introMain">
       <div class="introKicker">${packInfo().name} &middot; PUZZLE ${d.id}</div>
       <h1 class="introTitle">${d.title}</h1>
-      <span class="chip introCoins">&#129689; ${S.profile.coins}</span>
+
       <div class="introStreak">
         <span class="f">&#128293;</span>
         <span class="n">${S.profile.streak}</span>
-        <span class="l">WIN<br>STREAK</span>
-      </div>
-      <span class="pill ${band.cls}">${band.text}</span>
-
-      <div class="powerRow">
-        <button class="powerSquare ${S.powerPick ? "on" : ""}" data-act="power">
-          <div class="psBadge">W2E</div>
-          <div class="psTitle">Auto-fill</div>
-          <div class="psWatch">Quote only</div>
-          <div class="sw"><i></i><span>${S.powerPick ? "W2E" : "Off"}</span></div>
-        </button>
-        <button class="powerSquare ${S.glowPick ? "on" : ""}" data-act="glow">
-          <div class="psBadge">5</div>
-          <div class="psTitle">Key glow</div>
-          <div class="psWatch">5 coins</div>
-          <div class="sw"><i></i><span>${S.glowPick ? "On" : "Off"}</span></div>
-        </button>
+        <span class="l">PUZZLE<br>STREAK</span>
       </div>
 
-      <button class="btn primary introPlay" data-act="play">Play</button>
       <div class="introProof">${socialProof(d)}</div>
+
+      <button class="powerSquare ${S.powerPick ? "on" : ""}" data-act="power">
+        <div class="psBadge">W2E</div>
+        <div class="psTitle">Auto-fill</div>
+        <div class="psWatch">Watch &#9654;</div>
+        <div class="sw"><i></i><span>${S.powerPick ? "W2E" : "Off"}</span></div>
+      </button>
+
+      <div class="introBenefit">${powerCopy()}</div>
+      <button class="btn primary introPlay" data-act="play">Play</button>
     </div>
-    <div class="banner">BANNER AD</div>`;
+    <div class="banner">ADS</div>`;
 }
 
 /* ------------------------------------------------------------ puzzle */
@@ -1606,8 +1558,7 @@ function puzzleHtml() {
 
   const spent = STRIKES - p.strikes;
   const lives = [0, 1, 2].map(i =>
-    `<div class="life ${i < spent ? "spent" : ""}">${HEART_FULL}${HEART_EMPTY}</div>`).join("");
-  const band = bandLabel(d.band);
+    `<div class="life ${i < spent ? "spent" : ""}">${XMARK}</div>`).join("");
 
   /* the quote wraps a word at a time so no answer is ever split across rows */
   let ci = 0, groups = [], cur = "";
@@ -1662,11 +1613,7 @@ function puzzleHtml() {
   const keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
   const kb = keys.map((r, i) => {
     let row = r.split("").map(k => `<button class="key" data-key="${k}">${k}</button>`).join("");
-    if (i === 2) {
-      row = `<button class="key" data-key="LEFT">&#9664;</button>` + row +
-        `<button class="key" data-key="RIGHT">&#9654;</button>` +
-        `<button class="key wide" data-key="DEL">&#9003;</button>`;
-    }
+    if (i === 2) row += `<button class="key wide" data-key="DEL">&#9003;</button>`;
     return `<div class="krow">${row}</div>`;
   }).join("");
 
@@ -1675,7 +1622,7 @@ function puzzleHtml() {
       <button class="iconbtn" data-act="home">&#8592;</button>
       <div class="titles">
         <div class="t1">${d.title}</div>
-        <div class="t2">${packInfo().name.toUpperCase()} &middot; PUZZLE ${d.id} &middot; ${band.text.toUpperCase()}</div>
+        <div class="t2">${packInfo().name.toUpperCase()} &middot; PUZZLE ${d.id} &middot; ${d.band.toUpperCase()}</div>
       </div>
       <div class="lives">${lives}</div>
     </div>
@@ -1685,12 +1632,9 @@ function puzzleHtml() {
     <div class="clueWrap">
       <div class="clueScroll">${rows}</div>
       <div class="rail"><div class="thumb"></div></div>
-      <div class="hintStack">
-        <button class="hintBtn ${UNLIMITED_HINTS || S.profile.hints ? "" : "empty"}" data-act="hint">
-          &#128161; <span>${hintLabel()}</span>
-        </button>
-        <button class="hintBtn" data-act="burst">${BOLT} Burst</button>
-      </div>
+      <button class="hintBtn ${UNLIMITED_HINTS || S.profile.hints ? "" : "empty"}" data-act="hint">
+        &#128161; <span>${hintLabel()}</span>
+      </button>
     </div>
 
     <div class="kb">${kb}</div>
@@ -1769,10 +1713,6 @@ function syncCells() {
 
     node.className = cls.join(" ");
     node.querySelector("b").textContent = s.value;
-    const mark = node.querySelector(".breakMark");
-    if (bumps[s.id] === "broke") {
-      if (!mark) node.insertAdjacentHTML("beforeend", HEARTBREAK);
-    } else if (mark) mark.remove();
   });
 
   p.clues.forEach((row, i) => {
@@ -1784,12 +1724,6 @@ function syncCells() {
 
   const spent = STRIKES - p.strikes;
   app.querySelectorAll(".life").forEach((n, i) => n.classList.toggle("spent", i < spent));
-
-  app.querySelectorAll(".key.hot").forEach(n => n.classList.remove("hot"));
-  if (S.glow && sel && !sel.locked) {
-    const key = app.querySelector('.key[data-key="' + sel.correct + '"]');
-    if (key) key.classList.add("hot");
-  }
 }
 
 function scrollClueIntoView() {
@@ -1827,26 +1761,47 @@ function themeDone() {
 
 function streakHtml() {
   const info = S.streakInfo;
+  const inCycle = info.streak % HINT_EVERY === 0 ? HINT_EVERY : info.streak % HINT_EVERY;
+  const pips = [];
+  for (let i = 1; i <= HINT_EVERY; i++) {
+    const on = i <= inCycle;
+    pips.push(i === HINT_EVERY
+      ? `<div class="pip goal ${on ? "on" : ""}">&#128161;</div>`
+      : `<div class="pip ${on ? "on" : ""}"></div>`);
+  }
+
   const best = S.profile.best;
   const isBest = info.streak >= best;
+  const wins = info.streak === 1 ? "WIN IN A ROW" : "WINS IN A ROW";
+
   return `
     <div class="streakScreen">
-      <div class="streakHead">Win streak</div>
+      <div class="flame">&#128293;</div>
+      <div class="streakN">${info.streak}</div>
+      <div class="streakL">${wins}</div>
       <div class="streakNote">Solved back to back without giving up.
         Retry and Revive keep it alive &mdash; only walking away resets it.</div>
-      <div class="streakHero">
-        <div>
-          <div class="streakN">${info.streak}</div>
-          <div class="streakL">${info.streak === 1 ? "WIN IN A ROW" : "WINS IN A ROW"}</div>
-        </div>
-        <div class="chest ${info.reward ? "on" : ""}">${info.reward ? "&#128176;" : "&#128230;"}</div>
-      </div>
       <div class="streakStats">
         <div class="sbox ${isBest ? "on" : ""}">
           <div class="n">${best}</div>
           <div class="l">BEST RUN</div>
           ${isBest ? `<div class="tagNew">NEW</div>` : ``}
         </div>
+        <div class="sbox">
+          <div class="n">${themeDone()}<span style="font-size:15px;color:var(--muted)">/${
+            puzzles.length}</span></div>
+          <div class="l">THIS THEME</div>
+        </div>
+      </div>
+      <div class="streakProof">Only ${streakRarity(info.streak)}% of players hold a
+        ${info.streak} win streak. Keep it going.</div>
+      <div class="progWrap">
+        <div class="progTop">
+          <span>${inCycle} of ${HINT_EVERY} WINS</span>
+          <span>NEXT HINT</span>
+        </div>
+        <div class="progBar"><i></i></div>
+        <div class="pips">${pips.join("")}</div>
       </div>
       ${info.reward ? `<div class="rewardCard">&#127881; Five wins in a row &middot; +1 hint</div>` : ``}
       <div class="tapOn">TAP TO CONTINUE</div>
@@ -1935,34 +1890,25 @@ app.addEventListener("click", e => {
 
   const key = e.target.closest("[data-key]");
   if (key) {
-    if (S.busy) return;
     const k = key.dataset.key;
-    if (k === "DEL") return backspace();
-    if (k === "LEFT") return retreat();
-    if (k === "RIGHT") return advance();
-    return typeLetter(k);
+    return k === "DEL" ? backspace() : typeLetter(k);
   }
 
   const cell = e.target.closest("[data-cell]");
   if (cell) {
-    if (S.busy) return;
     const id = S.p.cellSlot[+cell.dataset.cell];
     if (id != null) selectSlot(id, "quote");
     return;
   }
 
   const ac = e.target.closest("[data-slot]");
-  if (ac) {
-    if (S.busy) return;
-    return selectSlot(+ac.dataset.slot, "clue");
-  }
+  if (ac) return selectSlot(+ac.dataset.slot, "clue");
 
   const act = e.target.closest("[data-act]");
   if (!act) return;
   switch (act.dataset.act) {
     case "home": if (S.p) saveProgress(); goHome(); break;
     case "hint": useHint(); break;
-    case "burst": useBurst(); break;
     case "revive": doRevive(); break;
     case "retry": doRetry(); break;
     case "askQuit": S.overlay = "confirm"; paintOverlay(); break;
@@ -1970,7 +1916,6 @@ app.addEventListener("click", e => {
     case "quitYes": abandon(); break;
     case "play": startPuzzle(); break;
     case "power": togglePower(act); break;
-    case "glow": toggleGlow(act); break;
     case "flip": S.reviewTab = S.reviewTab === "fact" ? "clues" : "fact"; render(); break;
     case "next":
       if (S.pi + 1 < puzzles.length) enterPuzzle(S.pi + 1);
@@ -1980,9 +1925,7 @@ app.addEventListener("click", e => {
 });
 
 document.addEventListener("keydown", e => {
-  if (S.screen !== "puzzle" || S.overlay || S.busy) return;
-  if (e.key === "ArrowLeft") { e.preventDefault(); return retreat(); }
-  if (e.key === "ArrowRight") { e.preventDefault(); return advance(); }
+  if (S.screen !== "puzzle" || S.overlay) return;
   if (e.key === "Backspace") { e.preventDefault(); return backspace(); }
   if (/^[a-zA-Z]$/.test(e.key)) { e.preventDefault(); typeLetter(e.key.toUpperCase()); }
 });
