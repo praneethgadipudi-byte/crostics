@@ -1,0 +1,136 @@
+#1  The Purple Carrot  [easy]
+  quote   : Wild carrots were purple, not orange.
+  unindexed: WILD CARROTS W.RE PURPLE, NOT O.ANGE.
+  stats   : letters=30 clues=8 qFree=2 aFree=2 entropy=3.695 vowels=0.367 avgLen=3.75 score=88.8
+  A. WILLOW (WILLOW)  Tree that weeps by the water
+  B. CURD (CURD)  The lumpy start of every cheese
+  C. TOAST (TOAST)  Bread that met the fire again
+  D. GAP (GAP)  The space that should not be there
+  E. PEN (PEN)  Enclosure for pigs, or a writing tool
+  F. URN (-RN)  Tall vessel for ashes or tea
+  G. ORE (ORE)  Rock worth digging up
+  H. EAR (E-R)  Corn grows in one, and you listen with one
+#2  Chocolate Currency  [easy]
+  quote   : Cacao beans were once used as actual money.
+  unindexed: CAC.O BEANS WERE ONCE USED AS ACTU.L MONEY.
+  stats   : letters=35 clues=8 qFree=2 aFree=2 entropy=3.55 vowels=0.486 avgLen=4.38 score=95.8
+  A. YELLOW (YE-LOW)  Colour of butter and lemons
+  B. CRUMB (CRUMB)  The evidence you ate it
+  C. SAUCE (SAUCE)  It rescues a dull dish
+  D. SCONE (SCONE)  It divides a nation over pronunciation
+  E. OATS (OATS)  Breakfast grain that thickens
+  F. CANE (CANE)  Sugar grows on it
+  G. DEN (DEN)  A fox's home, or a cosy back room
+  H. TEA (-EA)  Leaves that started a revolution
+#3  The Jar That Never Spoiled  [easy]
+  quote   : Honey sealed in ancient tombs is still edible.
+  unindexed: HONEY SEALED IN ANCI.NT TOMB. IS STILL EDIBLE.
+  stats   : letters=38 clues=8 qFree=2 aFree=2 entropy=3.567 vowels=0.395 avgLen=4.75 score=100.9
+  A. THYME (THYME)  Small leaves, big in a stew
+  B. RIBBON (-IBBON)  It ties the parcel
+  C. ISLAND (ISLAND)  Land with water all around
+  D. LENTIL (LENTIL)  Tiny pulse that thickens a stew
+  E. CIDER (CIDE-)  Apples, pressed and left alone
+  F. NEST (NEST)  Twigs arranged into a home
+  G. OIL (OIL)  It shimmers on top of water
+  H. SEA (SEA)  Salt water with a horizon
+#4  The Poison Apple  [medium]
+  quote   : Europeans once feared the tomato as deadly poison.
+  unindexed: EUROPEANS ONCE FEAR.D THE TOMATO AS D.ADLY P.ISON.
+  stats   : letters=42 clues=9 qFree=3 aFree=3 entropy=3.731 vowels=0.476 avgLen=4.67 score=113.9
+  A. CHERRY (CHERRY)  It tops the cake
+  B. PUMPKIN (PUMP-IN)  Orange squash with a carved face
+  C. FEAST (FEAST)  Dinner that got out of hand
+  D. SALAD (SALAD)  Raw vegetables making an effort
+  E. SEED (SEED)  The whole plant, packed small
+  F. ONION (ON-ON)  It makes you cry while helping
+  G. TOAD (TOAD)  Warty relative of the frog
+  H. TOE (TOE)  You stub it in the dark
+  I. OAR (OA-)  You row with a pair of them
+#5  Two Years For One Fruit  [medium]
+  quote   : One pineapple plant can take nearly two years to ripen.
+  unindexed: ONE PINEAPPLE PLANT CAN T.KE NEAR.Y TWO YEARS TO RIP.N.
+  stats   : letters=45 clues=9 qFree=3 aFree=3 entropy=3.524 vowels=0.4 avgLen=5 score=118.4
+  A. PASTRY (PASTRY)  Butter and flour, done properly
+  B. PICKLE (PICKLE)  Vegetable saved by vinegar
+  C. PANTRY (PANTRY)  Cupboard the cook trusts
+  D. WINTER (WINTER)  When the pantry earns its keep
+  E. POTATO (PO-ATO)  Root that became chips, crisps and mash
+  F. PECAN (PE-AN)  Nut at the heart of a pie
+  G. NEON (NEON)  Gas that made signs glow
+  H. VAN (-AN)  Delivery vehicle with no windows
+  I. EEL (EEL)  Long swimmer often mistaken for a snake
+#6  Berry Confusion  [medium]
+  quote   : To a botanist the banana is a berry and the strawberry is not.
+  unindexed: TO A BOTA.IST THE B.NANA IS A BERRY AND THE STR.WBERRY IS NOT.
+  stats   : letters=49 clues=10 qFree=3 aFree=3 entropy=3.484 vowels=0.367 avgLen=4.9 score=127.4
+  A. DAIRY (DAIRY)  Where milk becomes everything else
+  B. HONEY (HONEY)  The only food that never spoils
+  C. WHISK (WHIS-)  It beats eggs into submission
+  D. RABBIT (RABBIT)  It gets into the vegetable patch
+  E. BUTTER (B-TTER)  Cream that got churned
+  F. BEAN (BEAN)  It can be baked, roasted or ground
+  G. ROAST (ROAST)  Cook it slowly and let it brown
+  H. TASTE (TASTE)  Only five of them, officially
+  I. STAR (STAR)  It burns very far away
+  J. NOON (N-ON)  When both hands point up
+#7  Four Thousand Year Old Noodles  [hard]
+  quote   : The oldest bowl of noodles ever unearthed was made from millet.
+  unindexed: THE O.DEST BOWL OF NOOD.ES EV.R UNEARTHED WAS MADE FROM MILL.T.
+  stats   : letters=52 clues=10 qFree=4 aFree=4 entropy=3.803 vowels=0.385 avgLen=5.2 score=136.7
+  A. MUFFIN (MUFFIN)  Breakfast cake, in denial
+  B. HARVEST (HARVEST)  The payoff for a whole season
+  C. WHEAT (WHEAT)  The grain behind most bread
+  D. MEADOW (MEADOW)  Field of grass and wildflowers
+  E. BREAD (BRE-D)  The oldest thing on the table
+  F. TOMATO (TOM-TO)  Fruit that insists it is a vegetable
+  G. SLED (SLED)  It only works downhill
+  H. MELON (-ELON)  Big fruit that is mostly water
+  I. DOOR (DOOR)  You knock before opening it
+  J. ISLE (-SLE)  Small island in poetry
+#8  Spuds In Space  [hard]
+  quote   : A potato became the first food ever grown in orbit above our planet.
+  unindexed: A POTATO BECAME THE FIRST FOOD EV.R GR.WN IN ORBIT ABOV. OUR PL.NET.
+  stats   : letters=55 clues=11 qFree=4 aFree=4 entropy=3.915 vowels=0.436 avgLen=5 score=144.1
+  A. TRUFFLE (TRUFFLE)  Fungus dogs are trained to find
+  B. VIVID (VIVID)  So bright it stays with you
+  C. CASHEW (CASHEW)  Nut that grows outside its fruit
+  D. BAMBOO (BAMBOO)  Grass tall enough to build with
+  E. GRAIN (GRAIN)  Wheat, rice and the rest
+  F. PEPPER (-EPPER)  It travelled further than most people
+  G. BROTH (BROT-)  Thin soup with deep flavour
+  H. CORN (-ORN)  It grows in ears and pops
+  I. TENT (TENT)  Canvas bedroom
+  J. OAT (OAT)  Grain behind the breakfast bowl
+  K. ROOT (-OOT)  The part of the plant you dig for
+#9  The Orchid In Your Ice Cream  [hard]
+  quote   : Real vanilla comes from an orchid that must be pollinated by hand alone.
+  unindexed: REAL VANILLA C.MES FR.M AN ORCHID THAT MUST BE POL.INATED BY HAND ALO.E.
+  stats   : letters=59 clues=11 qFree=4 aFree=4 entropy=3.982 vowels=0.373 avgLen=5.36 score=150.7
+  A. VALLEY (VALLEY)  Where the river settled
+  B. MUSTARD (MUSTARD)  Seed paste with a sinus opinion
+  C. SIMMER (SIMMER)  Cook just below a boil
+  D. CHEF (CHEF)  The one shouting in the kitchen
+  E. CHILI (CHILI)  Heat you can eat
+  F. LADDER (LADDER)  Steps you can carry
+  G. HERB (HE-B)  Leafy flavour from the windowsill
+  H. BACON (BA-ON)  It made breakfast smell famous
+  I. PLANT (PLANT)  It stays put and still eats
+  J. BANANA (-ANANA)  Berry that grows on a giant herb
+  K. TOOTH (TOOT-)  Sweet-toothed people have a favourite
+#10  Counted Grain By Grain  [hard]
+  quote   : Black pepper was once so valuable that traders counted the grains one by one.
+  unindexed: BLACK PEPPER WAS O.CE SO VALUABLE THAT TRAD.RS COUNT.D THE GR.INS ONE BY ONE.
+  stats   : letters=63 clues=12 qFree=4 aFree=4 entropy=4.009 vowels=0.381 avgLen=5.25 score=159.6
+  A. VOYAGE (VOYAGE)  A long trip by sea
+  B. KETCHUP (KETCHUP)  It began as a fish sauce
+  C. WALNUT (WALNUT)  Nut shaped like a brain
+  D. CHEESE (CHEESE)  Milk that learned to wait
+  E. BASIL (BASIL)  Herb that makes pesto pesto
+  F. SUPPER (S-PPER)  The last meal of the day
+  G. CARROT (CARROT)  Root that was purple first
+  H. BOARD (BOARD)  You chop on it
+  I. BOLD (BOLD)  Brave, or a heavier font
+  J. STONE (STO-E)  The pit inside a peach
+  K. TUNA (T-NA)  Fish that comes in a tin
+  L. INN (-NN)  Old roadside stop with beds and beer

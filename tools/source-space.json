@@ -1,0 +1,232 @@
+{
+  "pack": {
+    "id": "space",
+    "name": "Space and the Sky",
+    "blurb": "Ten true things about what is over your head."
+  },
+  "theme": "space",
+  "tab": "Space",
+  "emoji": "&#129680;",
+  "puzzles": [
+    {
+      "id": 1,
+      "band": "easy",
+      "title": "The Day That Outlasts The Year",
+      "art": "venus",
+      "quote": "A day on Venus is longer than its year.",
+      "clues": [8],
+      "quoteFree": [1, 3],
+      "answerFree": [1, 3],
+      "themeWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "hideCount": 2,
+      "hideBias": "rare",
+      "hideShare": 0.16,
+      "pairPull": -0.6,
+      "fact": [
+        "A day on Venus is longer than its year. The planet turns on its axis so slowly that one rotation takes about two hundred and forty three earth days, while a full lap around the sun takes only two hundred and twenty five.",
+        "It also turns the wrong way. Almost everything in the solar system spins in the same direction, a leftover of the disc it all condensed from, but Venus rotates backwards. Stand on the surface, if you somehow could, and you would watch the sun rise in the west.",
+        "Very little else about the place is welcoming either. The atmosphere is mostly carbon dioxide, the pressure at ground level is like being half a mile underwater, and a permanent haze of sulphuric acid cloud keeps the surface at around four hundred and sixty degrees."
+      ]
+    },
+    {
+      "id": 2,
+      "band": "easy",
+      "title": "The Planet That Would Float",
+      "art": "saturn",
+      "quote": "Saturn is light enough to float on water.",
+      "clues": [8],
+      "quoteFree": [1, 3],
+      "answerFree": [1, 3],
+      "themeWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "hideCount": 2,
+      "hideBias": "rare",
+      "hideShare": 0.16,
+      "pairPull": -0.6,
+      "fact": [
+        "Saturn is light enough to float on water. Averaged out across its enormous volume, the planet is less dense than water is, because it is essentially a very deep atmosphere of hydrogen and helium with no solid surface to stand on.",
+        "The picture of it bobbing in a giant bath is a useful lie rather than a real possibility. There is no bath large enough, the planet would tear itself apart under its own gravity long before it settled, and the dense core at the centre is anything but light.",
+        "The rings are stranger than the planet. They stretch across a span wider than the distance from here to the moon, yet in most places they are only about ten metres thick, and they are made almost entirely of ordinary water ice."
+      ]
+    },
+    {
+      "id": 3,
+      "band": "easy",
+      "title": "The Moon Is Leaving",
+      "art": "moonaway",
+      "quote": "The moon drifts further from earth every year.",
+      "clues": [8],
+      "quoteFree": [1, 3],
+      "answerFree": [1, 3],
+      "themeWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "hideCount": 2,
+      "hideBias": "rare",
+      "hideShare": 0.18,
+      "pairPull": -0.4,
+      "fact": [
+        "The moon drifts further from earth every year. Mirrors left on the surface by the Apollo crews let us bounce a laser off it and measure the gap to within a few centimetres, and the answer keeps growing by about three and a half centimetres every year.",
+        "Tides are the reason. The moon raises a bulge of water on the earth, our spin drags that bulge slightly ahead, and the bulge tugs the moon forward into a wider orbit. The energy has to come from somewhere, so our own day gets a fraction of a second longer every century.",
+        "Run the film backwards and it gets dramatic. When the moon formed it may have been ten times closer, filling the sky, hauling tides hundreds of metres high across an earth that spun through a day in five or six hours."
+      ]
+    },
+    {
+      "id": 4,
+      "band": "medium",
+      "title": "Almost Everything Is The Sun",
+      "art": "sunmass",
+      "quote": "The sun holds almost all the mass in the solar system.",
+      "clues": [9],
+      "quoteFree": [2, 4],
+      "answerFree": [2, 4],
+      "themeWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "hideCount": 3,
+      "hideBias": "mixed",
+      "hideShare": 0.24,
+      "pairPull": 0,
+      "fact": [
+        "The sun holds almost all the mass in the solar system. Add up everything else, every planet and moon and asteroid and comet, and the total comes to about one seventh of one percent. Jupiter alone accounts for most of that remainder.",
+        "It is worth sitting with the scale for a moment. You could pour a million earths into the sun and still have room to spare, and the fusion running in its core turns roughly four million tonnes of matter into energy every second.",
+        "That imbalance is why the solar system works at all. Everything else is essentially debris orbiting one very large object, and the sun's gravity sets the timetable for all of it."
+      ]
+    },
+    {
+      "id": 5,
+      "band": "medium",
+      "title": "Footprints With No Weather",
+      "art": "bootprint",
+      "quote": "Footprints left on the moon will last millions of years.",
+      "clues": [9],
+      "quoteFree": [2, 4],
+      "answerFree": [2, 4],
+      "themeWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "hideCount": 3,
+      "hideBias": "mixed",
+      "hideShare": 0.24,
+      "pairPull": 0.1,
+      "fact": [
+        "Footprints left on the moon will last millions of years. There is no wind to blow the dust about and no rain to wash it away, so the marks pressed into the surface in 1969 are still sitting there in exactly the shape they were made.",
+        "They are not quite permanent. A steady drizzle of micrometeorites slowly churns the top layer of soil, and the sun's radiation gradually reworks the grains, so the prints will soften and vanish eventually. It simply takes a very long time.",
+        "The dust itself surprised the crews. Moon soil is sharp and glassy, produced by impacts rather than weather, and it clung to everything. It wore through the outer layer of their boots, smelled of spent gunpowder when it was brought inside, and got into every seal on the spacecraft."
+      ]
+    },
+    {
+      "id": 6,
+      "band": "medium",
+      "title": "The Silence Out There",
+      "art": "silence",
+      "quote": "Space is completely silent because sound needs air to travel.",
+      "clues": [10],
+      "quoteFree": [2, 4],
+      "answerFree": [2, 4],
+      "themeWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "hideCount": 3,
+      "hideBias": "mixed",
+      "hideShare": 0.26,
+      "pairPull": 0.25,
+      "fact": [
+        "Space is completely silent because sound needs air to travel. A sound is a pressure wave passing through a material, so with almost no material between the stars there is nothing to carry it. An explosion the size of a planet would reach you as light, never as noise.",
+        "Which makes every space film you have ever seen a polite fiction. Real footage from outside a spacecraft has no soundtrack at all, and astronauts on a spacewalk hear only their own suit: the fans, the radio, their own breathing.",
+        "There is a loophole. Thin gas between galaxies can still carry very low pressure waves, and astronomers have found the ringing of one in the Perseus cluster. Converted into something a human ear could use, the note sits about fifty seven octaves below middle C."
+      ]
+    },
+    {
+      "id": 7,
+      "band": "hard",
+      "title": "A Spoonful Of A Dead Star",
+      "art": "neutron",
+      "quote": "One teaspoon of neutron star matter would weigh a billion tonnes.",
+      "clues": [10],
+      "quoteFree": [3, 5],
+      "answerFree": [3, 5],
+      "themeWords": 2,
+      "maxLen": 8,
+      "latePull": 14,
+      "hideCount": 4,
+      "hideBias": "mixed",
+      "hideShare": 0.3,
+      "pairPull": 0.5,
+      "fact": [
+        "One teaspoon of neutron star matter would weigh a billion tonnes. When a massive star runs out of fuel its core collapses so hard that electrons and protons are crushed together into neutrons, packing the mass of a sun into a ball the size of a city.",
+        "Everything about the result is extreme. The surface gravity is billions of times ours, the crust may be the strongest material in the universe, and some of these objects spin hundreds of times a second, sweeping a beam of radio waves past us like a lighthouse.",
+        "We owe them a debt. When two neutron stars collide they scatter freshly made heavy elements across space, and a good share of the gold and platinum on earth was probably minted in a crash like that."
+      ]
+    },
+    {
+      "id": 8,
+      "band": "hard",
+      "title": "What Space Smells Like",
+      "art": "helmet",
+      "quote": "Astronauts describe the smell of space as faintly like seared steak.",
+      "clues": [11],
+      "quoteFree": [3, 5],
+      "answerFree": [3, 5],
+      "themeWords": 2,
+      "maxLen": 8,
+      "latePull": 14,
+      "hideCount": 4,
+      "hideBias": "common",
+      "hideShare": 0.3,
+      "pairPull": 0.7,
+      "fact": [
+        "Astronauts describe the smell of space as faintly like seared steak. Nobody can smell the vacuum itself, but after a spacewalk the airlock repressurises and the suits come off, and crew after crew has reported the same odd mix of burnt meat, hot metal and welding fumes.",
+        "The likely cause is chemistry clinging to the fabric. Atomic oxygen, single atoms rather than the paired kind we breathe, sticks to everything outside and recombines once it is back in a warm cabin. Anything that has been sitting in raw sunlight is also very slightly scorched.",
+        "Different corners of space would smell different anyway. Clouds of gas where stars form are full of carbon compounds, and one near the centre of our galaxy contains ethyl formate, the ester that gives raspberries part of their flavour."
+      ]
+    },
+    {
+      "id": 9,
+      "band": "hard",
+      "title": "Old Light Through The Window",
+      "art": "sunbeam",
+      "quote": "Sunlight reaching your window began its journey thousands of years ago.",
+      "clues": [11],
+      "quoteFree": [3, 5],
+      "answerFree": [3, 5],
+      "themeWords": 2,
+      "maxLen": 8,
+      "latePull": 16,
+      "hideCount": 4,
+      "hideBias": "common",
+      "hideShare": 0.32,
+      "pairPull": 0.9,
+      "fact": [
+        "Sunlight reaching your window began its journey thousands of years ago. The last eight minutes of the trip, from the sun's surface to here, is the easy part. Before that the energy spent an enormous stretch of time fighting its way out of the sun's interior.",
+        "The core is so dense that a packet of light cannot travel in a straight line. It is absorbed and thrown out again in a random direction over and over, drifting outward by accident rather than intent, and estimates for that stumble range from ten thousand to a hundred thousand years.",
+        "So a sunbeam on your desk is genuinely ancient. It was made while people were painting cave walls, and the energy in it has been trying to leave home ever since."
+      ]
+    },
+    {
+      "id": 10,
+      "band": "hard",
+      "title": "You Are Made Of Old Stars",
+      "art": "stardust",
+      "quote": "The heaviest atoms inside your body were forged long ago inside exploding stars.",
+      "clues": [12],
+      "quoteFree": [3, 5],
+      "answerFree": [3, 5],
+      "themeWords": 2,
+      "maxLen": 8,
+      "latePull": 16,
+      "hideCount": 5,
+      "hideBias": "common",
+      "hideShare": 0.34,
+      "pairPull": 1.1,
+      "fact": [
+        "The heaviest atoms inside your body were forged long ago inside exploding stars. The early universe made almost nothing but hydrogen and helium. Every carbon atom in your cells and every iron atom in your blood was assembled later, in the crushing heat at the heart of a star.",
+        "Getting it out again takes a catastrophe. A big star spends millions of years building heavier elements in shells around its core, then collapses and detonates, flinging the whole inventory into space. That debris seeds the next generation of stars and planets.",
+        "Our own solar system condensed out of exactly such wreckage. The calcium in your bones, the oxygen in your lungs and the gold in a wedding ring are all second hand material, and every one of those atoms is older than the sun."
+      ]
+    }
+  ]
+}

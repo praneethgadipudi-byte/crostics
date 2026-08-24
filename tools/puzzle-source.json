@@ -1,0 +1,190 @@
+{
+  "pack": {
+    "id": "food-origins",
+    "name": "Food Origins",
+    "blurb": "Ten true stories about where dinner came from."
+  },
+  "_config": "clues = allowed answer counts, quoteFree = unindexed quote cells, answerFree = answer letters that never reach the quote, latePull = how strongly unindexed cells are pushed towards the end of the quote.",
+  "puzzles": [
+    {
+      "id": 1,
+      "band": "easy",
+      "title": "The Purple Carrot",
+      "art": "carrot",
+      "quote": "Wild carrots were purple, not orange.",
+      "clues": [8],
+      "quoteFree": [2, 2],
+      "answerFree": [2, 2],
+      "foodWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "fact": [
+        "Long before the carrot became the tidy orange stick in your fridge, it grew across Persia and Afghanistan as a thin, forked, strong smelling root. Wild carrots were purple, not orange. Farmers of the time valued the plant as much for its aromatic seeds and feathery leaves as for anything underground.",
+        "The orange carrot is a surprisingly modern invention. Dutch growers in the sixteenth and seventeenth centuries kept selecting for a fatter, sweeter, less woody root, and the colour that came along for the ride was beta carotene. The vegetable we now treat as the definition of healthy eating is essentially a bred product of a few hundred years of patient gardening.",
+        "Purple carrots never actually vanished. They stayed in kitchens across Turkey, Iran and India, and they have quietly returned to European markets in the last twenty years, sold at a premium as something exotic and new."
+      ]
+    },
+    {
+      "id": 2,
+      "band": "easy",
+      "title": "Chocolate Currency",
+      "art": "cacao",
+      "quote": "Cacao beans were once used as actual money.",
+      "clues": [8],
+      "quoteFree": [2, 2],
+      "answerFree": [2, 2],
+      "foodWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "fact": [
+        "Cacao beans were once used as actual money. Across the Maya and later the Aztec world, prices were quoted in beans the way we quote them in coins. A turkey might cost a hundred beans, a ripe avocado around three, and a day of a labourer's work perhaps the same again.",
+        "Anything valuable enough to spend is valuable enough to fake. Archaeologists have found hollow cacao husks carefully repacked with clay and mud, which is about the oldest counterfeiting scheme we have physical evidence for. Merchants learned to weigh and rattle their beans before agreeing to a deal.",
+        "The drink those beans became would be almost unrecognisable today. It was unsweetened, poured from height to raise a thick foam, and often spiked with chilli, vanilla or annatto. Sugar only entered the story much later, in Europe."
+      ]
+    },
+    {
+      "id": 3,
+      "band": "easy",
+      "title": "The Jar That Never Spoiled",
+      "art": "honey",
+      "quote": "Honey sealed in ancient tombs is still edible.",
+      "clues": [8],
+      "quoteFree": [2, 2],
+      "answerFree": [2, 2],
+      "foodWords": 2,
+      "maxLen": 6,
+      "latePull": 6,
+      "fact": [
+        "Honey sealed in ancient tombs is still edible. Excavators working in Egypt have opened pots left undisturbed for thousands of years and found the contents unspoiled, thick and golden, needing nothing more than a gentle warming to pour again.",
+        "The reason is chemistry rather than magic. Honey holds very little free water, which leaves nothing for bacteria to live on, and it is naturally acidic. Bees also add an enzyme that slowly releases tiny amounts of hydrogen peroxide. Between them, those three defences make an environment almost nothing can grow in.",
+        "The one thing that will ruin a jar is moisture. Left open in a damp kitchen, honey absorbs water from the air and can finally ferment, which is exactly how mead was discovered."
+      ]
+    },
+    {
+      "id": 4,
+      "band": "medium",
+      "title": "The Poison Apple",
+      "art": "tomato",
+      "quote": "Europeans once feared the tomato as deadly poison.",
+      "clues": [9],
+      "quoteFree": [3, 3],
+      "answerFree": [3, 3],
+      "foodWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "fact": [
+        "Europeans once feared the tomato as deadly poison. When Spanish ships carried it back from the Americas in the sixteenth century, botanists took one look at the plant and recognised the family. It was an obvious relative of deadly nightshade, so for well over a century the tomato was grown as an ornamental curiosity and kept firmly out of the kitchen.",
+        "There was also a genuine reason people fell ill. Wealthy households ate from pewter plates with a high lead content, and the acid in a tomato pulled that lead straight out into the food. The poor, eating from wood and clay, ate tomatoes happily and suffered nothing at all.",
+        "Naples eventually settled the argument. Poor southern Italian cooks put the fruit on flatbread because it was cheap and it kept well, and the dish they invented travelled the world under the name pizza."
+      ]
+    },
+    {
+      "id": 5,
+      "band": "medium",
+      "title": "Two Years For One Fruit",
+      "art": "pineapple",
+      "quote": "One pineapple plant can take nearly two years to ripen.",
+      "clues": [9],
+      "quoteFree": [3, 3],
+      "answerFree": [3, 3],
+      "foodWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "fact": [
+        "One pineapple plant can take nearly two years to ripen. It is a slow, spiky, unglamorous crop that produces a single fruit at the centre of a rosette of tough leaves, and once it has done so the parent plant is finished.",
+        "That slowness explains why the pineapple became a symbol of outrageous wealth in eighteenth century Europe. Growing one in a cold climate meant building a heated glasshouse and paying a gardener to nurse it for two years. A single fruit could cost the equivalent of a small house, so hosts displayed them rather than ate them, and there was a brisk trade in renting a pineapple for the evening.",
+        "There is a further oddity in the fruit itself. What looks like one pineapple is actually dozens of separate flowers that fused as they grew, which is why the skin is patterned in those tessellated hexagons."
+      ]
+    },
+    {
+      "id": 6,
+      "band": "medium",
+      "title": "Berry Confusion",
+      "art": "banana",
+      "quote": "To a botanist the banana is a berry and the strawberry is not.",
+      "clues": [10],
+      "quoteFree": [3, 3],
+      "answerFree": [3, 3],
+      "foodWords": 2,
+      "maxLen": 7,
+      "latePull": 10,
+      "fact": [
+        "To a botanist the banana is a berry and the strawberry is not. A berry has a strict definition: it grows from a single flower with one ovary, and it carries its seeds inside the flesh. Bananas, grapes, tomatoes and even cucumbers all pass that test comfortably.",
+        "A strawberry fails on every count. What you eat is a swollen flower base rather than an ovary, and the real fruits are the tiny specks on the outside, each one a separate seed carrier. The proper term is an aggregate accessory fruit, which is not something anyone wants printed on a jam label.",
+        "The banana plant is misfiled too. It is not a tree but the largest herb on earth, with a false trunk made of tightly wrapped leaf bases. Nearly every banana sold for export is a clone of a single variety, which is why one determined fungus can threaten the entire trade."
+      ]
+    },
+    {
+      "id": 7,
+      "band": "hard",
+      "title": "Four Thousand Year Old Noodles",
+      "art": "noodle",
+      "quote": "The oldest bowl of noodles ever unearthed was made from millet.",
+      "clues": [10],
+      "quoteFree": [4, 4],
+      "answerFree": [4, 4],
+      "foodWords": 2,
+      "maxLen": 8,
+      "latePull": 14,
+      "fact": [
+        "In 2005 archaeologists digging at Lajia in north west China lifted an upturned earthenware bowl that had been buried by a flood roughly four thousand years ago. Underneath, protected by a pocket of air, sat a coil of thin yellow strands. The oldest bowl of noodles ever unearthed was made from millet.",
+        "That detail matters more than it sounds. Millet has almost no gluten, so those noodles could not have been rolled and cut in the familiar way. They were most likely pushed through a press or repeatedly stretched from a dough held together by sheer technique, which suggests a well developed cooking tradition rather than a first experiment.",
+        "The find did not settle the endless argument about who invented the noodle. Wheat noodles, Arab dried pasta and Italian pasta all have their own long histories and their own evidence, and the honest answer is that people in several places independently worked out that dough could be made into strings."
+      ]
+    },
+    {
+      "id": 8,
+      "band": "hard",
+      "title": "Spuds In Space",
+      "art": "potato",
+      "quote": "A potato became the first food ever grown in orbit above our planet.",
+      "clues": [11],
+      "quoteFree": [4, 4],
+      "answerFree": [4, 4],
+      "foodWords": 2,
+      "maxLen": 8,
+      "latePull": 14,
+      "fact": [
+        "A potato became the first food ever grown in orbit above our planet. In 1995 a joint experiment between NASA and the University of Wisconsin carried potato cuttings aboard the shuttle Columbia and produced tubers in weightlessness, proving that a crop could complete part of its life cycle away from the ground.",
+        "The potato was not a random choice. It yields more calories per square metre than almost anything else, it stores well, it grows from cuttings rather than seed, and nearly the whole plant is useful. Those are exactly the qualities you want when every gram of cargo is costed to the penny.",
+        "On earth the potato has done this before. Domesticated in the Andes thousands of years ago, where farmers still grow a startling range of shapes and colours, it later spread across Europe and quietly rewrote the population history of an entire continent."
+      ]
+    },
+    {
+      "id": 9,
+      "band": "hard",
+      "title": "The Orchid In Your Ice Cream",
+      "art": "vanilla",
+      "quote": "Real vanilla comes from an orchid that must be pollinated by hand alone.",
+      "clues": [11],
+      "quoteFree": [4, 4],
+      "answerFree": [4, 4],
+      "foodWords": 2,
+      "maxLen": 8,
+      "latePull": 16,
+      "fact": [
+        "Real vanilla comes from an orchid that must be pollinated by hand alone. The vine is native to Mexico, where a particular local bee had quietly done the job for centuries. Move the plant anywhere else in the world and the flowers open, wait a single morning, and close again having produced nothing.",
+        "The problem was solved in 1841 by Edmond Albius, an enslaved twelve year old boy on the island of Réunion, who worked out how to lift the flap separating the male and female parts of the flower and press them together with a sliver of bamboo. His method is still the method. Every vanilla pod in the world is the result of somebody performing that gesture, flower by flower, on the one morning it is possible.",
+        "Curing then takes months of blanching, sweating and slow drying before the pods develop any of the aroma we recognise. Between the hand work and the wait, vanilla remains the second most expensive spice on earth, which is why so much of what we taste is synthetic."
+      ]
+    },
+    {
+      "id": 10,
+      "band": "hard",
+      "title": "Counted Grain By Grain",
+      "art": "pepper",
+      "quote": "Black pepper was once so valuable that traders counted the grains one by one.",
+      "clues": [12],
+      "quoteFree": [4, 4],
+      "answerFree": [4, 4],
+      "foodWords": 2,
+      "maxLen": 8,
+      "latePull": 16,
+      "fact": [
+        "Black pepper was once so valuable that traders counted the grains one by one. It arrived in Europe from the Malabar coast of India after a journey of thousands of miles, and it was weighed on delicate scales, written into wills, accepted for rent and used to settle debts between merchants.",
+        "When Alaric besieged Rome in 408, part of the ransom he demanded was three thousand pounds of pepper alongside the gold and silver. London dock workers handling pepper cargoes were later made to sew up their pockets, because a handful of what looks like dried seeds was worth stealing.",
+        "That single ingredient reshaped the map. The search for a sea route to the pepper ports pushed Portuguese ships around Africa and sent Columbus west by mistake, and the trading companies built on the spice run went on to govern territories larger than the countries that chartered them."
+      ]
+    }
+  ]
+}

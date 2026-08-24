@@ -1,0 +1,125 @@
+{
+  "pack": {
+    "id": "animals",
+    "name": "The Animal Kingdom",
+    "blurb": "Ten true things about the neighbours."
+  },
+  "theme": "animals",
+  "tab": "Animals",
+  "emoji": "&#128062;",
+  "_ladder": "Ten fixed rungs. Content is sorted into them by quote length, unique letters and how little the quote leans on connecting words, so the facts below can be written in any order.",
+  "ladder": [
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 6, "hideCount": 2, "hideBias": "rare", "hideShare": 0.16, "pairPull": -0.6 },
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 6, "hideCount": 2, "hideBias": "rare", "hideShare": 0.16, "pairPull": -0.5 },
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 8, "hideCount": 2, "hideBias": "rare", "hideShare": 0.18, "pairPull": -0.35 },
+    { "band": "medium", "clues": [9], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 10, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.24, "pairPull": -0.1 },
+    { "band": "medium", "clues": [9], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 10, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.24, "pairPull": 0.1 },
+    { "band": "medium", "clues": [10], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 12, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.26, "pairPull": 0.3 },
+    { "band": "hard", "clues": [10], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "mixed", "hideShare": 0.3, "pairPull": 0.5 },
+    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "common", "hideShare": 0.3, "pairPull": 0.7 },
+    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 4, "hideBias": "common", "hideShare": 0.32, "pairPull": 0.9 },
+    { "band": "hard", "clues": [12], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 5, "hideBias": "common", "hideShare": 0.34, "pairPull": 1.1 }
+  ],
+  "puzzles": [
+    {
+      "title": "Three Hearts, Blue Blood",
+      "art": "octopus",
+      "quote": "An octopus has three hearts and blue blood.",
+      "fact": [
+        "An octopus has three hearts and blue blood. Two hearts push blood through the gills and the third sends it round the body, and the whole system runs on a copper based pigment rather than the iron based one we use, which is why the blood is blue.",
+        "That arrangement has a cost. The body heart stops beating while the animal swims, so swimming is exhausting and an octopus would rather crawl, which is exactly what it does whenever it has the option.",
+        "The nervous system is stranger still. Around two thirds of its neurons sit in the arms rather than the head, so each arm solves a good deal of the problem of where to go and what to grab largely on its own."
+      ]
+    },
+    {
+      "title": "Half A Brain Asleep",
+      "art": "dolphin",
+      "quote": "A dolphin sleeps with one half of its brain awake.",
+      "fact": [
+        "A dolphin sleeps with one half of its brain awake. Breathing is a conscious act for a dolphin, so falling fully asleep would mean drowning. Instead one hemisphere rests while the other keeps watch, and a few hours later they swap.",
+        "You can see it from the outside. A resting dolphin often keeps one eye open, and the open eye belongs to the half that is currently on duty, scanning for company and for anything with teeth.",
+        "Newborns take the idea further. Calves and their mothers go almost without sleep for the first weeks of life, swimming constantly, and gradually settle into the half and half pattern as the calf grows."
+      ]
+    },
+    {
+      "title": "Holding Hands At Sea",
+      "art": "otters",
+      "quote": "Sea otters hold hands while they sleep.",
+      "fact": [
+        "Sea otters hold hands while they sleep. Resting groups link paws into floating rafts, sometimes dozens of animals wide, which keeps families together and stops the tide carrying a sleeping otter out of the kelp bed.",
+        "They also anchor themselves. An otter will wrap a strand of kelp around its body before dozing, using the seaweed as a mooring line, and mothers park a pup in the kelp while they dive for food.",
+        "Almost everything about them is about warmth. Sea otters have no blubber, so they rely on the densest fur of any animal, up to a million hairs in a patch the size of a postage stamp, and they eat a quarter of their body weight a day to keep the furnace going."
+      ]
+    },
+    {
+      "title": "Stripes Nobody Repeats",
+      "art": "tigerstripes",
+      "quote": "No two tigers anywhere wear quite the same pattern of stripes.",
+      "fact": [
+        "No two tigers anywhere wear quite the same pattern of stripes. The markings work like a fingerprint, and researchers identify individuals from camera trap photographs by comparing the flank pattern rather than by tagging the animal.",
+        "The stripes are in the skin as well as the fur. Shave a tiger and the pattern is still there, because the pigment is laid down in the skin itself and the hairs simply follow the plan underneath.",
+        "As camouflage it is better than it looks. Vertical bars break up an outline in tall grass, and the animals a tiger hunts are mostly dichromatic, so to a deer that bright orange coat reads as a dull green."
+      ]
+    },
+    {
+      "title": "The Bird That Remembers You",
+      "art": "raven",
+      "quote": "A crow can remember a human face for years afterwards.",
+      "fact": [
+        "A crow can remember a human face for years afterwards. Researchers who trapped and released crows while wearing a particular mask were scolded by the local birds for years, and by birds that had never been caught themselves.",
+        "That last part is the interesting bit. The grudge spreads socially: young crows learn which face is dangerous by watching adults mob it, so a reputation outlives the encounter that created it.",
+        "The rest of the toolkit is just as good. Crows make hooks from twigs, drop nuts on roads for cars to crack, plan a couple of steps ahead in laboratory puzzles, and appear to hold something close to a grudge in the ordinary sense of the word."
+      ]
+    },
+    {
+      "title": "Cube Shaped Evidence",
+      "art": "wombat",
+      "quote": "A wombat produces droppings shaped like little cubes.",
+      "fact": [
+        "A wombat produces droppings shaped like little cubes. It makes around a hundred of them a night and stacks them on rocks and logs, where a flat sided pellet is far less likely to roll away than a round one.",
+        "The shape is made in the gut. The last stretch of intestine has stiff and stretchy sections in an uneven pattern, and as the very dry contents are squeezed along they are moulded into corners and flat faces.",
+        "The stacking is the point of the exercise. Wombats have poor eyesight and rely on smell to mark territory, so a cube parked on top of a rock at nose height is a message that stays where it was left."
+      ]
+    },
+    {
+      "title": "Ants Beyond Counting",
+      "art": "ants",
+      "quote": "Every human on earth shares the planet with millions of ants.",
+      "fact": [
+        "Every human on earth shares the planet with millions of ants. A careful global estimate puts the total at about twenty thousand trillion, which works out at somewhere over two million ants per person, and the combined weight of them exceeds that of all wild birds and mammals together.",
+        "They earn their keep. Ants turn over soil on a scale that rivals earthworms, carry seeds around, clear away dead insects and prune the plant world in ways that quietly shape entire habitats.",
+        "A colony behaves like one animal rather than a crowd. No ant is in charge and none has a plan, yet simple rules and chemical trails produce farming, herding, road building, warfare and organised rubbish disposal."
+      ]
+    },
+    {
+      "title": "Older Than The Oldest Tree",
+      "art": "shark",
+      "quote": "A Greenland shark can live for hundreds of years in cold water.",
+      "fact": [
+        "A Greenland shark can live for hundreds of years in cold water. Dating the lens of the eye gives ages of around four hundred, which makes it the longest lived animal with a backbone that we know of.",
+        "Everything about it is slow. The shark grows about a centimetre a year, cruises at less than one kilometre an hour, and is not thought to breed until somewhere around its one hundred and fiftieth birthday.",
+        "The cold explains a good deal of it. Life in near freezing Arctic water runs at a crawl, and a body that ages that gently has time to accumulate an extraordinary amount of history."
+      ]
+    },
+    {
+      "title": "The Immortal Jellyfish",
+      "art": "jellyfish",
+      "quote": "One jellyfish can reverse its own life cycle and begin again as a polyp.",
+      "fact": [
+        "One jellyfish can reverse its own life cycle and begin again as a polyp. Under stress, injury or starvation, the adult of a small species called Turritopsis settles onto a surface and rebuilds itself back into the juvenile stage it grew out of.",
+        "Its cells simply change job. Muscle can become nerve, nerve can become something else, and the animal reassembles a younger version of itself out of the parts it already has, then grows up all over again.",
+        "It is not truly immortal. Predators, disease and a hungry fish end most of these lives well before the trick is needed, but in a tank with nothing to eat it a single animal has been sent round the loop repeatedly."
+      ]
+    },
+    {
+      "title": "A Tongue Heavier Than You",
+      "art": "whale",
+      "quote": "The tongue of a blue whale weighs about as much as a full grown elephant.",
+      "fact": [
+        "The tongue of a blue whale weighs about as much as a full grown elephant. The animal itself reaches thirty metres and two hundred tonnes, which makes it the largest creature that has ever lived, larger than any dinosaur we have found.",
+        "The heart matches the scale. It is roughly the size of a small car, beats as slowly as twice a minute during a deep dive, and pushes blood through vessels wide enough for a child to crawl along.",
+        "All of it is built on some of the smallest food in the ocean. A feeding whale lunges through a swarm of krill, takes in a volume of water larger than its own body, and strains out several tonnes of shrimp the size of a fingernail every day."
+      ]
+    }
+  ]
+}

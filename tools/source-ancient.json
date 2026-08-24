@@ -1,0 +1,125 @@
+{
+  "pack": {
+    "id": "ancient",
+    "name": "The Ancient World",
+    "blurb": "Ten true things people did a very long time ago."
+  },
+  "theme": "ancient",
+  "tab": "Ancient",
+  "emoji": "&#127994;",
+  "_ladder": "Ten fixed rungs. Content is sorted into them by quote length, unique letters and how little the quote leans on connecting words, so the facts below can be written in any order.",
+  "ladder": [
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 6, "hideCount": 2, "hideBias": "rare", "hideShare": 0.16, "pairPull": -0.6 },
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 6, "hideCount": 2, "hideBias": "rare", "hideShare": 0.16, "pairPull": -0.5 },
+    { "band": "easy", "clues": [8], "quoteFree": [1, 3], "answerFree": [1, 3], "themeWords": 2, "maxLen": 6, "latePull": 8, "hideCount": 2, "hideBias": "rare", "hideShare": 0.18, "pairPull": -0.35 },
+    { "band": "medium", "clues": [9], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 10, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.24, "pairPull": -0.1 },
+    { "band": "medium", "clues": [9], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 10, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.24, "pairPull": 0.1 },
+    { "band": "medium", "clues": [10], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 12, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.26, "pairPull": 0.3 },
+    { "band": "hard", "clues": [10], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "mixed", "hideShare": 0.3, "pairPull": 0.5 },
+    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "common", "hideShare": 0.3, "pairPull": 0.7 },
+    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 4, "hideBias": "common", "hideShare": 0.32, "pairPull": 0.9 },
+    { "band": "hard", "clues": [12], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 5, "hideBias": "common", "hideShare": 0.34, "pairPull": 1.1 }
+  ],
+  "puzzles": [
+    {
+      "title": "Older Than The Mammoth",
+      "art": "pyramid",
+      "quote": "Mammoths were alive when the pyramids were built.",
+      "fact": [
+        "Mammoths were alive when the pyramids were built. The mainland herds had gone, but a stranded population survived on Wrangel Island in the Arctic Ocean until about four thousand years ago, several centuries after the great pyramid at Giza was finished.",
+        "Isolation made them smaller and steadily less healthy. Cut off by rising seas at the end of the last ice age, the island group bred among itself for thousands of years and slowly accumulated the genetic faults that come with a tiny population.",
+        "The overlap is a useful reminder of how recent ancient history is. Written records, cities, taxes and monumental architecture all existed while a herd of mammoths was still walking around on the other side of the world."
+      ]
+    },
+    {
+      "title": "The Cat Went First",
+      "art": "cathunt",
+      "quote": "Cats chose to live with farmers.",
+      "fact": [
+        "Cats chose to live with farmers. Nobody domesticated them. Once people began storing grain, the stores drew mice, and the mice drew wildcats, and the deal was simply that the hunting was better near a village.",
+        "The oldest evidence of the arrangement is a grave in Cyprus, where a person and a cat were buried together nine and a half thousand years ago. Cyprus had no native wildcats, so somebody had carried that animal across the sea by boat.",
+        "The genetics show how little we changed them. Compared with dogs, cattle or wheat, the domestic cat is barely altered from its wild ancestor, which fits an animal that domesticated itself and never fully agreed to the terms."
+      ]
+    },
+    {
+      "title": "Complaints In Clay",
+      "art": "tablet",
+      "quote": "The oldest written complaint is about a bad delivery of copper.",
+      "fact": [
+        "The oldest written complaint is about a bad delivery of copper. A clay tablet from Ur, written around three and a half thousand years ago, carries a furious letter from a merchant called Nanni to a trader named Ea-nasir about ingots of the wrong quality and a messenger sent away empty handed.",
+        "It survives because of what it is made of. Fired or simply baked hard by time, a clay tablet outlasts paper, parchment and hard drives without any effort at all, which is why so much of the earliest writing we have is receipts, contracts and grumbling.",
+        "Archaeologists digging Ea-nasir's house found several other complaints stored in the same room. Nobody knows why he kept them."
+      ]
+    },
+    {
+      "title": "Painted, Not Pale",
+      "art": "statue",
+      "quote": "Greek statues were once painted in loud colours from head to toe.",
+      "fact": [
+        "Greek statues were once painted in loud colours from head to toe. The white marble we admire in museums is simply stone that lost its paint, and traces of red, blue, yellow and gold survive in the grooves and folds where weather could not reach.",
+        "Modern light picks up what the eye cannot. Ultraviolet photography and raking light reveal patterns of decoration across statues that look bare, and reconstructions in full colour tend to shock people who grew up with the pale version.",
+        "That pale version shaped centuries of taste. Renaissance artists studied weathered marbles, concluded that restraint was the classical ideal, and built a whole aesthetic on what was really just a very slow loss of pigment."
+      ]
+    },
+    {
+      "title": "Concrete That Heals",
+      "art": "arch",
+      "quote": "Roman concrete grows stronger in seawater instead of crumbling.",
+      "fact": [
+        "Roman concrete grows stronger in seawater instead of crumbling. Harbour walls poured two thousand years ago are still standing, while modern reinforced concrete in the same conditions begins to fail within decades.",
+        "The recipe is the reason. Roman builders mixed volcanic ash with lime and seawater, and the reaction produced rare minerals that keep growing inside the cracks. Salt water that would destroy an ordinary wall feeds this one.",
+        "Recent work suggests the mixing was deliberately rough. Lumps of unslaked lime left in the mix act as a repair kit: when a crack lets water in, the lumps dissolve, and the gap fills itself with fresh mineral."
+      ]
+    },
+    {
+      "title": "The Library In The Ashes",
+      "art": "scroll",
+      "quote": "A whole library of scrolls survived the eruption as blocks of charcoal.",
+      "fact": [
+        "A whole library of scrolls survived the eruption as blocks of charcoal. When Vesuvius buried Herculaneum, a villa full of papyrus rolls was cooked rather than burnt, leaving hundreds of carbonised lumps too fragile to unroll.",
+        "Early attempts to open them destroyed dozens. The rolls crack into flakes at a touch, and for two centuries the collection sat in storage as the most tantalising unreadable text in the world.",
+        "It is being read now without being opened. High energy scans map the layers inside a lump, machine learning picks out the faint traces of ink, and the words are recovered line by line from a scroll that stays shut."
+      ]
+    },
+    {
+      "title": "Rome Had Fast Food",
+      "art": "thermopolium",
+      "quote": "Most people in Rome ate out every day.",
+      "fact": [
+        "Most people in Rome ate out every day. Ordinary flats in the city had no hearth, because an open fire in a crowded timber and brick block was a good way to burn down the neighbourhood, so cooking happened elsewhere.",
+        "Elsewhere meant the counter on the corner. Excavations at Pompeii and Ostia turn up hundreds of little shops with masonry counters and sunken jars for hot food, selling stew, bread, cheese, olives and heavily watered wine to anyone passing.",
+        "The scale of the habit surprised the archaeologists who counted them. One street in Pompeii has a food counter every few doors, which puts ancient dining somewhere between a modern food court and a very busy pub."
+      ]
+    },
+    {
+      "title": "The Machine In The Wreck",
+      "art": "gears",
+      "quote": "A shipwreck gave up a bronze machine that predicted eclipses.",
+      "fact": [
+        "A shipwreck gave up a bronze machine that predicted eclipses. Sponge divers working off the island of Antikythera in 1901 brought up a corroded lump that turned out to hold at least thirty interlocking gears cut by hand.",
+        "It is a model of the sky. Turn the handle and pointers show the sun and moon moving through the zodiac, the phase of the moon, the dates of eclipses and the cycle of the games, all driven by gear ratios chosen to match real astronomy.",
+        "Nothing of comparable complexity survives for more than a thousand years afterwards. Whatever workshop tradition produced it left no other trace, which is why a single corroded lump rewrote what we thought ancient engineers could do."
+      ]
+    },
+    {
+      "title": "Paid In Bread And Beer",
+      "art": "beer",
+      "quote": "The workers who built the pyramids were paid in bread and beer.",
+      "fact": [
+        "The workers who built the pyramids were paid in bread and beer. Records from the workers' villages list rations by the loaf and the jug, and the beer was thick, mildly alcoholic and nourishing enough to count as food rather than a treat.",
+        "They were not slaves. The camps beside the pyramids have bakeries, breweries, hospitals with mended bones and a cemetery of ordinary graves, all of which describe a large paid workforce rotating through in organised gangs.",
+        "The gangs even had names. Graffiti left inside the monuments records teams calling themselves things like the friends of Khufu, scrawled where nobody was ever supposed to look again."
+      ]
+    },
+    {
+      "title": "Steel Before Its Time",
+      "art": "sword",
+      "quote": "Craftsmen were forging fine steel long before anyone understood the recipe.",
+      "fact": [
+        "Craftsmen were forging fine steel long before anyone understood the recipe. Smiths in southern India were making crucible steel by the early centuries of the common era, sealing iron and carbon rich material in a clay pot and heating it for hours.",
+        "The bars travelled enormous distances. Traded west through Persia and the Arab world, they became the blades that Europe knew as Damascus steel, admired for holding an edge and for the watery pattern in the surface.",
+        "The chemistry only arrived much later. Nobody involved could have described carbon content or crystal structure, and the method was carried instead as a craft: exact clay, exact charge, exact number of hours, passed on by being shown."
+      ]
+    }
+  ]
+}

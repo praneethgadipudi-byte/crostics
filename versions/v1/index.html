@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crostics - Food Origins</title>
+<style>
+/* ==========================================================================
+   palette and frame
+   ========================================================================== */
+:root{
+  --bg:#FFF7EF;
+  --page:#F0E4D6;
+  --card:#FFFFFF;
+  --ink:#3B2F2A;
+  --ink-soft:#7B6A60;
+  --muted:#B6A79C;
+  --line:#EFE2D5;
+
+  --primary:#FF8A3D;
+  --primary-dk:#EE7222;
+  --primary-sh:#C85A12;
+  --accent:#31BFA3;
+  --accent-dk:#22A78D;
+  --good:#3FBE80;
+  --good-bg:#E4F7ED;
+  --bad:#FF5F5F;
+  --bad-bg:#FFE9E9;
+  --gold:#FFB020;
+
+  --cell:#FBEFE1;
+  --cell-line:#EBD9C4;
+  --cell-peer:#FFEBD2;
+  --cell-link:#FFD9AE;
+
+  --r-s:10px;
+  --r-m:16px;
+  --r-l:22px;
+  --shadow:0 2px 0 rgba(59,47,42,.06), 0 8px 24px rgba(59,47,42,.07);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden}
+body{
+  margin:0;
+  background:
+    radial-gradient(1000px 600px at 50% -10%, #FFE9D2 0%, transparent 60%),
+    var(--page);
+  font-family:"Nunito","Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+#app{
+  width:100%; max-width:440px; height:100dvh; max-height:940px;
+  background:var(--bg);
+  display:flex; flex-direction:column;
+  position:relative; overflow:hidden;
+  box-shadow:0 30px 80px rgba(59,47,42,.22);
+}
+@media (min-width:520px) and (min-height:800px){
+  #app{border-radius:28px; height:min(94dvh,940px)}
+}
+
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+::selection{background:var(--cell-link)}
+
+/* ==========================================================================
+   shared bits
+   ========================================================================== */
+.screen{display:flex;flex-direction:column;flex:1;min-height:0;animation:screenIn .28s ease both}
+@keyframes screenIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.banner{
+  flex:none;height:56px;margin:0 12px 10px;border-radius:var(--r-s);
+  border:1.5px dashed var(--cell-line);background:#FDF3E8;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.14em;
+}
+
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800;
+}
+.pill.easy{background:#E4F7ED;color:#279C67}
+.pill.medium{background:#FFF1D9;color:#C88914}
+.pill.hard{background:#FFE6E6;color:#D9534F}
+
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--card);border:1.5px solid var(--line);
+  padding:6px 12px;border-radius:999px;font-weight:900;font-size:14px;
+  box-shadow:0 2px 0 rgba(59,47,42,.05);
+}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:var(--r-m);font-weight:900;letter-spacing:.02em;
+  padding:15px 18px;transition:transform .08s ease, filter .15s ease;
+}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--primary);color:#fff;box-shadow:0 4px 0 var(--primary-sh)}
+.btn.primary:active{box-shadow:0 2px 0 var(--primary-sh)}
+.btn.ghost{background:var(--card);color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 rgba(59,47,42,.06)}
+.btn.mint{background:var(--accent);color:#fff;box-shadow:0 4px 0 var(--accent-dk)}
+.btn.mint:active{box-shadow:0 2px 0 var(--accent-dk)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+.scrollbox{position:relative;flex:1;min-height:0;display:flex}
+.scrollinner{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;padding-right:12px}
+.scrollinner::-webkit-scrollbar{display:none}
+.rail{
+  position:absolute;right:3px;top:6px;bottom:6px;width:5px;
+  border-radius:3px;background:#F1E4D6;
+}
+.rail .thumb{
+  position:absolute;left:0;width:5px;border-radius:3px;
+  background:var(--cell-link);transition:opacity .3s ease;
+}
+
+/* ==========================================================================
+   home
+   ========================================================================== */
+.homeHead{padding:22px 20px 14px}
+.homeHead h1{margin:0;font-size:30px;font-weight:900;letter-spacing:-.02em}
+.homeHead p{margin:5px 0 0;color:var(--ink-soft);font-size:14px;font-weight:600}
+.homeStats{display:flex;gap:8px;margin-top:14px}
+
+.cardGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:4px 20px 18px}
+.pcard{
+  background:var(--card);border-radius:var(--r-m);padding:13px;
+  border:2px solid var(--line);box-shadow:var(--shadow);
+  text-align:left;display:flex;flex-direction:column;gap:8px;
+  min-height:132px;position:relative;overflow:hidden;
+  transition:transform .1s ease;
+}
+.pcard:active{transform:scale(.97)}
+.pcard .art{height:44px;display:flex;align-items:center}
+.pcard .art svg{height:44px;width:auto}
+.pcard .no{font-size:11px;font-weight:900;color:var(--muted);letter-spacing:.1em}
+.pcard .nm{font-size:14px;font-weight:900;line-height:1.2}
+.pcard .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.pcard.done{border-color:#CFEEDD;background:linear-gradient(180deg,#F6FFFA,#fff)}
+.tick{width:22px;height:22px;border-radius:50%;background:var(--good);color:#fff;
+  display:grid;place-items:center;font-size:13px;font-weight:900}
+.pcard.locked{opacity:.5;pointer-events:none}
+.resume{font-size:11px;font-weight:900;color:var(--primary)}
+
+/* ==========================================================================
+   puzzle screen
+   ========================================================================== */
+.topbar{
+  flex:none;display:flex;align-items:center;gap:10px;
+  padding:14px 14px 10px;
+}
+.iconbtn{
+  width:38px;height:38px;border-radius:12px;background:var(--card);
+  border:2px solid var(--line);display:grid;place-items:center;
+  box-shadow:0 2px 0 rgba(59,47,42,.06);flex:none;
+}
+.iconbtn:active{transform:translateY(1px)}
+.topbar .titles{flex:1;min-width:0}
+.topbar .t1{font-size:15px;font-weight:900;line-height:1.1}
+.topbar .t2{font-size:11.5px;font-weight:800;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+
+.lives{display:flex;gap:5px;flex:none}
+/* an empty box per life, stamped with a cross left to right as they are spent */
+.life{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;
+  background:transparent;border:2px solid var(--line);
+  transition:transform .2s ease, background .2s ease, border-color .2s ease}
+.life svg{width:13px;height:13px;stroke:var(--bad);stroke-width:3;stroke-linecap:round;
+  opacity:0;transform:scale(.3);transition:opacity .18s ease, transform .18s ease}
+.life.spent{background:var(--bad-bg);border-color:#F3AFAF}
+.life.spent svg{opacity:1;transform:scale(1)}
+.life.pop{animation:lifePop .45s ease}
+@keyframes lifePop{0%{transform:scale(1)}35%{transform:scale(1.45)}100%{transform:scale(1)}}
+
+.quoteCard{
+  flex:none;margin:2px 14px 12px;padding:14px 12px;
+  background:var(--card);border:2px solid var(--line);
+  border-radius:var(--r-l);box-shadow:var(--shadow);
+}
+.quoteGrid{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 0}
+.qword{display:flex;gap:3px;margin:0 5px}
+.qpunc{align-self:flex-end;font-weight:900;font-size:15px;color:var(--ink-soft);padding-bottom:3px}
+
+.cell{
+  width:var(--cw);height:calc(var(--cw) * 1.34);
+  border-radius:6px;background:var(--cell);
+  border:1.5px solid var(--cell-line);
+  display:grid;place-items:center;position:relative;
+  font-weight:900;font-size:var(--cf);line-height:1;
+  color:var(--ink);cursor:pointer;
+  transition:background .15s ease, border-color .15s ease, transform .1s ease;
+}
+/* the letter sits below the index strip rather than fighting it for the centre */
+.cell b{display:block;padding-top:calc(var(--ixf) * 0.9)}
+.cell .ix{
+  position:absolute;top:1px;left:0;right:0;text-align:center;
+  font-size:var(--ixf);font-weight:800;line-height:1;
+  color:var(--muted);letter-spacing:0;
+}
+.cell.free{border-style:dashed;border-color:#D9C7B2;background:#FFFBF5}
+.cell.peer{background:var(--cell-peer)}
+.cell.link{background:var(--cell-link);border-color:#EFAF6C}
+.cell.sel{border-color:var(--primary);border-width:2.5px;background:#fff;
+  box-shadow:0 0 0 3px rgba(255,138,61,.18)}
+.cell.wrong{background:var(--bad-bg);border-color:#F3AFAF;color:var(--bad)}
+/* solved letters carry the strongest fill on the board so progress is obvious
+   at a glance, and they outrank the peer and link tints that would dilute it */
+.cell.lock,
+.cell.lock.peer,
+.cell.lock.link,
+.cell.lock.free{
+  background:#BDEDD2;border:2px solid var(--good);
+  color:#15734A;cursor:default;
+}
+.cell.lock .ix{color:#2F9C68}
+/* an unindexed cell keeps its dashed edge even once solved */
+.cell.lock.free{border-style:dashed}
+.cell.pop{animation:cellPop .3s ease}
+@keyframes cellPop{0%{transform:scale(1)}45%{transform:scale(1.22)}100%{transform:scale(1)}}
+.cell.shake{animation:shake .32s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* clue list */
+.clueWrap{position:relative;flex:1;min-height:0;margin:0 14px;display:flex}
+.clueScroll{
+  flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;
+  padding:2px 14px 72px 0;
+}
+.clueScroll::-webkit-scrollbar{display:none}
+
+.clueRow{
+  display:flex;gap:10px;align-items:center;
+  padding:9px 10px;border-radius:var(--r-m);margin-bottom:7px;
+  background:var(--card);border:2px solid transparent;
+  transition:border-color .15s ease, background .15s ease;
+}
+.clueRow.stack{flex-direction:column;align-items:stretch;gap:7px}
+.clueRow.active{border-color:#FFD9AE;background:#FFFDF9}
+.clueRow.solved{background:#F7FCF9}
+.clueRow .lbl{
+  flex:none;width:22px;height:22px;border-radius:7px;background:#F3E7DA;
+  display:grid;place-items:center;font-size:11px;font-weight:900;color:var(--ink-soft);
+}
+.clueRow.solved .lbl{background:var(--good);color:#fff}
+.clueHead{display:flex;gap:9px;align-items:flex-start;flex:1;min-width:0}
+.clueRow .txt{font-size:13.5px;font-weight:700;line-height:1.32;color:var(--ink)}
+.clueRow.solved .txt{color:var(--ink-soft)}
+.ansCells{display:flex;gap:3px;flex-wrap:wrap;flex:none}
+.clueRow.stack .ansCells{padding-left:31px}
+.ansCells .cell{--cw:26px;--cf:14px;--ixf:8px}
+
+.hintBtn{
+  position:absolute;right:14px;bottom:12px;z-index:3;
+  display:flex;align-items:center;gap:7px;
+  background:var(--card);border:2px solid var(--line);
+  padding:10px 15px;border-radius:999px;font-weight:900;font-size:14px;
+  box-shadow:0 4px 14px rgba(59,47,42,.14);
+}
+.hintBtn:active{transform:translateY(2px)}
+.hintBtn.empty{color:var(--muted)}
+
+/* keyboard */
+.kb{flex:none;padding:8px 6px 6px;display:flex;flex-direction:column;gap:6px}
+.krow{display:flex;gap:5px;justify-content:center}
+.key{
+  flex:1;max-width:38px;height:44px;border-radius:9px;
+  background:var(--card);box-shadow:0 2px 0 #E3D4C4;
+  display:grid;place-items:center;font-weight:900;font-size:16px;
+}
+.key:active{transform:translateY(2px);box-shadow:0 0 0 #E3D4C4}
+.key.wide{max-width:56px;background:#F3E7DA}
+
+/* ==========================================================================
+   overlays
+   ========================================================================== */
+.veil{
+  position:absolute;inset:0;z-index:50;
+  background:rgba(59,47,42,.5);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:22px;
+  animation:fade .2s ease both;
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.sheet{
+  width:100%;background:var(--card);border-radius:26px;padding:24px 20px 20px;
+  position:relative;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:sheetIn .3s cubic-bezier(.2,1.2,.4,1) both;
+}
+@keyframes sheetIn{from{opacity:0;transform:scale(.9) translateY(12px)}to{opacity:1;transform:none}}
+.sheet h2{margin:0 0 6px;font-size:22px;font-weight:900}
+.sheet p{margin:0 0 16px;color:var(--ink-soft);font-size:14px;font-weight:600;line-height:1.4}
+.closeX{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
+  background:#F3E7DA;display:grid;place-items:center;font-weight:900;color:var(--ink-soft)}
+.streakBox{
+  background:#FFF6E8;border:2px solid #FFE3BE;border-radius:var(--r-m);
+  padding:12px;margin-bottom:16px;
+}
+.streakBox .n{font-size:30px;font-weight:900;color:var(--primary)}
+.streakBox .l{font-size:11.5px;font-weight:900;color:#C88914;letter-spacing:.1em}
+.sheet .btn{width:100%;margin-top:9px}
+.costTag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.25);
+  padding:3px 9px;border-radius:999px;font-size:13px}
+
+.adFull{
+  position:absolute;inset:0;z-index:80;background:#221B17;color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+}
+.adFull .tag{font-size:11px;font-weight:900;letter-spacing:.3em;color:#8C7A6C}
+.adFull .big{font-size:26px;font-weight:900;letter-spacing:.02em}
+.adBar{width:150px;height:5px;border-radius:3px;background:#3A2F28;overflow:hidden}
+.adBar i{display:block;height:100%;background:var(--primary);width:0;animation:adGo 2s linear forwards}
+@keyframes adGo{to{width:100%}}
+
+.cheer{
+  position:absolute;inset:0;z-index:70;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;pointer-events:none;
+  background:rgba(255,247,239,.72);
+}
+.cheer .big{font-size:38px;font-weight:900;color:var(--primary);
+  animation:cheerIn .5s cubic-bezier(.2,1.4,.4,1) both}
+.cheer .sub{font-size:15px;font-weight:800;color:var(--ink-soft);
+  animation:cheerIn .5s .12s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes cheerIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+#confetti{position:absolute;inset:0;z-index:71;pointer-events:none}
+
+.toast{
+  position:absolute;left:50%;bottom:112px;transform:translateX(-50%);
+  background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;
+  font-size:13px;font-weight:800;z-index:60;animation:toastIn 2s ease both;
+}
+@keyframes toastIn{0%{opacity:0;transform:translate(-50%,8px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+
+/* ==========================================================================
+   streak screen
+   ========================================================================== */
+.streakScreen{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:26px;text-align:center;gap:6px}
+.flame{font-size:74px;animation:flameIn .6s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes flameIn{from{opacity:0;transform:scale(.4) rotate(-14deg)}to{opacity:1;transform:none}}
+.streakN{font-size:58px;font-weight:900;line-height:1;color:var(--primary)}
+.streakL{font-size:13px;font-weight:900;letter-spacing:.16em;color:var(--ink-soft)}
+.progWrap{width:100%;margin-top:26px}
+.progTop{display:flex;justify-content:space-between;font-size:12px;font-weight:900;
+  color:var(--ink-soft);margin-bottom:7px}
+.progBar{height:16px;border-radius:999px;background:#F1E2D2;overflow:hidden;position:relative}
+.progBar i{display:block;height:100%;border-radius:999px;
+  background:linear-gradient(90deg,#FFB020,var(--primary));width:0;
+  transition:width .9s cubic-bezier(.3,1,.4,1)}
+.pips{display:flex;justify-content:space-between;margin-top:8px}
+.pip{width:13px;height:13px;border-radius:50%;background:#EBDCCB}
+.pip.on{background:var(--primary)}
+.pip.goal{width:22px;height:22px;margin-top:-5px;background:#FFF;border:2.5px solid #EBDCCB;
+  display:grid;place-items:center;font-size:10px}
+.pip.goal.on{border-color:var(--gold);background:#FFF6E4}
+.tapOn{
+  margin-top:34px;font-size:11px;font-weight:900;letter-spacing:.22em;
+  color:var(--muted);animation:blink 1.8s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+.rewardCard{
+  margin-top:22px;background:#FFF6E8;border:2px solid #FFE3BE;border-radius:var(--r-m);
+  padding:14px 18px;font-weight:900;color:#C88914;font-size:14px;
+  animation:sheetIn .5s .5s both;
+}
+
+/* ==========================================================================
+   review screen
+   ========================================================================== */
+.reviewArt{
+  flex:none;margin:12px 14px 0;height:132px;border-radius:var(--r-l);
+  background:linear-gradient(160deg,#FFE7CC,#FFF4E6);
+  border:2px solid var(--line);display:grid;place-items:center;overflow:hidden;
+}
+.reviewArt svg{height:104px;width:auto}
+.reviewHead{padding:14px 20px 8px}
+.reviewHead h2{margin:0;font-size:21px;font-weight:900;letter-spacing:-.01em}
+.reviewBody{margin:0 14px;flex:1;min-height:0;display:flex;position:relative}
+.reviewBody .scrollinner{padding:0 16px 8px 6px}
+.reviewBody p{margin:0 0 13px;font-size:14px;line-height:1.6;font-weight:600;color:#4E403A}
+.reviewBody mark{
+  background:linear-gradient(180deg,transparent 52%,#FFDFAE 52%);
+  color:var(--ink);font-weight:800;padding:0 1px;border-radius:2px;
+}
+.recap{display:flex;flex-direction:column;gap:8px;padding-right:4px}
+.recapRow{display:flex;gap:10px;align-items:baseline;background:var(--card);
+  border:2px solid var(--line);border-radius:var(--r-s);padding:10px 12px}
+.recapRow .w{font-weight:900;font-size:13px;color:var(--primary-dk);
+  letter-spacing:.06em;flex:none;min-width:74px}
+.recapRow .c{font-size:13px;font-weight:600;color:var(--ink-soft);line-height:1.35}
+.reviewCtas{flex:none;padding:10px 16px 4px;display:flex;flex-direction:column;gap:9px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* PUZZLE_DATA_START */
+const PACK = {"pack":{"id":"food-origins","name":"Food Origins","blurb":"Ten true stories about where dinner came from."},"puzzles":[{"id":1,"band":"easy","title":"The Purple Carrot","art":"carrot","quote":"Wild carrots were purple, not orange.","fact":["Long before the carrot became the tidy orange stick in your fridge, it grew across Persia and Afghanistan as a thin, forked, strong smelling root. Wild carrots were purple, not orange. Farmers of the time valued the plant as much for its aromatic seeds and feathery leaves as for anything underground.","The orange carrot is a surprisingly modern invention. Dutch growers in the sixteenth and seventeenth centuries kept selecting for a fatter, sweeter, less woody root, and the colour that came along for the ride was beta carotene. The vegetable we now treat as the definition of healthy eating is essentially a bred product of a few hundred years of patient gardening.","Purple carrots never actually vanished. They stayed in kitchens across Turkey, Iran and India, and they have quietly returned to European markets in the last twenty years, sold at a premium as something exotic and new."],"factPara":0,"factStart":147,"factEnd":184,"clues":[{"a":"WILLOW","c":"Tree that weeps by the water","m":[0,1,2,19,8,11]},{"a":"CURD","c":"The lumpy start of every cheese","m":[4,16,13,3]},{"a":"TOAST","c":"Bread that met the fire again","m":[23,24,5,10,9]},{"a":"GAP","c":"The space that should not be there","m":[28,26,15]},{"a":"PEN","c":"Enclosure for pigs, or a writing tool","m":[18,29,21]},{"a":"URN","c":"Tall vessel for ashes or tea","m":[-1,17,27]},{"a":"ORE","c":"Rock worth digging up","m":[22,7,14]},{"a":"EAR","c":"Corn grows in one, and you listen with one","m":[20,-1,6]}],"free":[12,25],"stats":{"score":88.8,"letters":30,"clues":8,"freeQuote":2,"freeAnswer":2,"entropy":3.695,"vowelRatio":0.367,"avgLen":3.75}},{"id":2,"band":"easy","title":"Chocolate Currency","art":"cacao","quote":"Cacao beans were once used as actual money.","fact":["Cacao beans were once used as actual money. Across the Maya and later the Aztec world, prices were quoted in beans the way we quote them in coins. A turkey might cost a hundred beans, a ripe avocado around three, and a day of a labourer's work perhaps the same again.","Anything valuable enough to spend is valuable enough to fake. Archaeologists have found hollow cacao husks carefully repacked with clay and mud, which is about the oldest counterfeiting scheme we have physical evidence for. Merchants learned to weigh and rattle their beans before agreeing to a deal.","The drink those beans became would be almost unrecognisable today. It was unsweetened, poured from height to raise a thick foam, and often spiked with chilli, vanilla or annatto. Sugar only entered the story much later, in Europe."],"factPara":0,"factStart":0,"factEnd":43,"clues":[{"a":"YELLOW","c":"Colour of butter and lemons","m":[34,20,-1,29,14,10]},{"a":"CRUMB","c":"The evidence you ate it","m":[2,12,18,30,5]},{"a":"SAUCE","c":"It rescues a dull dish","m":[23,22,27,16,11]},{"a":"SCONE","c":"It divides a nation over pronunciation","m":[19,0,31,15,17]},{"a":"OATS","c":"Breakfast grain that thickens","m":[4,1,26,9]},{"a":"CANE","c":"Sugar grows on it","m":[25,7,8,33]},{"a":"DEN","c":"A fox's home, or a cosy back room","m":[21,6,32]},{"a":"TEA","c":"Leaves that started a revolution","m":[-1,13,24]}],"free":[3,28],"stats":{"score":95.8,"letters":35,"clues":8,"freeQuote":2,"freeAnswer":2,"entropy":3.55,"vowelRatio":0.486,"avgLen":4.38}},{"id":3,"band":"easy","title":"The Jar That Never Spoiled","art":"honey","quote":"Honey sealed in ancient tombs is still edible.","fact":["Honey sealed in ancient tombs is still edible. Excavators working in Egypt have opened pots left undisturbed for thousands of years and found the contents unspoiled, thick and golden, needing nothing more than a gentle warming to pour again.","The reason is chemistry rather than magic. Honey holds very little free water, which leaves nothing for bacteria to live on, and it is naturally acidic. Bees also add an enzyme that slowly releases tiny amounts of hydrogen peroxide. Between them, those three defences make an environment almost nothing can grow in.","The one thing that will ruin a jar is moisture. Left open in a damp kitchen, honey absorbs water from the air and can finally ferment, which is exactly how mead was discovered."],"factPara":0,"factStart":0,"factEnd":46,"clues":[{"a":"THYME","c":"Small leaves, big in a stew","m":[28,0,4,22,6]},{"a":"RIBBON","c":"It ties the parcel","m":[-1,29,23,35,21,14]},{"a":"ISLAND","c":"Land with water all around","m":[34,26,31,13,18,33]},{"a":"LENTIL","c":"Tiny pulse that thickens a stew","m":[8,3,2,20,11,36]},{"a":"CIDER","c":"Apples, pressed and left alone","m":[15,25,10,9,-1]},{"a":"NEST","c":"Twigs arranged into a home","m":[12,32,27,19]},{"a":"OIL","c":"It shimmers on top of water","m":[1,16,30]},{"a":"SEA","c":"Salt water with a horizon","m":[5,37,7]}],"free":[17,24],"stats":{"score":100.9,"letters":38,"clues":8,"freeQuote":2,"freeAnswer":2,"entropy":3.567,"vowelRatio":0.395,"avgLen":4.75}},{"id":4,"band":"medium","title":"The Poison Apple","art":"tomato","quote":"Europeans once feared the tomato as deadly poison.","fact":["Europeans once feared the tomato as deadly poison. When Spanish ships carried it back from the Americas in the sixteenth century, botanists took one look at the plant and recognised the family. It was an obvious relative of deadly nightshade, so for well over a century the tomato was grown as an ornamental curiosity and kept firmly out of the kitchen.","There was also a genuine reason people fell ill. Wealthy households ate from pewter plates with a high lead content, and the acid in a tomato pulled that lead straight out into the food. The poor, eating from wood and clay, ate tomatoes happily and suffered nothing at all.","Naples eventually settled the argument. Poor southern Italian cooks put the fruit on flatbread because it was cheap and it kept well, and the dish they invented travelled the world under the name pizza."],"factPara":0,"factStart":0,"factEnd":50,"clues":[{"a":"CHERRY","c":"It tops the cake","m":[11,20,21,16,2,35]},{"a":"PUMPKIN","c":"Orange squash with a carved face","m":[36,1,24,4,-1,38,41]},{"a":"FEAST","c":"Dinner that got out of hand","m":[13,14,28,29,22]},{"a":"SALAD","c":"Raw vegetables making an effort","m":[39,15,34,32,18]},{"a":"SEED","c":"The whole plant, packed small","m":[8,12,0,30]},{"a":"ONION","c":"It makes you cry while helping","m":[27,10,-1,3,7]},{"a":"TOAD","c":"Warty relative of the frog","m":[26,23,25,33]},{"a":"TOE","c":"You stub it in the dark","m":[19,40,5]},{"a":"OAR","c":"You row with a pair of them","m":[9,6,-1]}],"free":[17,31,37],"stats":{"score":113.9,"letters":42,"clues":9,"freeQuote":3,"freeAnswer":3,"entropy":3.731,"vowelRatio":0.476,"avgLen":4.67}},{"id":5,"band":"medium","title":"Two Years For One Fruit","art":"pineapple","quote":"One pineapple plant can take nearly two years to ripen.","fact":["One pineapple plant can take nearly two years to ripen. It is a slow, spiky, unglamorous crop that produces a single fruit at the centre of a rosette of tough leaves, and once it has done so the parent plant is finished.","That slowness explains why the pineapple became a symbol of outrageous wealth in eighteenth century Europe. Growing one in a cold climate meant building a heated glasshouse and paying a gardener to nurse it for two years. A single fruit could cost the equivalent of a small house, so hosts displayed them rather than ate them, and there was a brisk trade in renting a pineapple for the evening.","There is a further oddity in the fruit itself. What looks like one pineapple is actually dozens of separate flowers that fused as they grew, which is why the skin is patterned in those tessellated hexagons."],"factPara":0,"factStart":0,"factEnd":55,"clues":[{"a":"PASTRY","c":"Butter and flour, done properly","m":[42,26,37,30,27,29]},{"a":"PICKLE","c":"Vegetable saved by vinegar","m":[3,4,17,22,13,25]},{"a":"PANTRY","c":"Cupboard the cook trusts","m":[12,35,44,38,40,33]},{"a":"WINTER","c":"When the pantry earns its keep","m":[31,41,19,20,11,36]},{"a":"POTATO","c":"Root that became chips, crisps and mash","m":[8,32,-1,18,16,39]},{"a":"PECAN","c":"Nut at the heart of a pie","m":[9,6,-1,7,15]},{"a":"NEON","c":"Gas that made signs glow","m":[24,34,0,5]},{"a":"VAN","c":"Delivery vehicle with no windows","m":[-1,14,1]},{"a":"EEL","c":"Long swimmer often mistaken for a snake","m":[2,23,10]}],"free":[21,28,43],"stats":{"score":118.4,"letters":45,"clues":9,"freeQuote":3,"freeAnswer":3,"entropy":3.524,"vowelRatio":0.4,"avgLen":5}},{"id":6,"band":"medium","title":"Berry Confusion","art":"banana","quote":"To a botanist the banana is a berry and the strawberry is not.","fact":["To a botanist the banana is a berry and the strawberry is not. A berry has a strict definition: it grows from a single flower with one ovary, and it carries its seeds inside the flesh. Bananas, grapes, tomatoes and even cucumbers all pass that test comfortably.","A strawberry fails on every count. What you eat is a swollen flower base rather than an ovary, and the real fruits are the tiny specks on the outside, each one a separate seed carrier. The proper term is an aggregate accessory fruit, which is not something anyone wants printed on a jam label.","The banana plant is misfiled too. It is not a tree but the largest herb on earth, with a false trunk made of tightly wrapped leaf bases. Nearly every banana sold for export is a clone of a single variety, which is why one determined fungus can threaten the entire trade."],"factPara":0,"factStart":0,"factEnd":62,"clues":[{"a":"DAIRY","c":"Where milk becomes everything else","m":[30,17,20,26,27]},{"a":"HONEY","c":"The only food that never spoils","m":[32,47,29,13,43]},{"a":"WHISK","c":"It beats eggs into submission","m":[38,12,44,34,-1]},{"a":"RABBIT","c":"It gets into the vegetable patch","m":[25,22,39,3,8,10]},{"a":"BUTTER","c":"Cream that got churned","m":[14,-1,5,31,40,36]},{"a":"BEAN","c":"It can be baked, roasted or ground","m":[23,33,2,18]},{"a":"ROAST","c":"Cook it slowly and let it brown","m":[41,4,19,9,0]},{"a":"TASTE","c":"Only five of them, officially","m":[11,28,21,35,24]},{"a":"STAR","c":"It burns very far away","m":[45,48,6,42]},{"a":"NOON","c":"When both hands point up","m":[46,-1,1,16]}],"free":[7,15,37],"stats":{"score":127.4,"letters":49,"clues":10,"freeQuote":3,"freeAnswer":3,"entropy":3.484,"vowelRatio":0.367,"avgLen":4.9}},{"id":7,"band":"hard","title":"Four Thousand Year Old Noodles","art":"noodle","quote":"The oldest bowl of noodles ever unearthed was made from millet.","fact":["In 2005 archaeologists digging at Lajia in north west China lifted an upturned earthenware bowl that had been buried by a flood roughly four thousand years ago. Underneath, protected by a pocket of air, sat a coil of thin yellow strands. The oldest bowl of noodles ever unearthed was made from millet.","That detail matters more than it sounds. Millet has almost no gluten, so those noodles could not have been rolled and cut in the familiar way. They were most likely pushed through a press or repeatedly stretched from a dough held together by sheer technique, which suggests a well developed cooking tradition rather than a first experiment.","The find did not settle the endless argument about who invented the noodle. Wheat noodles, Arab dried pasta and Italian pasta all have their own long histories and their own evidence, and the honest answer is that people in several places independently worked out that dough could be made into strings."],"factPara":0,"factStart":238,"factEnd":301,"clues":[{"a":"MUFFIN","c":"Breakfast cake, in denial","m":[45,26,14,42,47,27]},{"a":"HARVEST","c":"The payoff for a whole season","m":[1,29,25,23,33,21,51]},{"a":"WHEAT","c":"The grain behind most bread","m":[11,32,2,39,0]},{"a":"MEADOW","c":"Field of grass and wildflowers","m":[38,41,36,5,3,35]},{"a":"BREAD","c":"The oldest thing on the table","m":[9,30,20,-1,40]},{"a":"TOMATO","c":"Fruit that insists it is a vegetable","m":[8,13,46,-1,31,10]},{"a":"SLED","c":"It only works downhill","m":[7,48,22,34]},{"a":"MELON","c":"Big fruit that is mostly water","m":[-1,28,12,16,15]},{"a":"DOOR","c":"You knock before opening it","m":[18,17,44,43]},{"a":"ISLE","c":"Small island in poetry","m":[-1,37,49,6]}],"free":[4,19,24,50],"stats":{"score":136.7,"letters":52,"clues":10,"freeQuote":4,"freeAnswer":4,"entropy":3.803,"vowelRatio":0.385,"avgLen":5.2}},{"id":8,"band":"hard","title":"Spuds In Space","art":"potato","quote":"A potato became the first food ever grown in orbit above our planet.","fact":["A potato became the first food ever grown in orbit above our planet. In 1995 a joint experiment between NASA and the University of Wisconsin carried potato cuttings aboard the shuttle Columbia and produced tubers in weightlessness, proving that a crop could complete part of its life cycle away from the ground.","The potato was not a random choice. It yields more calories per square metre than almost anything else, it stores well, it grows from cuttings rather than seed, and nearly the whole plant is useful. Those are exactly the qualities you want when every gram of cargo is costed to the penny.","On earth the potato has done this before. Domesticated in the Andes thousands of years ago, where farmers still grow a startling range of shapes and colours, it later spread across Europe and quietly rewrote the population history of an entire continent."],"factPara":0,"factStart":0,"factEnd":68,"clues":[{"a":"TRUFFLE","c":"Fungus dogs are trained to find","m":[13,37,47,21,16,50,25]},{"a":"VIVID","c":"So bright it stays with you","m":[44,34,26,39,24]},{"a":"CASHEW","c":"Nut that grows outside its fruit","m":[9,0,19,14,53,32]},{"a":"BAMBOO","c":"Grass tall enough to build with","m":[42,10,11,38,36,2]},{"a":"GRAIN","c":"Wheat, rice and the rest","m":[29,28,41,17,52]},{"a":"PEPPER","c":"It travelled further than most people","m":[-1,15,49,1,12,30]},{"a":"BROTH","c":"Thin soup with deep flavour","m":[7,18,46,20,-1]},{"a":"CORN","c":"It grows in ears and pops","m":[-1,6,48,35]},{"a":"TENT","c":"Canvas bedroom","m":[54,8,33,3]},{"a":"OAT","c":"Grain behind the breakfast bowl","m":[43,4,40]},{"a":"ROOT","c":"The part of the plant you dig for","m":[-1,23,22,5]}],"free":[27,31,45,51],"stats":{"score":144.1,"letters":55,"clues":11,"freeQuote":4,"freeAnswer":4,"entropy":3.915,"vowelRatio":0.436,"avgLen":5}},{"id":9,"band":"hard","title":"The Orchid In Your Ice Cream","art":"vanilla","quote":"Real vanilla comes from an orchid that must be pollinated by hand alone.","fact":["Real vanilla comes from an orchid that must be pollinated by hand alone. The vine is native to Mexico, where a particular local bee had quietly done the job for centuries. Move the plant anywhere else in the world and the flowers open, wait a single morning, and close again having produced nothing.","The problem was solved in 1841 by Edmond Albius, an enslaved twelve year old boy on the island of Réunion, who worked out how to lift the flap separating the male and female parts of the flower and press them together with a sliver of bamboo. His method is still the method. Every vanilla pod in the world is the result of somebody performing that gesture, flower by flower, on the one morning it is possible.","Curing then takes months of blanching, sweating and slow drying before the pods develop any of the aroma we recognise. Between the hand work and the wait, vanilla remains the second most expensive spice on earth, which is why so much of what we taste is synthetic."],"factPara":0,"factStart":0,"factEnd":72,"clues":[{"a":"VALLEY","c":"Where the river settled","m":[4,44,55,9,58,49]},{"a":"MUSTARD","c":"Seed paste with a sinus opinion","m":[13,33,34,45,5,23,27]},{"a":"SIMMER","c":"Cook just below a boil","m":[15,42,32,19,14,0]},{"a":"CHEF","c":"The one shouting in the kitchen","m":[11,25,37,16]},{"a":"CHILI","c":"Heat you can eat","m":[24,50,7,40,26]},{"a":"LADDER","c":"Steps you can carry","m":[8,20,47,53,46,17]},{"a":"HERB","c":"Leafy flavour from the windowsill","m":[29,1,-1,36]},{"a":"BACON","c":"It made breakfast smell famous","m":[48,30,-1,56,52]},{"a":"PLANT","c":"It stays put and still eats","m":[38,3,51,43,35]},{"a":"BANANA","c":"Berry that grows on a giant herb","m":[-1,10,6,54,21,2]},{"a":"TOOTH","c":"Sweet-toothed people have a favourite","m":[31,22,39,28,-1]}],"free":[12,18,41,57],"stats":{"score":150.7,"letters":59,"clues":11,"freeQuote":4,"freeAnswer":4,"entropy":3.982,"vowelRatio":0.373,"avgLen":5.36}},{"id":10,"band":"hard","title":"Counted Grain By Grain","art":"pepper","quote":"Black pepper was once so valuable that traders counted the grains one by one.","fact":["Black pepper was once so valuable that traders counted the grains one by one. It arrived in Europe from the Malabar coast of India after a journey of thousands of miles, and it was weighed on delicate scales, written into wills, accepted for rent and used to settle debts between merchants.","When Alaric besieged Rome in 408, part of the ransom he demanded was three thousand pounds of pepper alongside the gold and silver. London dock workers handling pepper cargoes were later made to sew up their pockets, because a handful of what looks like dried seeds was worth stealing.","That single ingredient reshaped the map. The search for a sea route to the pepper ports pushed Portuguese ships around Africa and sent Columbus west by mistake, and the trading companies built on the spice run went on to govern territories larger than the countries that chartered them."],"factPara":0,"factStart":0,"factEnd":77,"clues":[{"a":"VOYAGE","c":"A long trip by sea","m":[20,60,59,21,49,57]},{"a":"KETCHUP","c":"It began as a fish sauce","m":[4,9,43,16,47,23,7]},{"a":"WALNUT","c":"Nut shaped like a brain","m":[11,12,26,53,41,32]},{"a":"CHEESE","c":"Milk that learned to wait","m":[3,29,48,6,38,17]},{"a":"BASIL","c":"Herb that makes pesto pesto","m":[58,34,54,52,1]},{"a":"SUPPER","c":"The last meal of the day","m":[18,-1,5,8,27,37]},{"a":"CARROT","c":"Root that was purple first","m":[39,2,10,50,19,28]},{"a":"BOARD","c":"You chop on it","m":[0,55,30,33,35]},{"a":"BOLD","c":"Brave, or a heavier font","m":[25,14,22,45]},{"a":"STONE","c":"The pit inside a peach","m":[13,46,40,-1,62]},{"a":"TUNA","c":"Fish that comes in a tin","m":[31,-1,61,24]},{"a":"INN","c":"Old roadside stop with beds and beer","m":[-1,42,56]}],"free":[15,36,44,51],"stats":{"score":159.6,"letters":63,"clues":12,"freeQuote":4,"freeAnswer":4,"entropy":4.009,"vowelRatio":0.381,"avgLen":5.25}}]};
+/* PUZZLE_DATA_END */
+
+(function () {
+"use strict";
+
+/* ============================================================== settings */
+
+/* Flip to true once the gameplay is final and puzzles should gate on each other. */
+const SEQUENTIAL_UNLOCK = false;
+
+/* Testing aid: hints never run out. The balance and the streak reward keep
+   working underneath, so flipping this back restores the economy. */
+const UNLIMITED_HINTS = true;
+
+const STORE_KEY = "crostics.foodOrigins.v1";
+const START_HINTS = 3;
+const STRIKES = 3;
+const RETRY_COST = 20;
+const HINT_EVERY = 5;
+
+/* ================================================================= art */
+
+const ART = {
+  carrot: `<svg viewBox="0 0 120 96"><g fill="none" stroke="#2F9C68" stroke-width="6" stroke-linecap="round"><path d="M60 34V14"/><path d="M60 30 44 16"/><path d="M60 30 76 16"/></g><path d="M60 34c14 0 20 6 20 6L64 88a5 5 0 0 1-8 0L40 40s6-6 20-6z" fill="#FF8A3D"/><g stroke="#E8712A" stroke-width="3.5" stroke-linecap="round"><path d="M50 52h9"/><path d="M62 64h8"/><path d="M54 74h6"/></g></svg>`,
+  cacao: `<svg viewBox="0 0 120 96"><ellipse cx="60" cy="50" rx="26" ry="38" fill="#8A4A25"/><ellipse cx="60" cy="50" rx="26" ry="38" fill="none" stroke="#6E3819" stroke-width="3"/><g stroke="#6E3819" stroke-width="3" stroke-linecap="round"><path d="M50 18v64"/><path d="M70 18v64"/></g><path d="M60 12c4-6 12-8 12-8s-2 8-8 10z" fill="#2F9C68"/><ellipse cx="42" cy="80" rx="9" ry="7" fill="#C98A5E"/><ellipse cx="78" cy="80" rx="9" ry="7" fill="#C98A5E"/></svg>`,
+  honey: `<svg viewBox="0 0 120 96"><rect x="36" y="26" width="48" height="58" rx="12" fill="#FFB020"/><rect x="36" y="26" width="48" height="58" rx="12" fill="none" stroke="#D98C0A" stroke-width="3"/><rect x="32" y="18" width="56" height="12" rx="6" fill="#8A4A25"/><g fill="#FFF3D6"><path d="M52 44l6-3 6 3v7l-6 3-6-3z"/><path d="M64 58l6-3 6 3v7l-6 3-6-3z"/><path d="M44 60l5-2 5 2v6l-5 2-5-2z"/></g></svg>`,
+  tomato: `<svg viewBox="0 0 120 96"><circle cx="60" cy="56" r="30" fill="#FF5F5F"/><circle cx="60" cy="56" r="30" fill="none" stroke="#DC4141" stroke-width="3"/><ellipse cx="50" cy="46" rx="8" ry="5" fill="#FF8B8B" opacity=".7"/><g fill="#2F9C68"><path d="M60 30 44 20l6 12-14-2 12 8h24l12-8-14 2 6-12z"/></g><rect x="57" y="16" width="6" height="12" rx="3" fill="#2F9C68"/></svg>`,
+  pineapple: `<svg viewBox="0 0 120 96"><g fill="#2F9C68"><path d="M60 26 46 6l4 20-16-8 10 16z"/><path d="M60 26 74 6l-4 20 16-8-10 16z"/></g><rect x="36" y="28" width="48" height="60" rx="22" fill="#FFB020"/><rect x="36" y="28" width="48" height="60" rx="22" fill="none" stroke="#D98C0A" stroke-width="3"/><g stroke="#D98C0A" stroke-width="2.4" stroke-linecap="round"><path d="M40 44 80 66"/><path d="M40 60 76 82"/><path d="M44 34 84 56"/><path d="M80 44 40 66"/><path d="M80 60 44 82"/><path d="M76 34 36 56"/></g></svg>`,
+  banana: `<svg viewBox="0 0 120 96"><path d="M26 30c0 32 22 52 52 52 10 0 18-3 18-3s-10-6-10-14c0-6 4-10 4-10s-16 4-28-6C50 39 48 24 48 24s-10-4-14 0-8 6-8 6z" fill="#FFC93C"/><path d="M26 30c0 32 22 52 52 52 10 0 18-3 18-3s-10-6-10-14c0-6 4-10 4-10s-16 4-28-6C50 39 48 24 48 24s-10-4-14 0-8 6-8 6z" fill="none" stroke="#E0A81C" stroke-width="3"/><path d="M34 26c-4-4-8-8-8-8" stroke="#8A6A25" stroke-width="6" stroke-linecap="round" fill="none"/></svg>`,
+  noodle: `<svg viewBox="0 0 120 96"><path d="M24 46h72c0 22-16 36-36 36S24 68 24 46z" fill="#F4F0E8"/><path d="M24 46h72c0 22-16 36-36 36S24 68 24 46z" fill="none" stroke="#D9CEBE" stroke-width="3"/><g stroke="#FFC93C" stroke-width="5" stroke-linecap="round" fill="none"><path d="M38 44c0-12 6-18 6-24"/><path d="M52 44c0-14 10-18 6-26"/><path d="M68 44c0-12-6-20 0-26"/><path d="M82 44c0-10-8-16-4-22"/></g><rect x="18" y="44" width="84" height="7" rx="3.5" fill="#31BFA3"/></svg>`,
+  potato: `<svg viewBox="0 0 120 96"><path d="M30 52c0-18 16-30 34-30s28 10 28 24-12 32-32 32S30 68 30 52z" fill="#C98A5E"/><path d="M30 52c0-18 16-30 34-30s28 10 28 24-12 32-32 32S30 68 30 52z" fill="none" stroke="#9E6739" stroke-width="3"/><g fill="#8A5A30"><ellipse cx="52" cy="44" rx="4" ry="3"/><ellipse cx="72" cy="54" rx="4.5" ry="3.2"/><ellipse cx="58" cy="66" rx="3.4" ry="2.6"/></g><g stroke="#31BFA3" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"><circle cx="60" cy="52" r="42" stroke-dasharray="6 12"/></g></svg>`,
+  vanilla: `<svg viewBox="0 0 120 96"><g fill="#5B3A22"><rect x="34" y="16" width="9" height="64" rx="4.5" transform="rotate(-8 38 48)"/><rect x="50" y="20" width="9" height="60" rx="4.5" transform="rotate(4 54 50)"/></g><g fill="#FFF6E4" stroke="#EBD9C4" stroke-width="2"><ellipse cx="84" cy="40" rx="13" ry="8"/><ellipse cx="84" cy="58" rx="13" ry="8"/><ellipse cx="76" cy="49" rx="8" ry="13"/><ellipse cx="93" cy="49" rx="8" ry="13"/></g><circle cx="84" cy="49" r="6" fill="#FFB020"/></svg>`,
+  pepper: `<svg viewBox="0 0 120 96"><path d="M42 22h36l-4 12H46z" fill="#8A4A25"/><path d="M44 34h32l6 34a10 10 0 0 1-10 12H48a10 10 0 0 1-10-12z" fill="#C98A5E"/><path d="M44 34h32l6 34a10 10 0 0 1-10 12H48a10 10 0 0 1-10-12z" fill="none" stroke="#9E6739" stroke-width="3"/><rect x="52" y="12" width="16" height="10" rx="5" fill="#5B3A22"/><g fill="#3B2F2A"><circle cx="34" cy="82" r="5"/><circle cx="48" cy="88" r="4"/><circle cx="86" cy="84" r="5"/></g></svg>`
+};
+
+const XMARK = `<svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
+
+/* ============================================================== storage */
+
+function blankProfile() {
+  return { streak: 0, best: 0, hints: START_HINTS, done: {}, progress: {} };
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return blankProfile();
+    const p = JSON.parse(raw);
+    return Object.assign(blankProfile(), p);
+  } catch (e) {
+    return blankProfile();
+  }
+}
+
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(S.profile)); } catch (e) {}
+}
+
+/* ================================================================ state */
+
+const S = {
+  screen: "home",
+  pi: 0,
+  p: null,
+  sel: null,
+  ctx: "clue",
+  overlay: null,
+  reviewTab: "fact",
+  streakInfo: null,
+  profile: load()
+};
+
+const app = document.getElementById("app");
+const puzzles = PACK ? PACK.puzzles : [];
+
+/* ======================================================== puzzle runtime */
+
+function quoteLetters(quote) {
+  const out = [], up = quote.toUpperCase();
+  for (let i = 0; i < up.length; i++) {
+    if (up[i] >= "A" && up[i] <= "Z") out.push(up[i]);
+  }
+  return out;
+}
+
+/*
+ * A number identifies a letter rather than a position, so every E in the puzzle
+ * carries the same index and they are all solved together. A few letters are
+ * left unnumbered as a difficulty lever: they still fill as a group, the player
+ * just cannot see where they go until the first one is found.
+ */
+const MAX_HIDDEN = 3;
+function letterIndex(letters, hideCount) {
+  const count = {}, order = [];
+  letters.forEach(ch => {
+    if (count[ch]) count[ch]++;
+    else { count[ch] = 1; order.push(ch); }
+  });
+
+  /* the rarest letters are the ones hidden, since a letter you meet once is the
+     one you have to reason out rather than map */
+  const hidden = order.slice()
+    .sort((a, b) => count[a] - count[b] || order.indexOf(a) - order.indexOf(b))
+    .slice(0, Math.min(MAX_HIDDEN, hideCount));
+
+  /* numbering follows the quote, and skips the hidden letters so the visible
+     run stays contiguous */
+  const num = {};
+  let n = 0;
+  order.forEach(ch => { if (hidden.indexOf(ch) < 0) num[ch] = ++n; });
+  return { num: num, hidden: hidden };
+}
+
+/*
+ * Every letter the player can type is a slot. A slot is reachable from the clue
+ * list, from the quote, or from both, which is what makes an answer letter and
+ * its quote cell the same thing rather than two values kept in sync.
+ */
+function buildPuzzle(data) {
+  const slots = [];
+  const cellSlot = [];
+  const letters = quoteLetters(data.quote);
+
+  const clues = data.clues.map((c, ci) => {
+    const ids = [];
+    for (let j = 0; j < c.a.length; j++) {
+      const id = slots.length;
+      slots.push({
+        id: id, correct: c.a[j], value: "", locked: false,
+        clue: ci, pos: j, cell: c.m[j]
+      });
+      if (c.m[j] >= 0) cellSlot[c.m[j]] = id;
+      ids.push(id);
+    }
+    return {
+      label: String.fromCharCode(65 + ci),
+      text: c.c, answer: c.a, slots: ids, solved: false
+    };
+  });
+
+  data.free.forEach(cellIdx => {
+    const id = slots.length;
+    slots.push({
+      id: id, correct: letters[cellIdx], value: "", locked: false,
+      clue: -1, pos: -1, cell: cellIdx
+    });
+    cellSlot[cellIdx] = id;
+  });
+
+  const ix = letterIndex(letters, data.free.length);
+
+  return {
+    data: data, slots: slots, cellSlot: cellSlot, clues: clues,
+    letters: letters, num: ix.num, hidden: ix.hidden,
+    strikes: STRIKES, revived: false, retried: false
+  };
+}
+
+function openPuzzle(index) {
+  S.pi = index;
+  S.p = buildPuzzle(puzzles[index]);
+  restoreProgress();
+  S.sel = firstOpenSlot();
+  S.ctx = "clue";
+  S.screen = "puzzle";
+  /* closing the tab on the fail popup must not hand back three fresh strikes */
+  S.overlay = S.p.strikes <= 0 ? "fail" : null;
+  render();
+}
+
+function firstOpenSlot() {
+  const p = S.p;
+  for (let c = 0; c < p.clues.length; c++) {
+    for (const id of p.clues[c].slots) {
+      if (!p.slots[id].locked) return id;
+    }
+  }
+  for (const s of p.slots) if (!s.locked) return s.id;
+  return 0;
+}
+
+function restoreProgress() {
+  const rec = S.profile.progress[S.p.data.id];
+  if (!rec) return;
+  const v = rec.v || "", l = rec.l || "";
+  S.p.slots.forEach((s, i) => {
+    const ch = v[i] || " ";
+    s.value = ch === " " ? "" : ch;
+    s.locked = l[i] === "1";
+  });
+  S.p.strikes = typeof rec.s === "number" ? rec.s : STRIKES;
+  refreshSolved();
+}
+
+function saveProgress() {
+  const p = S.p;
+  if (!p) return;
+  let v = "", l = "";
+  p.slots.forEach(s => { v += s.value || " "; l += s.locked ? "1" : "0"; });
+  S.profile.progress[p.data.id] = { v: v, l: l, s: p.strikes };
+  save();
+}
+
+function clearProgress(id) {
+  delete S.profile.progress[id];
+  save();
+}
+
+function refreshSolved() {
+  S.p.clues.forEach(c => {
+    c.solved = c.slots.every(id => S.p.slots[id].locked);
+  });
+}
+
+function isWon() {
+  return S.p.slots.every(s => s.value === s.correct);
+}
+
+/* ================================================================= input */
+
+function slotOf(id) { return S.p.slots[id]; }
+
+function selectSlot(id, ctx) {
+  if (id == null) return;
+  S.sel = id;
+  /* a slot reached from the quote keeps walking along the quote, and one
+     reached from a clue keeps walking along that answer. A cell no clue feeds
+     can only ever be worked from the quote. */
+  if (ctx) S.ctx = ctx;
+  if (S.p.slots[id].clue < 0) S.ctx = "quote";
+  syncCells();
+  scrollClueIntoView();
+}
+
+function advance() {
+  const p = S.p, cur = slotOf(S.sel);
+  if (!cur) return;
+
+  if (cur.clue >= 0 && S.ctx === "clue") {
+    const row = p.clues[cur.clue];
+    for (let j = cur.pos + 1; j < row.slots.length; j++) {
+      if (!p.slots[row.slots[j]].locked) return selectSlot(row.slots[j]);
+    }
+    for (let c = 1; c <= p.clues.length; c++) {
+      const next = p.clues[(cur.clue + c) % p.clues.length];
+      for (const id of next.slots) if (!p.slots[id].locked) return selectSlot(id);
+    }
+  }
+
+  /* a quote-only cell simply walks to the next open cell along the quote */
+  for (let c = cur.cell + 1; c < p.cellSlot.length; c++) {
+    const id = p.cellSlot[c];
+    if (id != null && !p.slots[id].locked) return selectSlot(id);
+  }
+  const open = p.slots.find(s => !s.locked);
+  if (open) selectSlot(open.id);
+}
+
+function retreat() {
+  const p = S.p, cur = slotOf(S.sel);
+  if (!cur) return;
+  if (cur.clue >= 0 && S.ctx === "clue") {
+    const row = p.clues[cur.clue];
+    for (let j = cur.pos - 1; j >= 0; j--) {
+      if (!p.slots[row.slots[j]].locked) return selectSlot(row.slots[j]);
+    }
+    return;
+  }
+  for (let c = cur.cell - 1; c >= 0; c--) {
+    const id = p.cellSlot[c];
+    if (id != null && !p.slots[id].locked) return selectSlot(id);
+  }
+}
+
+function typeLetter(ch) {
+  const p = S.p;
+  if (!p || S.overlay) return;
+  const s = slotOf(S.sel);
+  if (!s || s.locked) return;
+
+  s.value = ch;
+
+  if (ch === s.correct) {
+    fillLetter(ch);
+    lockCompletedWords();
+    saveProgress();
+    syncCells();
+    if (isWon()) return void setTimeout(win, 260);
+    advance();
+  } else {
+    p.strikes = Math.max(0, p.strikes - 1);
+    bump(s, "shake");
+    saveProgress();
+    syncCells();
+    flashLife();
+    if (p.strikes === 0) return void setTimeout(showFail, 420);
+    advance();
+  }
+}
+
+function backspace() {
+  const s = slotOf(S.sel);
+  if (!s) return;
+  if (!s.locked && s.value) {
+    s.value = "";
+    saveProgress();
+    syncCells();
+    return;
+  }
+  retreat();
+  const prev = slotOf(S.sel);
+  if (prev && !prev.locked && prev.value) {
+    prev.value = "";
+    saveProgress();
+  }
+  syncCells();
+}
+
+/*
+ * One correct letter settles every place that letter appears, in the quote and
+ * in every answer. A group fill can never be wrong, because a cell's correct
+ * value is simply its letter.
+ */
+function fillLetter(ch) {
+  const same = S.p.slots.filter(s => s.correct === ch);
+  same.forEach((s, i) => {
+    s.value = ch;
+    s.locked = true;
+    /* the pops run left to right so the spread is legible rather than a flash */
+    const wait = Math.min(i * 25, 200);
+    setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+  });
+}
+
+function lockCompletedWords() {
+  S.p.clues.forEach(row => {
+    const done = row.slots.every(id => S.p.slots[id].value === S.p.slots[id].correct);
+    if (done) row.slots.forEach(id => { S.p.slots[id].locked = true; });
+    row.solved = done;
+  });
+}
+
+function hintLabel() {
+  return UNLIMITED_HINTS ? "\u221E" : String(S.profile.hints);
+}
+
+function useHint() {
+  const p = S.p;
+  if (!p || S.overlay) return;
+  if (!UNLIMITED_HINTS && S.profile.hints <= 0) return toast("No hints left");
+  const s = slotOf(S.sel);
+  if (!s || s.locked) return toast("Pick an empty cell first");
+
+  if (!UNLIMITED_HINTS) S.profile.hints--;
+  fillLetter(s.correct);
+  lockCompletedWords();
+  saveProgress();
+  save();
+  syncCells();
+  const hb = app.querySelector(".hintBtn span");
+  if (hb) hb.textContent = hintLabel();
+  if (isWon()) return void setTimeout(win, 260);
+  advance();
+}
+
+const bumps = {};
+function bump(slot, cls) {
+  bumps[slot.id] = cls;
+  setTimeout(() => { delete bumps[slot.id]; syncCells(); }, 380);
+}
+
+function flashLife() {
+  const nodes = app.querySelectorAll(".life");
+  /* called after the strike is deducted, so this is the box just stamped */
+  const idx = STRIKES - S.p.strikes - 1;
+  if (nodes[idx]) {
+    nodes[idx].classList.add("pop");
+    setTimeout(() => nodes[idx] && nodes[idx].classList.remove("pop"), 460);
+  }
+}
+
+/* ============================================================ flow: fail */
+
+function showFail() {
+  S.overlay = "fail";
+  paintOverlay();
+}
+
+function doRevive() {
+  playAd("w2e", () => {
+    S.p.strikes = 1;
+    S.p.revived = true;
+    S.overlay = null;
+    saveProgress();
+    render();
+  });
+}
+
+function doRetry() {
+  /* coins are not deducted yet, the cost is shown for the flow only */
+  S.p = buildPuzzle(puzzles[S.pi]);
+  S.p.retried = true;
+  S.sel = firstOpenSlot();
+  S.overlay = null;
+  clearProgress(S.p.data.id);
+  render();
+}
+
+function abandon() {
+  S.profile.streak = 0;
+  clearProgress(S.p.data.id);
+  save();
+  S.overlay = null;
+  goHome();
+}
+
+/* ============================================================= flow: win */
+
+function win() {
+  const p = S.p;
+  S.profile.done[p.data.id] = true;
+  S.profile.streak++;
+  S.profile.best = Math.max(S.profile.best, S.profile.streak);
+
+  const reward = S.profile.streak % HINT_EVERY === 0;
+  if (reward) S.profile.hints++;
+  S.streakInfo = { streak: S.profile.streak, reward: reward };
+
+  clearProgress(p.data.id);
+  save();
+
+  cheer();
+  setTimeout(() => {
+    playAd("interstitial", () => {
+      S.screen = "streak";
+      render();
+      setTimeout(() => {
+        const bar = app.querySelector(".progBar i");
+        if (bar) bar.style.width = barWidth() + "%";
+      }, 120);
+      const jump = setTimeout(gotoReview, 3400);
+      app.onclick = () => { clearTimeout(jump); app.onclick = null; gotoReview(); };
+    });
+  }, 1900);
+}
+
+function barWidth() {
+  const inCycle = S.streakInfo.streak % HINT_EVERY;
+  return (inCycle === 0 ? HINT_EVERY : inCycle) / HINT_EVERY * 100;
+}
+
+function gotoReview() {
+  app.onclick = null;
+  S.screen = "review";
+  S.reviewTab = "fact";
+  render();
+}
+
+function goHome() {
+  S.screen = "home";
+  S.p = null;
+  S.sel = null;
+  render();
+}
+
+/* ============================================================== overlays */
+
+function playAd(kind, done) {
+  S.overlay = kind;
+  paintOverlay();
+  setTimeout(() => {
+    S.overlay = null;
+    paintOverlay();
+    done();
+  }, 2000);
+}
+
+function toast(msg) {
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.textContent = msg;
+  app.appendChild(el);
+  setTimeout(() => el.remove(), 2000);
+}
+
+function cheer() {
+  const box = document.createElement("div");
+  box.className = "cheer";
+  box.innerHTML = `<div class="big">Solved!</div><div class="sub">Nicely worked out</div>`;
+  app.appendChild(box);
+
+  const cv = document.createElement("canvas");
+  cv.id = "confetti";
+  cv.width = app.clientWidth;
+  cv.height = app.clientHeight;
+  app.appendChild(cv);
+  runConfetti(cv);
+
+  setTimeout(() => { box.remove(); cv.remove(); }, 1900);
+}
+
+function runConfetti(cv) {
+  const ctx = cv.getContext("2d");
+  const colors = ["#FF8A3D", "#FFB020", "#31BFA3", "#3FBE80", "#FF5F5F", "#FFD9AE"];
+  const bits = [];
+  for (let i = 0; i < 130; i++) {
+    bits.push({
+      x: cv.width / 2 + (Math.random() - .5) * 120,
+      y: cv.height * .42 + (Math.random() - .5) * 60,
+      vx: (Math.random() - .5) * 9,
+      vy: -6 - Math.random() * 9,
+      w: 5 + Math.random() * 6,
+      h: 8 + Math.random() * 8,
+      rot: Math.random() * 6.3,
+      spin: (Math.random() - .5) * .35,
+      c: colors[(Math.random() * colors.length) | 0]
+    });
+  }
+  let frames = 0;
+  (function step() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    bits.forEach(b => {
+      b.vy += .38; b.x += b.vx; b.y += b.vy; b.rot += b.spin; b.vx *= .995;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.fillStyle = b.c;
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    });
+    if (++frames < 115 && cv.isConnected) requestAnimationFrame(step);
+  })();
+}
+
+/* ================================================================ render */
+
+function render() {
+  app.querySelectorAll(".screen").forEach(n => n.remove());
+  const el = document.createElement("div");
+  el.className = "screen";
+  if (S.screen === "home") el.innerHTML = homeHtml();
+  else if (S.screen === "puzzle") el.innerHTML = puzzleHtml();
+  else if (S.screen === "streak") el.innerHTML = streakHtml();
+  else if (S.screen === "review") el.innerHTML = reviewHtml();
+  app.insertBefore(el, app.firstChild);
+
+  if (S.screen === "puzzle") { fitQuote(); syncCells(); wireRail(".clueScroll", ".clueWrap"); }
+  if (S.screen === "review") wireRail(".scrollinner", ".reviewBody");
+  if (S.screen === "home") wireRail(".scrollinner", ".scrollbox");
+  paintOverlay();
+}
+
+function paintOverlay() {
+  app.querySelectorAll(".veil,.adFull").forEach(n => n.remove());
+  if (!S.overlay) return;
+
+  if (S.overlay === "fail") {
+    const v = document.createElement("div");
+    v.className = "veil";
+    v.innerHTML = `
+      <div class="sheet">
+        <button class="closeX" data-act="abandon">&#10005;</button>
+        <h2>Out of strikes</h2>
+        <p>Keep this run alive, or start the puzzle over.</p>
+        <div class="streakBox">
+          <div class="n">${S.profile.streak}</div>
+          <div class="l">CURRENT STREAK</div>
+        </div>
+        <button class="btn primary" data-act="revive">
+          <span>&#9654; Revive</span><span class="costTag">Watch an ad</span>
+        </button>
+        <button class="btn ghost" data-act="retry">
+          <span>Retry</span><span class="costTag" style="background:#FFF1D9;color:#C88914">
+          &#9679; ${RETRY_COST}</span>
+        </button>
+      </div>`;
+    app.appendChild(v);
+    return;
+  }
+
+  const isW2e = S.overlay === "w2e";
+  const ad = document.createElement("div");
+  ad.className = "adFull";
+  ad.innerHTML = `
+    <div class="tag">ADVERTISEMENT</div>
+    <div class="big">${isW2e ? "W2E Ad" : "Interstitial Ad"}</div>
+    <div class="adBar"><i></i></div>`;
+  app.appendChild(ad);
+}
+
+/* -------------------------------------------------------------- home */
+
+function homeHtml() {
+  const cards = puzzles.map((p, i) => {
+    const done = !!S.profile.done[p.id];
+    const started = !!S.profile.progress[p.id];
+    const locked = SEQUENTIAL_UNLOCK && i > 0 && !S.profile.done[puzzles[i - 1].id];
+    return `
+      <button class="pcard ${done ? "done" : ""} ${locked ? "locked" : ""}" data-open="${i}">
+        <div class="art">${ART[p.art] || ""}</div>
+        <div>
+          <div class="no">PUZZLE ${p.id}</div>
+          <div class="nm">${p.title}</div>
+        </div>
+        <div class="foot">
+          <span class="pill ${p.band}">${p.band}</span>
+          ${done ? `<span class="tick">&#10003;</span>`
+                 : started ? `<span class="resume">RESUME</span>`
+                 : locked ? `<span class="resume" style="color:var(--muted)">&#128274;</span>` : ``}
+        </div>
+      </button>`;
+  }).join("");
+
+  return `
+    <div class="homeHead">
+      <h1>${PACK.pack.name}</h1>
+      <p>${PACK.pack.blurb}</p>
+      <div class="homeStats">
+        <span class="chip">&#128293; ${S.profile.streak}<span
+          style="font-weight:800;color:var(--muted);font-size:11px">STREAK</span></span>
+        <span class="chip">&#128161; ${hintLabel()}<span
+          style="font-weight:800;color:var(--muted);font-size:11px">HINTS</span></span>
+      </div>
+    </div>
+    <div class="scrollbox">
+      <div class="scrollinner"><div class="cardGrid">${cards}</div></div>
+      <div class="rail"><div class="thumb"></div></div>
+    </div>
+    <div class="banner">BANNER AD</div>`;
+}
+
+/* ------------------------------------------------------------ puzzle */
+
+function puzzleHtml() {
+  const p = S.p, d = p.data;
+
+  const spent = STRIKES - p.strikes;
+  const lives = [0, 1, 2].map(i =>
+    `<div class="life ${i < spent ? "spent" : ""}">${XMARK}</div>`).join("");
+
+  /* the quote wraps a word at a time so no answer is ever split across rows */
+  let ci = 0, groups = [], cur = "";
+  const up = d.quote.toUpperCase();
+  for (let i = 0; i < up.length; i++) {
+    const ch = up[i];
+    if (ch >= "A" && ch <= "Z") {
+      const slot = p.slots[p.cellSlot[ci]];
+      const n = p.num[slot.correct];
+      /* an unnumbered letter still fills as a group, it just cannot be mapped */
+      cur += `<div class="cell ${n ? "" : "free"}" id="q${ci}" data-cell="${ci}">
+                ${n ? `<span class="ix">${n}</span>` : ""}<b></b></div>`;
+      ci++;
+    } else if (ch === " ") {
+      if (cur) groups.push(`<div class="qword">${cur}</div>`);
+      cur = "";
+    } else {
+      if (cur) groups.push(`<div class="qword">${cur}</div>`);
+      cur = "";
+      groups.push(`<span class="qpunc">${ch}</span>`);
+    }
+  }
+  if (cur) groups.push(`<div class="qword">${cur}</div>`);
+
+  /*
+   * Side by side reads tighter, but a clue that wraps squeezes the answer cells
+   * into a column, so anything long switches the whole list to stacked.
+   */
+  const longest = Math.max.apply(null, d.clues.map(c => c.c.length));
+  const widest = Math.max.apply(null, d.clues.map(c => c.a.length));
+  const stack = longest > 30 || widest > 6;
+
+  const rows = p.clues.map((row, i) => {
+    const cells = row.slots.map(id => {
+      const s = p.slots[id];
+      /* the same number as every other cell holding this letter, which is what
+         tells the player the two places are the same answer */
+      const n = p.num[s.correct];
+      return `<div class="cell ${n ? "" : "free"}" id="a${id}" data-slot="${id}">
+                ${n ? `<span class="ix">${n}</span>` : ""}<b></b></div>`;
+    }).join("");
+    return `
+      <div class="clueRow ${stack ? "stack" : ""}" id="row${i}">
+        <div class="clueHead">
+          <div class="lbl">${row.label}</div>
+          <div class="txt">${row.text}</div>
+        </div>
+        <div class="ansCells">${cells}</div>
+      </div>`;
+  }).join("");
+
+  const keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+  const kb = keys.map((r, i) => {
+    let row = r.split("").map(k => `<button class="key" data-key="${k}">${k}</button>`).join("");
+    if (i === 2) row += `<button class="key wide" data-key="DEL">&#9003;</button>`;
+    return `<div class="krow">${row}</div>`;
+  }).join("");
+
+  return `
+    <div class="topbar">
+      <button class="iconbtn" data-act="home">&#8592;</button>
+      <div class="titles">
+        <div class="t1">${d.title}</div>
+        <div class="t2">${PACK.pack.name.toUpperCase()} &middot; PUZZLE ${d.id} &middot; ${d.band.toUpperCase()}</div>
+      </div>
+      <div class="lives">${lives}</div>
+    </div>
+
+    <div class="quoteCard"><div class="quoteGrid">${groups.join("")}</div></div>
+
+    <div class="clueWrap">
+      <div class="clueScroll">${rows}</div>
+      <div class="rail"><div class="thumb"></div></div>
+      <button class="hintBtn ${UNLIMITED_HINTS || S.profile.hints ? "" : "empty"}" data-act="hint">
+        &#128161; <span>${hintLabel()}</span>
+      </button>
+    </div>
+
+    <div class="kb">${kb}</div>
+    <div class="banner">BANNER AD</div>`;
+}
+
+/*
+ * Cell size is measured rather than guessed, because the row count depends on
+ * where words happen to break, not just on how many letters there are. Four
+ * rows is the target for every quote, short ones simply use fewer.
+ */
+const ROW_GAP = 6;
+const MIN_CW = 20;
+const COMFY_CW = 24;
+function fitQuote() {
+  const grid = app.querySelector(".quoteGrid");
+  if (!grid) return;
+  const target = 4;
+  const sizes = [28, 26, 24, 22, 21, 20];
+
+  /* measure every candidate once, then decide */
+  const rowsAt = {};
+  for (const size of sizes) {
+    apply(size);
+    rowsAt[size] = Math.round((grid.offsetHeight + ROW_GAP) / (size * 1.34 + ROW_GAP));
+  }
+
+  /*
+   * Legible index numbers matter more than a tight row count, so a quote is
+   * allowed one row beyond its target rather than shrink under COMFY_CW, and
+   * MIN_CW is the hard floor whatever the row count comes to.
+   */
+  const exact = sizes.find(s => rowsAt[s] <= target);
+  const loose = sizes.find(s => rowsAt[s] <= target + 1);
+  apply(exact >= COMFY_CW ? exact : (loose || exact || MIN_CW));
+
+  function apply(size) {
+    grid.style.setProperty("--cw", size + "px");
+    grid.style.setProperty("--cf", Math.round(size * 0.58) + "px");
+    grid.style.setProperty("--ixf", Math.max(6, Math.min(9, Math.round(size * 0.32))) + "px");
+  }
+}
+
+/*
+ * Cells are patched in place rather than re-rendered so the pop and shake
+ * animations survive, the clue list keeps its scroll position, and typing on a
+ * long puzzle stays cheap.
+ */
+function syncCells() {
+  const p = S.p;
+  if (!p) return;
+  const sel = p.slots[S.sel];
+  const selClue = sel ? sel.clue : -2;
+
+  p.slots.forEach(s => {
+    const base = ["cell"];
+    if (!p.num[s.correct]) base.push("free");
+    if (s.locked) base.push("lock");
+    else if (s.value && s.value !== s.correct) base.push("wrong");
+    if (bumps[s.id]) base.push(bumps[s.id]);
+
+    /* the tapped cell reads as selected, its counterpart as linked, and every
+       other cell holding the same letter as a soft trail across both grids */
+    const chosen = sel && s.id === sel.id;
+    const peer = sel && !chosen && s.correct === sel.correct;
+
+    const a = document.getElementById("a" + s.id);
+    if (a) {
+      const cls = base.slice();
+      if (chosen) cls.push(S.ctx === "clue" ? "sel" : "link");
+      else if (peer) cls.push("peer");
+      a.className = cls.join(" ");
+      a.querySelector("b").textContent = s.value;
+    }
+
+    if (s.cell >= 0) {
+      const q = document.getElementById("q" + s.cell);
+      if (q) {
+        const cls = base.slice();
+        if (chosen) cls.push(S.ctx === "quote" ? "sel" : "link");
+        else if (peer) cls.push("peer");
+        q.className = cls.join(" ");
+        q.querySelector("b").textContent = s.value;
+      }
+    }
+  });
+
+  p.clues.forEach((row, i) => {
+    const node = document.getElementById("row" + i);
+    if (!node) return;
+    node.classList.toggle("active", i === selClue);
+    node.classList.toggle("solved", row.solved);
+  });
+
+  const spent = STRIKES - p.strikes;
+  app.querySelectorAll(".life").forEach((n, i) => n.classList.toggle("spent", i < spent));
+}
+
+function scrollClueIntoView() {
+  const sel = S.p.slots[S.sel];
+  if (!sel || sel.clue < 0) return;
+  const row = document.getElementById("row" + sel.clue);
+  const box = app.querySelector(".clueScroll");
+  if (!row || !box) return;
+  const top = row.offsetTop, bot = top + row.offsetHeight;
+  if (top < box.scrollTop + 4) box.scrollTo({ top: top - 8, behavior: "smooth" });
+  else if (bot > box.scrollTop + box.clientHeight - 60) {
+    box.scrollTo({ top: bot - box.clientHeight + 66, behavior: "smooth" });
+  }
+}
+
+/* ------------------------------------------------------------ streak */
+
+function streakHtml() {
+  const info = S.streakInfo;
+  const inCycle = info.streak % HINT_EVERY === 0 ? HINT_EVERY : info.streak % HINT_EVERY;
+  const pips = [];
+  for (let i = 1; i <= HINT_EVERY; i++) {
+    const on = i <= inCycle;
+    pips.push(i === HINT_EVERY
+      ? `<div class="pip goal ${on ? "on" : ""}">&#128161;</div>`
+      : `<div class="pip ${on ? "on" : ""}"></div>`);
+  }
+  return `
+    <div class="streakScreen">
+      <div class="flame">&#128293;</div>
+      <div class="streakN">${info.streak}</div>
+      <div class="streakL">PUZZLE STREAK</div>
+      <div class="progWrap">
+        <div class="progTop">
+          <span>${inCycle} of ${HINT_EVERY}</span>
+          <span>NEXT HINT</span>
+        </div>
+        <div class="progBar"><i></i></div>
+        <div class="pips">${pips.join("")}</div>
+      </div>
+      ${info.reward ? `<div class="rewardCard">&#127881; Streak reward earned &middot; +1 hint</div>` : ``}
+      <div class="tapOn">TAP TO CONTINUE</div>
+    </div>
+    <div class="banner">BANNER AD</div>`;
+}
+
+/* ------------------------------------------------------------ review */
+
+function reviewHtml() {
+  const d = S.p.data;
+
+  const paras = d.fact.map((text, i) => {
+    if (i !== d.factPara) return `<p>${text}</p>`;
+    return `<p>${text.slice(0, d.factStart)}<mark>${
+      text.slice(d.factStart, d.factEnd)}</mark>${text.slice(d.factEnd)}</p>`;
+  }).join("");
+
+  const recap = d.clues.map((c, i) => `
+    <div class="recapRow">
+      <div class="w">${String.fromCharCode(65 + i)} &nbsp;${c.a}</div>
+      <div class="c">${c.c}</div>
+    </div>`).join("");
+
+  const onFact = S.reviewTab === "fact";
+  const next = S.pi + 1 < puzzles.length;
+
+  return `
+    <div class="reviewArt">${ART[d.art] || ""}</div>
+    <div class="reviewHead"><h2>${d.title}</h2></div>
+    <div class="reviewBody">
+      <div class="scrollinner">${onFact ? paras : `<div class="recap">${recap}</div>`}</div>
+      <div class="rail"><div class="thumb"></div></div>
+    </div>
+    <div class="reviewCtas">
+      <button class="btn ghost" data-act="flip">
+        ${onFact ? "See the clues" : "Back to the fact"}
+      </button>
+      <button class="btn primary" data-act="next">${next ? "NEXT PUZZLE" : "BACK TO PACK"}</button>
+    </div>
+    <div class="banner">BANNER AD</div>`;
+}
+
+/* ============================================================= scroll rail */
+
+function wireRail(innerSel, wrapSel) {
+  const wrap = app.querySelector(wrapSel);
+  if (!wrap) return;
+  const inner = wrap.querySelector(innerSel) || app.querySelector(innerSel);
+  const rail = wrap.querySelector(".rail");
+  if (!inner || !rail) return;
+  const thumb = rail.querySelector(".thumb");
+
+  function update() {
+    const ratio = inner.clientHeight / inner.scrollHeight;
+    if (ratio >= 1) { rail.style.opacity = "0"; return; }
+    rail.style.opacity = "1";
+    const h = Math.max(28, rail.clientHeight * ratio);
+    const max = rail.clientHeight - h;
+    const p = inner.scrollTop / (inner.scrollHeight - inner.clientHeight);
+    thumb.style.height = h + "px";
+    thumb.style.transform = "translateY(" + (p * max) + "px)";
+  }
+  inner.addEventListener("scroll", update, { passive: true });
+  requestAnimationFrame(update);
+  setTimeout(update, 120);
+}
+
+/* ================================================================= events */
+
+app.addEventListener("click", e => {
+  const openCard = e.target.closest("[data-open]");
+  if (openCard) return openPuzzle(+openCard.dataset.open);
+
+  const key = e.target.closest("[data-key]");
+  if (key) {
+    const k = key.dataset.key;
+    return k === "DEL" ? backspace() : typeLetter(k);
+  }
+
+  const cell = e.target.closest("[data-cell]");
+  if (cell) {
+    const id = S.p.cellSlot[+cell.dataset.cell];
+    if (id != null) selectSlot(id, "quote");
+    return;
+  }
+
+  const ac = e.target.closest("[data-slot]");
+  if (ac) return selectSlot(+ac.dataset.slot, "clue");
+
+  const act = e.target.closest("[data-act]");
+  if (!act) return;
+  switch (act.dataset.act) {
+    case "home": saveProgress(); goHome(); break;
+    case "hint": useHint(); break;
+    case "revive": doRevive(); break;
+    case "retry": doRetry(); break;
+    case "abandon": abandon(); break;
+    case "flip": S.reviewTab = S.reviewTab === "fact" ? "clues" : "fact"; render(); break;
+    case "next":
+      if (S.pi + 1 < puzzles.length) openPuzzle(S.pi + 1);
+      else goHome();
+      break;
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (S.screen !== "puzzle" || S.overlay) return;
+  if (e.key === "Backspace") { e.preventDefault(); return backspace(); }
+  if (/^[a-zA-Z]$/.test(e.key)) { e.preventDefault(); typeLetter(e.key.toUpperCase()); }
+});
+
+window.addEventListener("resize", () => {
+  if (S.screen === "puzzle") fitQuote();
+});
+
+/* =================================================================== boot */
+
+if (!PACK || !puzzles.length) {
+  app.innerHTML = `<div style="padding:40px;text-align:center;font-weight:800">
+    No pack data.<br><span style="font-weight:600;color:#7B6A60;font-size:14px">
+    Run <code>cscript //nologo tools\\build-puzzles.js</code> to generate it.</span></div>`;
+} else {
+  /* #3 opens puzzle 3 straight away, which saves a lot of tapping while testing */
+  const jump = parseInt((location.hash || "").replace("#", ""), 10);
+  if (jump >= 1 && jump <= puzzles.length) openPuzzle(jump - 1);
+  else render();
+}
+
+})();
+</script>
+</body>
+</html>
