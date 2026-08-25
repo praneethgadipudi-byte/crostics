@@ -305,7 +305,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   font-size:var(--ixf);font-weight:800;line-height:1;
   color:var(--muted);letter-spacing:0;
 }
-.cell.free{border-style:dashed;border-color:#D9C7B2;background:#FFFBF5}
+.cell.free .ix{color:#C4B3A0}
 /* every other cell of the selected letter, in the quote and in the clue list.
    It has to carry real contrast, because it is the only thing showing where a
    letter goes when auto-fill is off. */
@@ -1618,7 +1618,7 @@ function puzzleHtml() {
       const n = p.num[slot.correct];
       /* an unnumbered letter still fills as a group, it just cannot be mapped */
       cur += `<div class="cell ${n ? "" : "free"}" id="q${ci}" data-cell="${ci}">
-                ${n ? `<span class="ix">${n}</span>` : ""}<b></b></div>`;
+                <span class="ix">${n || "?"}</span><b></b></div>`;
       ci++;
     } else if (ch === " ") {
       if (cur) groups.push(`<div class="qword">${cur}</div>`);
@@ -1646,7 +1646,7 @@ function puzzleHtml() {
          tells the player the two places are the same answer */
       const n = p.num[s.correct];
       return `<div class="cell ${n ? "" : "free"}" id="a${id}" data-slot="${id}">
-                ${n ? `<span class="ix">${n}</span>` : ""}<b></b></div>`;
+                <span class="ix">${n || "?"}</span><b></b></div>`;
     }).join("");
     return `
       <div class="clueRow ${stack ? "stack" : ""}" id="row${i}">
@@ -1789,7 +1789,8 @@ function syncCells() {
   app.querySelectorAll(".key.hot").forEach(n => n.classList.remove("hot"));
   /* glow names a letter once it has been revealed anywhere, so tapping that
      same index in the quote or in another clue still lights the key */
-  if (S.glow && sel && p.slots.some(s => s.correct === sel.correct && s.locked)) {
+  if (S.glow && sel && p.num[sel.correct] &&
+      p.slots.some(s => s.correct === sel.correct && s.locked)) {
     const key = app.querySelector('.key[data-key="' + sel.correct + '"]');
     if (key) key.classList.add("hot");
   }
