@@ -386,11 +386,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   box-shadow:0 4px 14px rgba(59,47,42,.14);
 }
 .hintStack{
-  position:absolute;bottom:12px;z-index:3;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
+  position:absolute;right:8px;bottom:12px;z-index:3;
+  display:flex;flex-direction:row;align-items:center;gap:8px;
 }
-.hintStack.left{left:8px}
-.hintStack.right{right:8px}
 .hintBtn:active{transform:translateY(2px)}
 .hintBtn.empty{color:var(--muted)}
 .hintBtn .bolt{width:28px;height:28px;display:block}
@@ -1686,15 +1684,13 @@ function puzzleHtml() {
     <div class="clueWrap">
       <div class="clueScroll">${rows}</div>
       <div class="rail"><div class="thumb"></div></div>
-      <div class="hintStack left">
+      <div class="hintStack">
+        <button class="hintBtn ${S.profile.hints ? "" : "empty"}" data-act="hint" aria-label="Hint">&#128161;</button>
         <button class="hintBtn" data-act="burst" aria-label="Letter burst">
           <svg class="bolt" viewBox="0 0 16 20" fill="none" aria-hidden="true">
             <path d="M9.2 1.2 2.4 11h5.2L6.6 18.8 14 8.4H8.6L9.2 1.2z" fill="#FF8A3D" stroke="#C85A12" stroke-width="1.2" stroke-linejoin="round"/>
           </svg>
         </button>
-      </div>
-      <div class="hintStack right">
-        <button class="hintBtn ${S.profile.hints ? "" : "empty"}" data-act="hint" aria-label="Hint">&#128161;</button>
       </div>
     </div>
 
@@ -1791,8 +1787,9 @@ function syncCells() {
   app.querySelectorAll(".life").forEach((n, i) => n.classList.toggle("spent", i < spent));
 
   app.querySelectorAll(".key.hot").forEach(n => n.classList.remove("hot"));
-  /* glow names a letter only after the player has already put it on the board */
-  if (S.glow && sel && sel.locked) {
+  /* glow names a letter once it has been revealed anywhere, so tapping that
+     same index in the quote or in another clue still lights the key */
+  if (S.glow && sel && p.slots.some(s => s.correct === sel.correct && s.locked)) {
     const key = app.querySelector('.key[data-key="' + sel.correct + '"]');
     if (key) key.classList.add("hot");
   }
