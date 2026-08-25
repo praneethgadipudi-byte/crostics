@@ -341,7 +341,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .clueWrap{position:relative;flex:1;min-height:0;margin:0 14px;display:flex}
 .clueScroll{
   flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;
-  padding:2px 58px 12px 58px;
+  padding:2px 14px 72px 0;
 }
 .clueScroll::-webkit-scrollbar{display:none}
 
@@ -393,11 +393,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .hintStack.right{right:8px}
 .hintBtn:active{transform:translateY(2px)}
 .hintBtn.empty{color:var(--muted)}
-.hintBtn .w2eMark{
-  display:flex;flex-direction:column;align-items:center;gap:1px;
-  font-size:11px;font-weight:900;letter-spacing:.04em;color:var(--primary-dk);line-height:1;
-}
-.hintBtn .w2eMark b{font-size:16px;line-height:1}
+.hintBtn .bolt{width:28px;height:28px;display:block}
 
 /* keyboard */
 .kb{flex:none;padding:8px 6px 6px;display:flex;flex-direction:column;gap:6px}
@@ -1692,7 +1688,9 @@ function puzzleHtml() {
       <div class="rail"><div class="thumb"></div></div>
       <div class="hintStack left">
         <button class="hintBtn" data-act="burst" aria-label="Letter burst">
-          <span class="w2eMark"><b>&#9654;</b>W2E</span>
+          <svg class="bolt" viewBox="0 0 16 20" fill="none" aria-hidden="true">
+            <path d="M9.2 1.2 2.4 11h5.2L6.6 18.8 14 8.4H8.6L9.2 1.2z" fill="#FF8A3D" stroke="#C85A12" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
         </button>
       </div>
       <div class="hintStack right">
