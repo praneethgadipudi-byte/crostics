@@ -1000,7 +1000,6 @@ function missLetter(s) {
       syncCells();
       S.busy = false;
       if (p.strikes === 0) return showFail();
-      advance();
     }, 780);
   }, 520);
 }
@@ -1265,7 +1264,7 @@ function win() {
         const bar = app.querySelector(".progBar i");
         if (bar) bar.style.width = barWidth() + "%";
       }, 120);
-      const jump = setTimeout(gotoReview, 3400);
+      const jump = setTimeout(gotoReview, 15000);
       app.onclick = () => { clearTimeout(jump); app.onclick = null; gotoReview(); };
     });
   }, 1900);
