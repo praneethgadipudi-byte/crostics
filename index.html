@@ -843,8 +843,12 @@ function openPuzzle(index) {
   S.power = !!S.profile.power[id];
   S.glow = !!S.profile.glow[id];
   restoreProgress();
-  /* a board saved before this rule still settles any already-complete letters */
-  settleQuoteFromClues();
+  /* a board saved before this rule still settles quote cells for solved words */
+  settleQuoteFromWords(
+    S.p.clues
+      .map((c, i) => i)
+      .filter(i => S.p.clues[i].slots.every(id => S.p.slots[id].locked))
+  );
   S.sel = firstOpenSlot();
   S.ctx = "clue";
   S.busy = false;
@@ -974,7 +978,7 @@ function typeLetter(ch) {
     const quoteWasDone = S.p.quoteHailed;
     fillLetter(s);
     const fresh = lockCompletedWords();
-    settleQuoteFromClues();
+    settleQuoteFromWords(fresh);
     saveProgress();
     syncCells();
     if (isWon()) return void setTimeout(win, 260);
@@ -1033,7 +1037,8 @@ function backspace() {
 function fillLetter(slot) {
   const ch = slot.correct;
   const same = [slot];
-  if (S.power) {
+  /* the powerup spreads into the quote, but never for an unindexed (?) letter */
+  if (S.power && S.p.num[ch]) {
     S.p.slots.forEach(s => {
       if (s.id !== slot.id && s.clue < 0 && s.correct === ch) same.push(s);
     });
@@ -1047,24 +1052,30 @@ function fillLetter(slot) {
 }
 
 /*
- * Base rule, independent of the powerup: once every clue-word cell of a numbered
- * letter is solved, that letter's quote cells reveal themselves. A numbered
- * letter that no clue feeds is skipped, so it is never handed over for free, and
- * unindexed letters are left out entirely and stay manual.
+ * Base rule, independent of the powerup: whenever a clue-word is fully solved,
+ * every numbered letter in that word reveals its quote cells. Unindexed (?)
+ * letters are left out entirely and stay manual.
  */
-function settleQuoteFromClues() {
+function settleQuoteFromWords(rows) {
+  if (!rows || !rows.length) return;
   const p = S.p;
-  Object.keys(p.num).forEach(ch => {
-    const clueCells = p.slots.filter(s => s.clue >= 0 && s.correct === ch);
-    if (!clueCells.length) return;
-    if (!clueCells.every(s => s.locked)) return;
+  const letters = {};
+  rows.forEach(i => {
+    p.clues[i].slots.forEach(id => {
+      const ch = p.slots[id].correct;
+      if (p.num[ch]) letters[ch] = true;
+    });
+  });
 
-    const quoteCells = p.slots.filter(s => s.clue < 0 && s.correct === ch && !s.locked);
-    quoteCells.forEach((s, i) => {
-      s.value = ch;
-      s.locked = true;
-      const wait = Math.min(i * 25, 200);
-      setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+  let k = 0;
+  Object.keys(letters).forEach(ch => {
+    p.slots.forEach(s => {
+      if (s.clue < 0 && s.correct === ch && !s.locked) {
+        s.value = ch;
+        s.locked = true;
+        const wait = Math.min(k++ * 25, 200);
+        setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+      }
     });
   });
 }
@@ -1154,7 +1165,7 @@ function useHint() {
   const quoteWasDone = S.p.quoteHailed;
   fillLetter(s);
   const fresh = lockCompletedWords();
-  settleQuoteFromClues();
+  settleQuoteFromWords(fresh);
   saveProgress();
   save();
   syncCells();
@@ -1177,7 +1188,7 @@ function useBurst() {
   playAd("w2e", () => {
     picks.forEach(s => fillLetter(s));
     const fresh = lockCompletedWords();
-    settleQuoteFromClues();
+    settleQuoteFromWords(fresh);
     saveProgress();
     syncCells();
     if (isWon()) return void setTimeout(win, 260);
