@@ -843,6 +843,8 @@ function openPuzzle(index) {
   S.power = !!S.profile.power[id];
   S.glow = !!S.profile.glow[id];
   restoreProgress();
+  /* a board saved before this rule still settles any already-complete letters */
+  settleQuoteFromClues();
   S.sel = firstOpenSlot();
   S.ctx = "clue";
   S.busy = false;
@@ -972,6 +974,7 @@ function typeLetter(ch) {
     const quoteWasDone = S.p.quoteHailed;
     fillLetter(s);
     const fresh = lockCompletedWords();
+    settleQuoteFromClues();
     saveProgress();
     syncCells();
     if (isWon()) return void setTimeout(win, 260);
@@ -1040,6 +1043,29 @@ function fillLetter(slot) {
     s.locked = true;
     const wait = Math.min(i * 25, 200);
     setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+  });
+}
+
+/*
+ * Base rule, independent of the powerup: once every clue-word cell of a numbered
+ * letter is solved, that letter's quote cells reveal themselves. A numbered
+ * letter that no clue feeds is skipped, so it is never handed over for free, and
+ * unindexed letters are left out entirely and stay manual.
+ */
+function settleQuoteFromClues() {
+  const p = S.p;
+  Object.keys(p.num).forEach(ch => {
+    const clueCells = p.slots.filter(s => s.clue >= 0 && s.correct === ch);
+    if (!clueCells.length) return;
+    if (!clueCells.every(s => s.locked)) return;
+
+    const quoteCells = p.slots.filter(s => s.clue < 0 && s.correct === ch && !s.locked);
+    quoteCells.forEach((s, i) => {
+      s.value = ch;
+      s.locked = true;
+      const wait = Math.min(i * 25, 200);
+      setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+    });
   });
 }
 
@@ -1128,6 +1154,7 @@ function useHint() {
   const quoteWasDone = S.p.quoteHailed;
   fillLetter(s);
   const fresh = lockCompletedWords();
+  settleQuoteFromClues();
   saveProgress();
   save();
   syncCells();
@@ -1150,6 +1177,7 @@ function useBurst() {
   playAd("w2e", () => {
     picks.forEach(s => fillLetter(s));
     const fresh = lockCompletedWords();
+    settleQuoteFromClues();
     saveProgress();
     syncCells();
     if (isWon()) return void setTimeout(win, 260);
