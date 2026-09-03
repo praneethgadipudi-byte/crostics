@@ -16,9 +16,9 @@
     { "band": "medium", "clues": [9], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 10, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.24, "pairPull": 0.1 },
     { "band": "medium", "clues": [10], "quoteFree": [2, 4], "answerFree": [2, 4], "themeWords": 2, "maxLen": 7, "latePull": 12, "hideCount": 3, "hideBias": "mixed", "hideShare": 0.26, "pairPull": 0.3 },
     { "band": "hard", "clues": [10], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "mixed", "hideShare": 0.3, "pairPull": 0.5 },
-    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "common", "hideShare": 0.3, "pairPull": 0.7 },
-    { "band": "hard", "clues": [11], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 4, "hideBias": "common", "hideShare": 0.32, "pairPull": 0.9 },
-    { "band": "hard", "clues": [12], "quoteFree": [3, 5], "answerFree": [3, 5], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 5, "hideBias": "common", "hideShare": 0.34, "pairPull": 1.1 }
+    { "band": "hard", "clues": [11], "quoteFree": [3, 7], "answerFree": [3, 6], "themeWords": 2, "maxLen": 8, "latePull": 14, "hideCount": 4, "hideBias": "common", "hideShare": 0.3, "pairPull": 0.7 },
+    { "band": "hard", "clues": [11], "quoteFree": [3, 7], "answerFree": [3, 6], "themeWords": 2, "maxLen": 8, "latePull": 16, "hideCount": 4, "hideBias": "common", "hideShare": 0.32, "pairPull": 0.9 },
+    { "band": "hard", "clues": [12], "quoteFree": [3, 7], "answerFree": [3, 6], "themeWords": 2, "maxLen": 9, "latePull": 16, "hideCount": 5, "hideBias": "common", "hideShare": 0.34, "pairPull": 1.1 }
   ],
   "puzzles": [
     {
@@ -74,6 +74,11 @@
     {
       "title": "Lungs Laid Out Flat",
       "art": "lungs",
+      "clues": [11, 12],
+      "quoteFree": [3, 9],
+      "answerFree": [3, 8],
+      "maxLen": 9,
+      "themeWords": 1,
       "quote": "Stretched flat your lungs would cover half of a tennis court.",
       "fact": [
         "Stretched flat your lungs would cover half of a tennis court. The trick is not size but folding: each lung divides into ever smaller tubes ending in hundreds of millions of tiny sacs, and it is the total surface of those sacs that does the work.",

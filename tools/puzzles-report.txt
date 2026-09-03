@@ -1,136 +1,737 @@
-#1  The Purple Carrot  [easy]
-  quote   : Wild carrots were purple, not orange.
-  unindexed: WILD CARROTS W.RE PURPLE, NOT O.ANGE.
-  stats   : letters=30 clues=8 qFree=2 aFree=2 entropy=3.695 vowels=0.367 avgLen=3.75 score=88.8
+==========  Food Origins  ==========
+
+#1  The Purple Carrot  [easy]  score=106.4
+  quote    : Wild carrots were purple, not orange.
+  unnumbered: WILD .ARROTS WERE PURPLE, NOT ORAN.E.
+  hidden   : C G  (7% of cells)
+  levers   : letters=30 clues=8 distinct=15 pairLoad=0.56 vowels=0.367 common=0.667 stop=0.233 qFree=1 aFree=3
   A. WILLOW (WILLOW)  Tree that weeps by the water
-  B. CURD (CURD)  The lumpy start of every cheese
-  C. TOAST (TOAST)  Bread that met the fire again
-  D. GAP (GAP)  The space that should not be there
-  E. PEN (PEN)  Enclosure for pigs, or a writing tool
-  F. URN (-RN)  Tall vessel for ashes or tea
-  G. ORE (ORE)  Rock worth digging up
+  B. SUGAR (SUGAR)  It once travelled as treasure
+  C. PECAN (PECAN)  Nut at the heart of a pie
+  D. RIND (R-ND)  Tough skin of a cheese or melon
+  E. TOP (TOP)  The best, or a spinning toy
+  F. TOE (TOE)  You stub it in the dark
+  G. ORE (-RE)  Rock worth digging up
   H. EAR (E-R)  Corn grows in one, and you listen with one
-#2  Chocolate Currency  [easy]
-  quote   : Cacao beans were once used as actual money.
-  unindexed: CAC.O BEANS WERE ONCE USED AS ACTU.L MONEY.
-  stats   : letters=35 clues=8 qFree=2 aFree=2 entropy=3.55 vowels=0.486 avgLen=4.38 score=95.8
-  A. YELLOW (YE-LOW)  Colour of butter and lemons
-  B. CRUMB (CRUMB)  The evidence you ate it
+#2  Chocolate Currency  [easy]  score=109.8
+  quote    : Cacao beans were once used as actual money.
+  unnumbered: CACAO BEANS WERE ONCE USE. AS ACTUAL .ONEY.
+  hidden   : D M  (6% of cells)
+  levers   : letters=35 clues=8 distinct=15 pairLoad=0.73 vowels=0.486 common=0.657 stop=0.286 qFree=1 aFree=3
+  A. CURRY (CU-RY)  A dish that travelled the world
+  B. WOMBAT (WOMBAT)  Its burrow has separate rooms
   C. SAUCE (SAUCE)  It rescues a dull dish
-  D. SCONE (SCONE)  It divides a nation over pronunciation
-  E. OATS (OATS)  Breakfast grain that thickens
-  F. CANE (CANE)  Sugar grows on it
-  G. DEN (DEN)  A fox's home, or a cosy back room
-  H. TEA (-EA)  Leaves that started a revolution
-#3  The Jar That Never Spoiled  [easy]
-  quote   : Honey sealed in ancient tombs is still edible.
-  unindexed: HONEY SEALED IN ANCI.NT TOMB. IS STILL EDIBLE.
-  stats   : letters=38 clues=8 qFree=2 aFree=2 entropy=3.567 vowels=0.395 avgLen=4.75 score=100.9
+  D. COCOA (COCOA)  Warm drink for cold hands
+  E. SALAD (SALAD)  Raw vegetables making an effort
+  F. EASE (EASE)  Comfort, or to loosen a grip
+  G. NEON (NE-N)  Gas that made signs glow
+  H. NET (NE-)  It catches fish and stops goals
+#3  The Jar That Never Spoiled  [easy]  score=113.4
+  quote    : Honey sealed in ancient tombs is still edible.
+  unnumbered: HONE. SEALED IN AN.IENT TOMBS IS STILL EDIBLE.
+  hidden   : Y C  (5% of cells)
+  levers   : letters=38 clues=8 distinct=14 pairLoad=0.87 vowels=0.395 common=0.711 stop=0.237 qFree=1 aFree=3
   A. THYME (THYME)  Small leaves, big in a stew
-  B. RIBBON (-IBBON)  It ties the parcel
-  C. ISLAND (ISLAND)  Land with water all around
+  B. BACON (BACON)  It made breakfast smell famous
+  C. BASIL (BASIL)  Herb that makes pesto pesto
   D. LENTIL (LENTIL)  Tiny pulse that thickens a stew
-  E. CIDER (CIDE-)  Apples, pressed and left alone
-  F. NEST (NEST)  Twigs arranged into a home
-  G. OIL (OIL)  It shimmers on top of water
-  H. SEA (SEA)  Salt water with a horizon
-#4  The Poison Apple  [medium]
-  quote   : Europeans once feared the tomato as deadly poison.
-  unindexed: EUROPEANS ONCE FEAR.D THE TOMATO AS D.ADLY P.ISON.
-  stats   : letters=42 clues=9 qFree=3 aFree=3 entropy=3.731 vowels=0.476 avgLen=4.67 score=113.9
-  A. CHERRY (CHERRY)  It tops the cake
-  B. PUMPKIN (PUMP-IN)  Orange squash with a carved face
-  C. FEAST (FEAST)  Dinner that got out of hand
-  D. SALAD (SALAD)  Raw vegetables making an effort
-  E. SEED (SEED)  The whole plant, packed small
-  F. ONION (ON-ON)  It makes you cry while helping
-  G. TOAD (TOAD)  Warty relative of the frog
-  H. TOE (TOE)  You stub it in the dark
-  I. OAR (OA-)  You row with a pair of them
-#5  Two Years For One Fruit  [medium]
-  quote   : One pineapple plant can take nearly two years to ripen.
-  unindexed: ONE PINEAPPLE PLANT CAN T.KE NEAR.Y TWO YEARS TO RIP.N.
-  stats   : letters=45 clues=9 qFree=3 aFree=3 entropy=3.524 vowels=0.4 avgLen=5 score=118.4
-  A. PASTRY (PASTRY)  Butter and flour, done properly
+  E. TENDON (TENDON)  Rope tying muscle to bone
+  F. SHIELD (S-IELD)  A wall you carry with you
+  G. IRIS (I-IS)  Flower, or the coloured ring in your eye
+  H. SET (SE-)  A collection, or what jelly does
+#4  The Poison Apple  [medium]  score=131.6
+  quote    : Europeans once feared the tomato as deadly poison.
+  unnumbered: EURO.EAN. ONCE FEARE. THE TOMATO A. .EA.LY .OI.ON.
+  hidden   : D P S  (19% of cells)
+  levers   : letters=42 clues=9 distinct=17 pairLoad=0.84 vowels=0.476 common=0.738 stop=0.214 qFree=2 aFree=4
+  A. PAPYRUS (PAPYRUS)  Reed that carried the first writing
+  B. FEATHER (FEATHER)  It keeps a bird up and warm
+  C. COSMOS (COSMOS)  Everything there is, in one word
+  D. ONION (ONION)  It makes you cry while helping
+  E. LADDER (LADDE-)  Steps you can carry
+  F. OATS (OAT-)  Breakfast grain that thickens
+  G. NOD (NOD)  Silent yes
+  H. TEA (T-A)  Leaves that started a revolution
+  I. EEL (EE-)  Long swimmer often mistaken for a snake
+#5  Two Years For One Fruit  [medium]  score=134.3
+  quote    : One pineapple plant can take nearly two years to ripen.
+  unnumbered: .NE PINEAPP.E P.ANT CAN TAKE NEAR.. TW. .EARS T. RIPEN.
+  hidden   : L Y O  (18% of cells)
+  levers   : letters=45 clues=9 distinct=14 pairLoad=1.14 vowels=0.4 common=0.711 stop=0.244 qFree=3 aFree=4
+  A. YELLOW (YELLOW)  Colour of butter and lemons
   B. PICKLE (PICKLE)  Vegetable saved by vinegar
   C. PANTRY (PANTRY)  Cupboard the cook trusts
-  D. WINTER (WINTER)  When the pantry earns its keep
-  E. POTATO (PO-ATO)  Root that became chips, crisps and mash
-  F. PECAN (PE-AN)  Nut at the heart of a pie
-  G. NEON (NEON)  Gas that made signs glow
-  H. VAN (-AN)  Delivery vehicle with no windows
-  I. EEL (EEL)  Long swimmer often mistaken for a snake
-#6  Berry Confusion  [medium]
-  quote   : To a botanist the banana is a berry and the strawberry is not.
-  unindexed: TO A BOTA.IST THE B.NANA IS A BERRY AND THE STR.WBERRY IS NOT.
-  stats   : letters=49 clues=10 qFree=3 aFree=3 entropy=3.484 vowels=0.367 avgLen=4.9 score=127.4
-  A. DAIRY (DAIRY)  Where milk becomes everything else
-  B. HONEY (HONEY)  The only food that never spoils
-  C. WHISK (WHIS-)  It beats eggs into submission
-  D. RABBIT (RABBIT)  It gets into the vegetable patch
-  E. BUTTER (B-TTER)  Cream that got churned
-  F. BEAN (BEAN)  It can be baked, roasted or ground
-  G. ROAST (ROAST)  Cook it slowly and let it brown
-  H. TASTE (TASTE)  Only five of them, officially
-  I. STAR (STAR)  It burns very far away
-  J. NOON (N-ON)  When both hands point up
-#7  Four Thousand Year Old Noodles  [hard]
-  quote   : The oldest bowl of noodles ever unearthed was made from millet.
-  unindexed: THE O.DEST BOWL OF NOOD.ES EV.R UNEARTHED WAS MADE FROM MILL.T.
-  stats   : letters=52 clues=10 qFree=4 aFree=4 entropy=3.803 vowels=0.385 avgLen=5.2 score=136.7
+  D. PEPPER (PEPPER)  It travelled further than most people
+  E. TOAST (TOAST)  Bread that met the fire again
+  F. ORANGE (ORAN-E)  Fruit and colour in one word
+  G. MINT (-INT)  Cool herb, or where coins are made
+  H. BEAN (-EAN)  It can be baked, roasted or ground
+  I. INN (-NN)  Old roadside stop with beds and beer
+#6  Berry Confusion  [medium]  score=135.4
+  quote    : To a botanist the banana is a berry and the strawberry is not.
+  unnumbered: T. A ..TAN.ST THE .ANANA .S A .ERRY AND THE STRAW.ERRY .S N.T.
+  hidden   : O I B  (20% of cells)
+  levers   : letters=49 clues=10 distinct=13 pairLoad=1.03 vowels=0.367 common=0.837 stop=0.408 qFree=2 aFree=4
+  A. HONEY (HONEY)  The only food that never spoils
+  B. DAIRY (DAIRY)  Where milk becomes everything else
+  C. WHEAT (WHEAT)  The grain behind most bread
+  D. RIBBON (RIBBON)  It ties the parcel
+  E. RABBIT (RABBIT)  It gets into the vegetable patch
+  F. CARROT (-ARROT)  Root that was purple first
+  G. TASTE (TASTE)  Only five of them, officially
+  H. PASTA (-ASTA)  It comes in a hundred shapes
+  I. YEAST (-EAST)  Tiny fungus that lifts the loaf
+  J. SON (S-N)  Boy in the family tree
+#7  Four Thousand Year Old Noodles  [hard]  score=153.3
+  quote    : The oldest bowl of noodles ever unearthed was made from millet.
+  unnumbered: THE OLDE.T BOWL OF NOODLE. EVE. UNE..THED W.. ..DE F.O. .ILLET.
+  hidden   : M A S R  (23% of cells)
+  levers   : letters=52 clues=10 distinct=17 pairLoad=1.12 vowels=0.385 common=0.635 stop=0.308 qFree=3 aFree=5
   A. MUFFIN (MUFFIN)  Breakfast cake, in denial
   B. HARVEST (HARVEST)  The payoff for a whole season
-  C. WHEAT (WHEAT)  The grain behind most bread
-  D. MEADOW (MEADOW)  Field of grass and wildflowers
-  E. BREAD (BRE-D)  The oldest thing on the table
-  F. TOMATO (TOM-TO)  Fruit that insists it is a vegetable
-  G. SLED (SLED)  It only works downhill
-  H. MELON (-ELON)  Big fruit that is mostly water
-  I. DOOR (DOOR)  You knock before opening it
-  J. ISLE (-SLE)  Small island in poetry
-#8  Spuds In Space  [hard]
-  quote   : A potato became the first food ever grown in orbit above our planet.
-  unindexed: A POTATO BECAME THE FIRST FOOD EV.R GR.WN IN ORBIT ABOV. OUR PL.NET.
-  stats   : letters=55 clues=11 qFree=4 aFree=4 entropy=3.915 vowels=0.436 avgLen=5 score=144.1
-  A. TRUFFLE (TRUFFLE)  Fungus dogs are trained to find
+  C. MEADOW (MEADOW)  Field of grass and wildflowers
+  D. WOMBAT (WOMBAT)  Its burrow has separate rooms
+  E. SHUTTLE (SH-TTLE)  Reusable ride up to orbit
+  F. SEED (SEED)  The whole plant, packed small
+  G. LADDER (L-DDER)  Steps you can carry
+  H. LEMON (LE-ON)  Sour yellow fixer of everything
+  I. ROLL (R-LL)  Small bread, or what dough does
+  J. BEE (-EE)  Tiny worker behind every honey jar
+#8  Spuds In Space  [hard]  score=163.5
+  quote    : A potato became the first food ever grown in orbit above our planet.
+  unnumbered: A P..A.. BECAME ..E FIR.. F..D EVER GR.WN IN .RBI. AB.VE .UR PLANE..
+  hidden   : O T S H  (29% of cells)
+  levers   : letters=55 clues=11 distinct=20 pairLoad=1.17 vowels=0.436 common=0.709 stop=0.236 qFree=3 aFree=5
+  A. WAFFLE (WAFFLE)  Grid you pour syrup into
   B. VIVID (VIVID)  So bright it stays with you
-  C. CASHEW (CASHEW)  Nut that grows outside its fruit
-  D. BAMBOO (BAMBOO)  Grass tall enough to build with
-  E. GRAIN (GRAIN)  Wheat, rice and the rest
-  F. PEPPER (-EPPER)  It travelled further than most people
-  G. BROTH (BROT-)  Thin soup with deep flavour
-  H. CORN (-ORN)  It grows in ears and pops
-  I. TENT (TENT)  Canvas bedroom
-  J. OAT (OAT)  Grain behind the breakfast bowl
-  K. ROOT (-OOT)  The part of the plant you dig for
-#9  The Orchid In Your Ice Cream  [hard]
-  quote   : Real vanilla comes from an orchid that must be pollinated by hand alone.
-  unindexed: REAL VANILLA C.MES FR.M AN ORCHID THAT MUST BE POL.INATED BY HAND ALO.E.
-  stats   : letters=59 clues=11 qFree=4 aFree=4 entropy=3.982 vowels=0.373 avgLen=5.36 score=150.7
-  A. VALLEY (VALLEY)  Where the river settled
-  B. MUSTARD (MUSTARD)  Seed paste with a sinus opinion
-  C. SIMMER (SIMMER)  Cook just below a boil
+  C. NUTMEG (NUTMEG)  Spice grated over custard
+  D. BROTH (BROTH)  Thin soup with deep flavour
+  E. RECIPE (RECIPE)  Instructions you will ignore slightly
+  F. BAMBOO (BA-BOO)  Grass tall enough to build with
+  G. PASTRY (PASTR-)  Butter and flour, done properly
+  H. ROAST (ROA-T)  Cook it slowly and let it brown
+  I. ORANGE (ORAN-E)  Fruit and colour in one word
+  J. TON (TON)  A very heavy amount
+  K. TOY (TO-)  Plaything under the tree
+#9  The Orchid In Your Ice Cream  [hard]  score=168.8
+  quote    : Real vanilla comes from an orchid that must be pollinated by hand alone.
+  unnumbered: .E.L V.NILL. C.ME. F..M .N ..CHID TH.T MU.T BE P.LLIN.TED BY H.ND .L.NE.
+  hidden   : A O R S  (31% of cells)
+  levers   : letters=59 clues=11 distinct=19 pairLoad=1.18 vowels=0.373 common=0.644 stop=0.237 qFree=3 aFree=5
+  A. GRAVITY (-RAVITY)  Why nothing here floats away
+  B. CRUMB (CRUMB)  The evidence you ate it
+  C. DOLPHIN (DOLPHIN)  It sleeps with half its brain awake
   D. CHEF (CHEF)  The one shouting in the kitchen
-  E. CHILI (CHILI)  Heat you can eat
-  F. LADDER (LADDER)  Steps you can carry
-  G. HERB (HE-B)  Leafy flavour from the windowsill
-  H. BACON (BA-ON)  It made breakfast smell famous
-  I. PLANT (PLANT)  It stays put and still eats
-  J. BANANA (-ANANA)  Berry that grows on a giant herb
-  K. TOOTH (TOOT-)  Sweet-toothed people have a favourite
-#10  Counted Grain By Grain  [hard]
-  quote   : Black pepper was once so valuable that traders counted the grains one by one.
-  unindexed: BLACK PEPPER WAS O.CE SO VALUABLE THAT TRAD.RS COUNT.D THE GR.INS ONE BY ONE.
-  stats   : letters=63 clues=12 qFree=4 aFree=4 entropy=4.009 vowels=0.381 avgLen=5.25 score=159.6
-  A. VOYAGE (VOYAGE)  A long trip by sea
+  E. SIMMER (SIMMER)  Cook just below a boil
+  F. BREAD (B-EAD)  The oldest thing on the table
+  G. SANDAL (SANDAL)  Footwear of the ancient world
+  H. THRONE (TH-ONE)  A chair with consequences
+  I. TOMATO (TO-ATO)  Fruit that insists it is a vegetable
+  J. LLAMA (LLA-A)  Andean pack animal that spits
+  K. ALOE (ALOE)  Plant you rub on a sunburn
+#10  Counted Grain By Grain  [hard]  score=177.4
+  quote    : Black pepper was once so valuable that traders counted the grains one by one.
+  unnumbered: BLACK P.PP.. .AS ONC. SO VALUABL. .HA. ..AD..S COUN..D .H. G.A.NS ON. BY ON..
+  hidden   : E T R I W  (32% of cells)
+  levers   : letters=63 clues=12 distinct=20 pairLoad=1.16 vowels=0.381 common=0.667 stop=0.381 qFree=3 aFree=5
+  A. GRAVITY (GRAVITY)  Why nothing here floats away
   B. KETCHUP (KETCHUP)  It began as a fish sauce
   C. WALNUT (WALNUT)  Nut shaped like a brain
-  D. CHEESE (CHEESE)  Milk that learned to wait
-  E. BASIL (BASIL)  Herb that makes pesto pesto
-  F. SUPPER (S-PPER)  The last meal of the day
-  G. CARROT (CARROT)  Root that was purple first
-  H. BOARD (BOARD)  You chop on it
-  I. BOLD (BOLD)  Brave, or a heavier font
-  J. STONE (STO-E)  The pit inside a peach
-  K. TUNA (T-NA)  Fish that comes in a tin
-  L. INN (-NN)  Old roadside stop with beds and beer
+  D. CRESCENT (CRESCENT)  The moon at its thinnest
+  E. DOLPHIN (DOLPH-N)  It sleeps with half its brain awake
+  F. POTATO (PO-ATO)  Root that became chips, crisps and mash
+  G. BOARD (BOARD)  You chop on it
+  H. BANANA (BANANA)  Berry that grows on a giant herb
+  I. ORB (ORB)  A sphere, said poetically
+  J. SEED (SEE-)  The whole plant, packed small
+  K. ELF (EL-)  Small helper with pointed ears
+  L. SEA (SE-)  Salt water with a horizon
+==========  Space and the Sky  ==========
+
+#1  The Day That Outlasts The Year  [easy]  score=102.3
+  quote    : A day on Venus is longer than its year.
+  unnumbered: A DAY ON .EN.S IS LONGER THAN ITS YEAR.
+  hidden   : V U  (7% of cells)
+  levers   : letters=30 clues=8 distinct=15 pairLoad=0.66 vowels=0.4 common=0.767 stop=0.4 qFree=1 aFree=3
+  A. VOYAGE (VOYAGE)  A long trip by sea
+  B. YIELD (YIELD)  Give way, or what the harvest gives
+  C. THORN (THORN)  The rose's warning
+  D. SUN (SUN)  The reason plants bother
+  E. STAR (STAR)  It burns very far away
+  F. INN (I-N)  Old roadside stop with beds and beer
+  G. SEA (SE-)  Salt water with a horizon
+  H. NAP (NA-)  A short guilt-free sleep
+#2  The Planet That Would Float  [easy]  score=108.4
+  quote    : Saturn is light enough to float on water.
+  unnumbered: SATURN IS LIGHT ENOUGH TO .LOAT ON .ATER.
+  hidden   : W F  (6% of cells)
+  levers   : letters=33 clues=8 distinct=14 pairLoad=0.79 vowels=0.394 common=0.758 stop=0.182 qFree=1 aFree=3
+  A. FINGER (FINGER)  Ten of them, and all named
+  B. WALNUT (WALNUT)  Nut shaped like a brain
+  C. SIGNAL (SIGNAL)  What a distant probe sends home
+  D. DUST (-UST)  Space is surprisingly full of it
+  E. HERO (HERO)  The one the story follows
+  F. HAT (HAT)  Chefs wear a tall white one
+  G. LOT (-OT)  An auction item, or a great deal
+  H. POT (-OT)  It sits on the stove all day
+#3  The Moon Is Leaving  [easy]  score=117.9
+  quote    : The moon drifts further from earth every year.
+  unnumbered: THE MOON DRIFTS F.RTHER FROM EARTH E.ERY YEAR.
+  hidden   : V U  (5% of cells)
+  levers   : letters=38 clues=8 distinct=15 pairLoad=0.94 vowels=0.342 common=0.737 stop=0.184 qFree=3 aFree=3
+  A. MUFFIN (MUFFIN)  Breakfast cake, in denial
+  B. IVORY (-VORY)  Pale material, and the piano keys
+  C. THYME (THYME)  Small leaves, big in a stew
+  D. FOREST (FOREST)  Trees in enormous numbers
+  E. CRATER (-RATER)  Dent left by an old arrival
+  F. TIDE (T-DE)  The sea keeping to a timetable
+  G. EAR (EAR)  Corn grows in one, and you listen with one
+  H. ORE (ORE)  Rock worth digging up
+#4  Almost Everything Is The Sun  [medium]  score=131.6
+  quote    : The sun holds almost all the mass in the solar system.
+  unnumbered: THE SU. H.LDS AL..ST ALL THE .ASS I. THE S.LAR SYSTE..
+  hidden   : M O N  (19% of cells)
+  levers   : letters=43 clues=9 distinct=14 pairLoad=1.08 vowels=0.302 common=0.744 stop=0.326 qFree=3 aFree=4
+  A. MUMMY (MUMMY)  Wrapped for a very long journey
+  B. DOLPHIN (DOL-HIN)  It sleeps with half its brain awake
+  C. SHUTTLE (SH-TTLE)  Reusable ride up to orbit
+  D. SPHERE (S-HERE)  The shape gravity insists on
+  E. APOLLO (A-OLLO)  The programme that reached the moon
+  F. ASH (ASH)  What the fire leaves behind
+  G. SALT (SALT)  It was once worth its weight in wages
+  H. TAN (TAN)  Colour earned in sunshine
+  I. SET (SET)  A collection, or what jelly does
+#5  Footprints With No Weather  [medium]  score=135.7
+  quote    : Footprints left on the moon will last millions of years.
+  unnumbered: .OOTPRINTS L..T ON TH. .OON WILL LAST .ILLIONS O. Y.ARS.
+  hidden   : F E M  (17% of cells)
+  levers   : letters=46 clues=9 distinct=15 pairLoad=1.04 vowels=0.348 common=0.696 stop=0.239 qFree=2 aFree=4
+  A. WAFFLE (WAFFLE)  Grid you pour syrup into
+  B. PYRAMID (PYRAMI-)  A tomb with a very good angle
+  C. SHELF (SHELF)  Where the jars queue up
+  D. COSMOS (-OSMOS)  Everything there is, in one word
+  E. ONIONS (ONIONS)  They make the cook weep
+  F. LENTIL (LENTIL)  Tiny pulse that thickens a stew
+  G. ORBIT (OR-IT)  The loop a planet keeps to
+  H. TOOL (TOOL)  It is only as good as the hand
+  I. TIN (T-N)  Metal can for beans
+#6  The Silence Out There  [medium]  score=148.3
+  quote    : Space is completely silent because sound needs air to travel.
+  unnumbered: SPA.E IS ..MPLETELY SILE.T BE.AUSE S.U.D .EEDS AIR T. TRAVEL.
+  hidden   : C O N  (18% of cells)
+  levers   : letters=51 clues=10 distinct=17 pairLoad=1.19 vowels=0.412 common=0.667 stop=0.078 qFree=2 aFree=4
+  A. GRAVITY (-RAVITY)  Why nothing here floats away
+  B. PUMPKIN (PUMP-IN)  Orange squash with a carved face
+  C. CUSTARD (CUSTARD)  Eggs and milk, gently thickened
+  D. BALANCE (BALANCE)  The inner ear keeps it for you
+  E. SCONE (SCONE)  It divides a nation over pronunciation
+  F. LOOSE (LOOSE)  Not tied down
+  G. SLED (SLED)  It only works downhill
+  H. SENSE (SE-SE)  Sight, smell or common
+  I. ICE (I-E)  It floats in your drink
+  J. EEL (EEL)  Long swimmer often mistaken for a snake
+#7  A Spoonful Of A Dead Star  [hard]  score=156
+  quote    : One teaspoon of neutron star matter would weigh a billion tonnes.
+  unnumbered: ONE TEA.POON OF NEUT.ON .TA. MATTE. WOU.D WE.GH A B....ON TONNE..
+  hidden   : L I R S  (22% of cells)
+  levers   : letters=54 clues=10 distinct=18 pairLoad=1.27 vowels=0.426 common=0.759 stop=0.204 qFree=3 aFree=5
+  A. WILLOW (WILLOW)  Tree that weeps by the water
+  B. ASTEROID (ASTEROID)  Rock keeping an orbit of its own
+  C. PENGUIN (PENGUIN)  A bird that swims instead
+  D. FEATHER (FEATHER)  It keeps a bird up and warm
+  E. NEBULA (NEBULA)  Cloud where new stars are made
+  F. COSMOS (-OSMOS)  Everything there is, in one word
+  G. TENDON (TEN-ON)  Rope tying muscle to bone
+  H. NOVA (NO-A)  A star having a very bad week
+  I. ORB (OR-)  A sphere, said poetically
+  J. NOD (NO-)  Silent yes
+#8  What Space Smells Like  [hard]  score=145.5
+  quote    : The likely cause is chemistry clinging to the fabric.
+  unnumbered: TH. L...LY CAUS. .S CH.M.STRY CL.NG.NG T. TH. FABR.C.
+  hidden   : E I O K  (30% of cells)
+  levers   : letters=44 clues=9 distinct=18 pairLoad=1.34 vowels=0.341 common=0.636 stop=0.227 qFree=2 aFree=4
+  A. YOGURT (YOGURT)  Milk cultured into breakfast
+  B. GALAXY (GALA-Y)  Billions of stars at one address
+  C. KITCHEN (KITCHEN)  The room the house revolves around
+  D. CHEF (CHEF)  The one shouting in the kitchen
+  E. SCRIBE (SCRIBE)  The one in the room who could write
+  F. CHIME (CHIME)  Gentle bell sound
+  G. SUNSET (S-NSET)  The sky's daily finale
+  H. FIT (-IT)  Healthy, or the way a shoe behaves
+  I. OIL (-IL)  It shimmers on top of water
+#9  Old Light Through The Window  [hard]  score=171.9
+  quote    : Sunlight reaching your window began its journey thousands of years ago.
+  unnumbered: .UNLIGH. RE.CHING Y.UR WIND.W BEG.N I.. J.URNEY .H.U..ND. .F YE.R. .G..
+  hidden   : S O A T  (32% of cells)
+  levers   : letters=60 clues=11 distinct=19 pairLoad=1.42 vowels=0.383 common=0.667 stop=0.15 qFree=3 aFree=5
+  A. JUNGLE (JUNGLE)  Green, loud and hard to cross
+  B. GRAVITY (GRA-ITY)  Why nothing here floats away
+  C. YOGURT (YOGURT)  Milk cultured into breakfast
+  D. CHERRY (CHERRY)  It tops the cake
+  E. DOUGH (DOUGH)  It rises when you leave it alone
+  F. WHEAT (WHEAT)  The grain behind most bread
+  G. WONDER (WONDE-)  What a good fact leaves behind
+  H. FOSSIL (FOSSI-)  Stone copy of something alive
+  I. BANANA (BANANA)  Berry that grows on a giant herb
+  J. ONIONS (ONION-)  They make the cook weep
+  K. SUN (SU-)  The reason plants bother
+#10  You Are Made Of Old Stars  [hard]  score=187.6
+  quote    : The heaviest atoms inside your body were forged long ago inside exploding stars.
+  unnumbered: .H. H.A.I.S. A...S INSID. Y.UR B.DY W.R. F.RG.D L.NG AG. INSID. .XPL.DING S.ARS.
+  hidden   : E O T M V  (33% of cells)
+  levers   : letters=67 clues=12 distinct=21 pairLoad=1.37 vowels=0.403 common=0.687 stop=0.164 qFree=5 aFree=4
+  A. GALAXY (GALAXY)  Billions of stars at one address
+  B. GRAVITY (GRAVITY)  Why nothing here floats away
+  C. WOMBAT (WOMBAT)  Its burrow has separate rooms
+  D. LIGHT (LIGHT)  Not heavy, and not dark
+  E. PENGUIN (PENGUIN)  A bird that swims instead
+  F. DRIFT (DRIFT)  Slow sideways travel
+  G. SHIELD (SHIE-D)  A wall you carry with you
+  H. SUNRISE (S-NRISE)  The daily reset
+  I. DONOR (DONOR)  One who gives blood or funds
+  J. ODD (ODD)  Not even, and a bit strange
+  K. GOOSE (-OOSE)  Bird that guards like a dog
+  L. MOSS (-OSS)  Green velvet on old stone
+==========  The Human Body  ==========
+
+#1  Two Billion Beats  [easy]  score=107.1
+  quote    : Your heart will beat two billion times.
+  unnumbered: .OUR HEART WILL BEAT TWO BILLION TI.ES.
+  hidden   : M Y  (6% of cells)
+  levers   : letters=32 clues=8 distinct=15 pairLoad=0.8 vowels=0.406 common=0.656 stop=0.344 qFree=1 aFree=3
+  A. YELLOW (YELLOW)  Colour of butter and lemons
+  B. THUMB (THUMB)  The one that made tools possible
+  C. ELBOW (ELBOW)  The joint you cannot lick
+  D. IRIS (IRIS)  Flower, or the coloured ring in your eye
+  E. LIVER (LI-ER)  The organ that grows back
+  F. TIN (TIN)  Metal can for beans
+  G. DOT (-OT)  The smallest mark you can make
+  H. TAR (TA-)  Black sticky road stuff
+#2  The Hardest Thing You Own  [easy]  score=110.4
+  quote    : Tooth enamel is the hardest thing you own.
+  unnumbered: TOOTH ENAME. IS THE HARDEST THING YO. OWN.
+  hidden   : U L  (6% of cells)
+  levers   : letters=34 clues=8 distinct=16 pairLoad=0.87 vowels=0.382 common=0.794 stop=0.235 qFree=1 aFree=3
+  A. YOGURT (YOGURT)  Milk cultured into breakfast
+  B. MEADOW (MEADOW)  Field of grass and wildflowers
+  C. LASH (LASH)  It stands guard over the eye
+  D. HORNET (HO-NET)  A wasp with a shorter temper
+  E. HOST (HOST)  The one who opens the door
+  F. HEN (HEN)  She supplies the breakfast
+  G. VEIN (-EIN)  Pipe bringing the blood back
+  H. PIT (-IT)  Hole in the ground, or a peach's core
+#3  A Brand New Cover  [easy]  score=115.8
+  quote    : Your body makes new skin about every month.
+  unnumbered: YOUR BODY MAKES NE. SKIN ABOUT E.ERY MONTH.
+  hidden   : V W  (6% of cells)
+  levers   : letters=35 clues=8 distinct=17 pairLoad=1.16 vowels=0.371 common=0.6 stop=0.257 qFree=1 aFree=3
+  A. KIDNEY (KIDNEY)  Filter that works in a pair
+  B. WHISK (WH-SK)  It beats eggs into submission
+  C. VOYAGE (VOYA-E)  A long trip by sea
+  D. MUMMY (-UMMY)  Wrapped for a very long journey
+  E. BONE (BONE)  What the stock is simmered from
+  F. BUS (BUS)  It runs late and stops often
+  G. OTTER (OTTER)  It cracks shells on its chest
+  H. OAR (OAR)  You row with a pair of them
+#4  Fewer Bones Than A Baby  [medium]  score=129.4
+  quote    : A human adult has fewer bones than a newborn baby.
+  unnumbered: A H.MAN AD.L. HAS FE.ER BONES .HAN A NE.BORN BABY.
+  hidden   : U W T  (15% of cells)
+  levers   : letters=40 clues=9 distinct=16 pairLoad=0.91 vowels=0.375 common=0.675 stop=0.225 qFree=2 aFree=4
+  A. WOMBAT (WOMBAT)  Its burrow has separate rooms
+  B. BARLEY (BARLEY)  Grain behind beer and soup
+  C. BREATH (BREATH)  You take twenty thousand a day
+  D. CASHEW (-ASHEW)  Nut that grows outside its fruit
+  E. HUB (HUB)  The busy middle of everything
+  F. TENDON (-ENDON)  Rope tying muscle to bone
+  G. FUN (FUN)  The whole point of a game
+  H. SUN (S-N)  The reason plants bother
+  I. FAN (-AN)  It cools you, or it cheers for you
+#5  Half Of You Is Not You  [medium]  score=136.8
+  quote    : Roughly half the cells in your body are not human at all.
+  unnumbered: RO.GHL. HALF .HE CELLS IN .O.R BOD. ARE NO. H.MAN A. ALL.
+  hidden   : U Y T  (20% of cells)
+  levers   : letters=45 clues=9 distinct=18 pairLoad=1.16 vowels=0.356 common=0.6 stop=0.444 qFree=2 aFree=4
+  A. FINGER (FINGER)  Ten of them, and all named
+  B. CHERRY (CHERRY)  It tops the cake
+  C. THYME (THYME)  Small leaves, big in a stew
+  D. HONEY (HON-Y)  The only food that never spoils
+  E. BLOOD (BLOOD)  Five litres, never allowed to rest
+  F. AUTUMN (AUTU-N)  When the harvest comes in
+  G. SKULL (S-ULL)  The helmet you were born in
+  H. HALO (HALO)  Ring above a saint's head
+  I. LLAMA (LLA-A)  Andean pack animal that spits
+#6  A Very Long Circuit  [medium]  score=142.4
+  quote    : The blood vessels in one body would circle the earth twice.
+  unnumbered: THE BLOO. VESSELS .N ONE BO.Y WOUL. ..R.LE THE EARTH TW..E.
+  hidden   : D C I  (19% of cells)
+  levers   : letters=48 clues=10 distinct=17 pairLoad=1.27 vowels=0.375 common=0.646 stop=0.333 qFree=2 aFree=4
+  A. VALLEY (VALLEY)  Where the river settled
+  B. WILLOW (WILLOW)  Tree that weeps by the water
+  C. BRUSH (BRUSH)  It paints or it tidies your hair
+  D. KITCHEN (-ITCHEN)  The room the house revolves around
+  E. SCRIBE (SCRIBE)  The one in the room who could write
+  F. TOOTH (TOOTH)  Sweet-toothed people have a favourite
+  G. COAST (CO-ST)  Where the land runs out
+  H. ODD (ODD)  Not even, and a bit strange
+  I. KNEE (-NEE)  Hinge in the middle of your leg
+  J. DUE (D-E)  Expected, or what the library wants back
+#7  The Brain On A Light Bulb  [hard]  score=156
+  quote    : Your brain runs on about the same power as a household light bulb.
+  unnumbered: YOUR BRAI. RU.S O. ABOU. .H. SAM. POW.R AS A HOUS.HO.D .IGH. BU.B.
+  hidden   : L T N E  (25% of cells)
+  levers   : letters=53 clues=10 distinct=18 pairLoad=1.49 vowels=0.415 common=0.66 stop=0.321 qFree=3 aFree=5
+  A. PYRAMID (PYRAMID)  A tomb with a very good angle
+  B. TONGUE (TONGUE)  Taster and talker in one
+  C. SHUTTLE (SHUTTLE)  Reusable ride up to orbit
+  D. ELBOW (ELBOW)  The joint you cannot lick
+  E. RIBBON (RIBBON)  It ties the parcel
+  F. PHARAOH (-HARAOH)  A living god in a headdress
+  G. BALANCE (BALAN-E)  The inner ear keeps it for you
+  H. HOOK (HOO-)  It hangs your coat or catches your fish
+  I. RUT (RU-)  Groove in a track, or a dull routine
+  J. SUM (SU-)  The answer to an addition
+#8  Lungs Laid Out Flat  [hard]  score=160.8
+  quote    : Stretched flat your lungs would cover half of a tennis court.
+  unnumbered: S.R..CH.D FLA. Y.UR LUNGS W.ULD C.V.R HALF .F A ..NN.S C.UR..
+  hidden   : T E O I  (30% of cells)
+  levers   : letters=50 clues=11 distinct=18 pairLoad=1.01 vowels=0.34 common=0.6 stop=0.24 qFree=3 aFree=7
+  A. GRAVITY (GRAVITY)  Why nothing here floats away
+  B. WAFFLE (WAFFLE)  Grid you pour syrup into
+  C. FEATHER (FEATHER)  It keeps a bird up and warm
+  D. CUSTARD (CUST-RD)  Eggs and milk, gently thickened
+  E. CHURN (CHURN)  Machine that turns cream into butter
+  F. MUSCLE (-USCLE)  It only ever knows how to pull
+  G. DUST (DUS-)  Space is surprisingly full of it
+  H. TON (T-N)  A very heavy amount
+  I. LOT (L-T)  An auction item, or a great deal
+  J. OWN (O-N)  To possess, or to admit
+  K. OWL (O-L)  Night bird with a rotating stare
+#9  Nobody Else Has Your Print  [hard]  score=170.1
+  quote    : Every person alive has a pattern of tongue prints as unique as fingerprints.
+  unnumbered: EVE.Y PE..O. ALIVE .A. A PATTE.. OF TO.GUE P.I.T. A. U.IQUE A. FI.GE.P.I.T..
+  hidden   : S R N H  (32% of cells)
+  levers   : letters=63 clues=11 distinct=17 pairLoad=1.6 vowels=0.397 common=0.746 stop=0.159 qFree=3 aFree=3
+  A. QUARRY (QUARRY)  Where the stone came from
+  B. TRUFFLE (TRUFFLE)  Fungus dogs are trained to find
+  C. VIVID (VIVI-)  So bright it stays with you
+  D. PENGUIN (PENGUIN)  A bird that swims instead
+  E. SPRING (SPRING)  Season of sowing
+  F. SPHERE (SPHERE)  The shape gravity insists on
+  G. RETINA (RETINA)  Screen at the back of the eye
+  H. POTATO (POTATO)  Root that became chips, crisps and mash
+  I. SEASON (SEASON)  Add salt, or a quarter of the year
+  J. SWEAT (S-EAT)  Cooling system nobody installed
+  K. ASH (AS-)  What the fire leaves behind
+#10  Signals At Traffic Speed  [hard]  score=179.1
+  quote    : Nerve signals race along your body at more than a hundred metres every second.
+  unnumbered: N..V. S.GNALS .AC. ALONG YOU. .ODY AT MO.. T.AN A .UND..D M.T..S .V..Y S.COND.
+  hidden   : E R H I B  (33% of cells)
+  levers   : letters=64 clues=12 distinct=18 pairLoad=1.22 vowels=0.375 common=0.688 stop=0.234 qFree=3 aFree=5
+  A. GRAVITY (GRAVITY)  Why nothing here floats away
+  B. VOYAGE (VOYAGE)  A long trip by sea
+  C. THUMB (THUMB)  The one that made tools possible
+  D. CANDY (CANDY)  Sugar with no other job
+  E. MUSTARD (MUSTARD)  Seed paste with a sinus opinion
+  F. RADISH (RAD-SH)  Peppery root eaten raw
+  G. CANDLE (CANDLE)  Light that shrinks as it works
+  H. SNORES (SNORES)  Rumbles of deep sleep
+  I. SOONER (-OONER)  Earlier than that
+  J. MELON (-ELON)  Big fruit that is mostly water
+  K. KNEE (-NEE)  Hinge in the middle of your leg
+  L. ERA (ER-)  A stretch of history with a name
+==========  The Ancient World  ==========
+
+#1  The Cat Went First  [easy]  score=99.6
+  quote    : Cats chose to live with farmers.
+  unnumbered: CATS CHOSE TO LI.E WITH FAR.ERS.
+  hidden   : V M  (8% of cells)
+  levers   : letters=26 clues=7 distinct=14 pairLoad=0.63 vowels=0.346 common=0.731 stop=0.231 qFree=1 aFree=4
+  A. HARVEST (HARVEST)  The payoff for a whole season
+  B. SHELF (SHELF)  Where the jars queue up
+  C. WORM (WORM)  The gardener's quiet ally
+  D. COIN (COI-)  Money you can hear
+  E. ICE (I-E)  It floats in your drink
+  F. CAT (CA-)  It ignores you on purpose
+  G. SET (S-T)  A collection, or what jelly does
+#2  Rome Had Fast Food  [easy]  score=104.6
+  quote    : Most people in Rome ate out every day.
+  unnumbered: MOST PEOPLE IN ROME ATE O.T E.ERY DAY.
+  hidden   : U V  (7% of cells)
+  levers   : letters=30 clues=8 distinct=15 pairLoad=0.7 vowels=0.467 common=0.667 stop=0.3 qFree=1 aFree=3
+  A. VINYL (VINYL)  Records came back on it
+  B. MUMMY (-UMMY)  Wrapped for a very long journey
+  C. SPEAR (SPEAR)  Reach beating strength
+  D. POD (POD)  Where peas keep their siblings
+  E. TREAT (TREAT)  Something nice you did not need
+  F. TOE (TOE)  You stub it in the dark
+  G. ORE (O-E)  Rock worth digging up
+  H. EVE (E-E)  The night before the big day
+#3  Steel Before Its Time  [easy]  score=111.2
+  quote    : The chemistry only arrived much later.
+  unnumbered: THE CHEMISTRY ONLY ARRIVE. M.CH LATER.
+  hidden   : U D  (6% of cells)
+  levers   : letters=32 clues=8 distinct=16 pairLoad=0.8 vowels=0.313 common=0.656 stop=0.219 qFree=1 aFree=3
+  A. VALLEY (VALLEY)  Where the river settled
+  B. CHERRY (CHERRY)  It tops the cake
+  C. THRONE (THRONE)  A chair with consequences
+  D. ARCH (ARCH)  Stone clever enough to hold itself up
+  E. MUD (MUD)  Soil that met too much rain
+  F. RIM (-IM)  The edge of a wheel or a glass
+  G. PIT (-IT)  Hole in the ground, or a peach's core
+  H. NET (-ET)  It catches fish and stops goals
+#4  Older Than The Mammoth  [medium]  score=134.4
+  quote    : Mammoths were alive when the pyramids were built.
+  unnumbered: MAMMO.HS .ERE A.IVE .HEN .HE PYRAMIDS .ERE BUI...
+  hidden   : W L T  (20% of cells)
+  levers   : letters=41 clues=9 distinct=18 pairLoad=1.08 vowels=0.366 common=0.634 stop=0.268 qFree=2 aFree=4
+  A. PYRAMID (PYRAMID)  A tomb with a very good angle
+  B. WILLOW (WILLOW)  Tree that weeps by the water
+  C. THUMB (THUMB)  The one that made tools possible
+  D. WOVEN (W-VEN)  Made on a loom
+  E. HAMMER (HAMMER)  It only understands nails
+  F. TRIBE (TRI-E)  A group bound by kinship
+  G. HAT (HAT)  Chefs wear a tall white one
+  H. SEA (SE-)  Salt water with a horizon
+  I. BEE (-EE)  Tiny worker behind every honey jar
+#5  Paid In Bread And Beer  [medium]  score=146.6
+  quote    : The workers who built the pyramids were paid in bread and beer.
+  unnumbered: .HE .ORKERS .HO .UIL. .HE PYRAMIDS .ERE PAID IN .READ AND .EER.
+  hidden   : B W T  (18% of cells)
+  levers   : letters=51 clues=9 distinct=18 pairLoad=1.38 vowels=0.373 common=0.667 stop=0.294 qFree=4 aFree=4
+  A. PAPYRUS (PAPYRUS)  Reed that carried the first writing
+  B. WHISK (WHISK)  It beats eggs into submission
+  C. WOMBAT (WOMBAT)  Its burrow has separate rooms
+  D. RIBBON (RIBBON)  It ties the parcel
+  E. WHALE (WHALE)  The biggest animal that ever lived
+  F. SENATE (-ENATE)  Old men, older arguments
+  G. DESERT (DE-ERT)  Sand, sun and very little else
+  H. CIDER (-IDER)  Apples, pressed and left alone
+  I. RIDGE (RID-E)  The long top of a hill
+#6  Painted, Not Pale  [medium]  score=148.9
+  quote    : Greek statues were once painted in loud colours from head to toe.
+  unnumbered: GREEK ST.T.ES WERE ONCE P.INTE. IN LO.. COLO.RS FROM HE.. TO TOE.
+  hidden   : U D A  (17% of cells)
+  levers   : letters=53 clues=10 distinct=19 pairLoad=1.21 vowels=0.453 common=0.698 stop=0.302 qFree=3 aFree=4
+  A. KETCHUP (KETCHUP)  It began as a fish sauce
+  B. FORUM (FORUM)  Where Rome went to argue
+  C. SWORD (SWORD)  The old way to end a debate
+  D. CUSTARD (CUSTARD)  Eggs and milk, gently thickened
+  E. LEGION (LEGION)  Rome's marching unit
+  F. SANDAL (SANDAL)  Footwear of the ancient world
+  G. KITTEN (-ITTEN)  It has not learned scorn yet
+  H. METEOR (-ETEOR)  Streak that burns up on the way in
+  I. ZOO (-OO)  Where animals watch people
+  J. EEL (EE-)  Long swimmer often mistaken for a snake
+#7  Complaints In Clay  [hard]  score=156.9
+  quote    : The oldest written complaint is about a bad delivery of copper.
+  unnumbered: THE O..EST WRITTEN COM..AINT IS A.OUT A .A. .E.IVERY OF CO..ER.
+  hidden   : D P L B  (21% of cells)
+  levers   : letters=52 clues=10 distinct=20 pairLoad=1.2 vowels=0.385 common=0.635 stop=0.25 qFree=3 aFree=5
+  A. PYRAMID (PYRAMID)  A tomb with a very good angle
+  B. DOLPHIN (DOLPHIN)  It sleeps with half its brain awake
+  C. WALNUT (WALNUT)  Nut shaped like a brain
+  D. SCRIBE (SCRIBE)  The one in the room who could write
+  E. BEAVER (BEAVER)  It builds its own pond
+  F. FLINT (FLI-T)  Stone that makes sparks
+  G. OCTOPUS (OCTOP-S)  Three hearts and eight arms
+  H. TOAD (-OAD)  Warty relative of the frog
+  I. DOT (-OT)  The smallest mark you can make
+  J. VET (-ET)  Doctor for the four-legged
+#8  The Machine In The Wreck  [hard]  score=165.1
+  quote    : A shipwreck gave up a bronze machine that predicted eclipses.
+  unnumbered: A .HIPWR.CK GAV. UP A BR.NZ. MACHIN. .HA. PR.DIC..D .CLIP....
+  hidden   : E T S O  (29% of cells)
+  levers   : letters=51 clues=11 distinct=21 pairLoad=1.3 vowels=0.373 common=0.627 stop=0.157 qFree=3 aFree=6
+  A. LIZARD (LIZARD)  It can leave its tail behind
+  B. PUMPKIN (PUMPKIN)  Orange squash with a carved face
+  C. VINEGAR (VINEGAR)  Wine that took a wrong turn
+  D. PHARAOH (PHARAOH)  A living god in a headdress
+  E. CASHEW (CASHEW)  Nut that grows outside its fruit
+  F. SCRIBE (SC-IBE)  The one in the room who could write
+  G. PAD (P-D)  Notepad, or a cat's soft foot
+  H. CUE (C-E)  A nudge to start speaking
+  I. COT (C-T)  Folding bed for an unexpected guest
+  J. TEA (TE-)  Leaves that started a revolution
+  K. JET (-ET)  Fast plane, or a spurt of water
+#9  Concrete That Heals  [hard]  score=164
+  quote    : Roman concrete grows stronger in seawater instead of crumbling.
+  unnumbered: .OMAN CONC..T. G.OWS ST.ONG.. .N S.AWAT.. .NST.AD OF C.UMB..NG.
+  hidden   : E R I L  (32% of cells)
+  levers   : letters=54 clues=11 distinct=17 pairLoad=0.97 vowels=0.352 common=0.722 stop=0.074 qFree=3 aFree=6
+  A. FINGER (FINGER)  Ten of them, and all named
+  B. BADGER (BADGER)  Stripe-faced digger of long tunnels
+  C. SUMMIT (SUMMIT)  The top, at last
+  D. WILLOW (WI-LOW)  Tree that weeps by the water
+  E. CRESCENT (CRESCENT)  The moon at its thinnest
+  F. ORANGE (ORANGE)  Fruit and colour in one word
+  G. ARENA (ARE-A)  Sand that soaked up the show
+  H. CRUST (CR-ST)  The outside of the loaf
+  I. URN (-RN)  Tall vessel for ashes or tea
+  J. SON (S-N)  Boy in the family tree
+  K. TOP (TO-)  The best, or a spinning toy
+#10  The Library In The Ashes  [hard]  score=180.4
+  quote    : A whole library of scrolls survived the eruption as blocks of charcoal.
+  unnumbered: A .H.LE LIB.A.Y .F .C..LL. .U.VIVED THE E.UPTI.. A. BL.CK. .F CHA.C.AL.
+  hidden   : O S R N W  (34% of cells)
+  levers   : letters=59 clues=12 distinct=20 pairLoad=1.48 vowels=0.356 common=0.61 stop=0.169 qFree=3 aFree=6
+  A. VIVID (VIVID)  So bright it stays with you
+  B. WAFFLE (WAFFLE)  Grid you pour syrup into
+  C. KETCHUP (KETCHUP)  It began as a fish sauce
+  D. QUARRY (-UARRY)  Where the stone came from
+  E. CHARIOT (CHARIOT)  Two wheels and a great deal of noise
+  F. BALANCE (BALANCE)  The inner ear keeps it for you
+  G. SCROLL (SCROLL)  A book before books had spines
+  H. BRUSH (BR-SH)  It paints or it tidies your hair
+  I. ROLL (R-LL)  Small bread, or what dough does
+  J. ZOO (-OO)  Where animals watch people
+  K. SON (SO-)  Boy in the family tree
+  L. SEA (SE-)  Salt water with a horizon
+==========  The Animal Kingdom  ==========
+
+#1  Holding Hands At Sea  [easy]  score=108.7
+  quote    : Sea otters hold hands while they sleep.
+  unnumbered: SEA OTTERS HOLD HANDS .HILE THEY SLEE..
+  hidden   : W P  (6% of cells)
+  levers   : letters=32 clues=8 distinct=14 pairLoad=0.71 vowels=0.344 common=0.75 stop=0.125 qFree=1 aFree=3
+  A. YELLOW (YELLOW)  Colour of butter and lemons
+  B. SPIDER (SPIDER)  Eight legs and excellent engineering
+  C. SLOTH (SLOTH)  In absolutely no hurry
+  D. HAND (HAND)  Five fingers and a wave
+  E. HEAT (HEAT)  What the oven provides
+  F. ASH (-SH)  What the fire leaves behind
+  G. SET (S-T)  A collection, or what jelly does
+  H. EEL (EE-)  Long swimmer often mistaken for a snake
+#2  Three Hearts, Blue Blood  [easy]  score=110.3
+  quote    : An octopus has three hearts and blue blood.
+  unnumbered: AN O.TO.US HAS THREE HEARTS AND BLUE BLOOD.
+  hidden   : C P  (6% of cells)
+  levers   : letters=35 clues=8 distinct=14 pairLoad=0.84 vowels=0.4 common=0.714 stop=0.229 qFree=1 aFree=3
+  A. POUCH (POUCH)  Small bag, or a kangaroo's pocket
+  B. BRUSH (BRUSH)  It paints or it tidies your hair
+  C. HORNET (HORNET)  A wasp with a shorter temper
+  D. TABLET (TABLET)  Clay page pressed with a reed
+  E. PANDA (-ANDA)  It eats one plant, and badly
+  F. SLED (SLED)  It only works downhill
+  G. GAS (-AS)  It fuels the hob
+  H. ZOO (-OO)  Where animals watch people
+#3  Half A Brain Asleep  [easy]  score=116.3
+  quote    : A dolphin sleeps with one half of its brain awake.
+  unnumbered: A .OLPHIN SLEEPS WITH ONE HALF OF ITS BRAIN AWA.E.
+  hidden   : K D  (5% of cells)
+  levers   : letters=40 clues=8 distinct=16 pairLoad=1.29 vowels=0.4 common=0.7 stop=0.325 qFree=1 aFree=2
+  A. WAFFLE (WAFFLE)  Grid you pour syrup into
+  B. WHISK (WHISK)  It beats eggs into submission
+  C. SHIELD (SHIELD)  A wall you carry with you
+  D. BREATH (BREATH)  You take twenty thousand a day
+  E. SNAIL (SNAIL)  It brings its house along
+  F. PAINT (PAINT)  It covers a wall, slowly
+  G. PAW (PA-)  Foot with claws
+  H. OZONE (O-ONE)  Layer that blocks the sun's rays
+#4  The Bird That Remembers You  [medium]  score=138
+  quote    : A crow can remember a human face for years afterwards.
+  unnumbered: A .ROW .AN RE.E.BER A HU.AN .A.E .OR YEARS A.TERWARDS.
+  hidden   : F C M  (21% of cells)
+  levers   : letters=44 clues=9 distinct=16 pairLoad=1.16 vowels=0.386 common=0.659 stop=0.182 qFree=3 aFree=4
+  A. MUMMY (MUMMY)  Wrapped for a very long journey
+  B. COFFEE (COFFEE)  Beans that run the morning
+  C. FEATHER (FEATHER)  It keeps a bird up and warm
+  D. WONDER (WONDER)  What a good fact leaves behind
+  E. CLAW (C-AW)  It grips, and it warns
+  F. CABIN (CAB-N)  Small wooden retreat
+  G. GRASS (-RASS)  Wheat is one, technically
+  H. AJAR (A-AR)  Not quite closed
+  I. EAR (EAR)  Corn grows in one, and you listen with one
+#5  Ants Beyond Counting  [medium]  score=142.5
+  quote    : Every human on earth shares the planet with millions of ants.
+  unnumbered: EVERY HU.AN ON EARTH SHARES THE P.ANET W.TH .....ONS OF ANTS.
+  hidden   : L I M  (16% of cells)
+  levers   : letters=50 clues=9 distinct=17 pairLoad=1.33 vowels=0.36 common=0.78 stop=0.22 qFree=3 aFree=4
+  A. GRAVITY (-RAVITY)  Why nothing here floats away
+  B. DOLPHIN (-OLPHIN)  It sleeps with half its brain awake
+  C. WHALE (WHALE)  The biggest animal that ever lived
+  D. MUFFIN (MU-FIN)  Breakfast cake, in denial
+  E. PHARAOH (-HARAOH)  A living god in a headdress
+  F. MOTH (MOTH)  It ruins jumpers and loves lamps
+  G. ANTLER (ANTLER)  Headgear grown and dropped each year
+  H. NEST (NEST)  Twigs arranged into a home
+  I. TENSE (TENSE)  Strung tight, or a verb's time
+#6  Stripes Nobody Repeats  [medium]  score=145.6
+  quote    : No two tigers anywhere wear quite the same pattern of stripes.
+  unnumbered: .O T.O T.GERS A.Y.HERE .EAR QU.TE THE SAME PATTER. OF STR.PES.
+  hidden   : W N I  (18% of cells)
+  levers   : letters=51 clues=10 distinct=17 pairLoad=1.36 vowels=0.392 common=0.784 stop=0.196 qFree=2 aFree=4
+  A. QUARRY (QUARRY)  Where the stone came from
+  B. FINGER (FINGER)  Ten of them, and all named
+  C. SWARM (SWARM)  Thousands moving as one mind
+  D. WINTER (WINTER)  When the pantry earns its keep
+  E. WHEAT (WHEAT)  The grain behind most bread
+  F. HERON (HE-ON)  Patient fisher on stilts
+  G. POTATO (POTATO)  Root that became chips, crisps and mash
+  H. SPINE (SPI-E)  The stack that holds you upright
+  I. SENSE (SE-SE)  Sight, smell or common
+  J. TENT (TE-T)  Canvas bedroom
+#7  Cube Shaped Evidence  [hard]  score=154.3
+  quote    : A wombat produces droppings shaped like little cubes.
+  unnumbered: A W.MBAT PR..U.ES .R.PPINGS SHAPE. .IKE .ITT.E .UBES.
+  hidden   : L D O C  (24% of cells)
+  levers   : letters=45 clues=10 distinct=19 pairLoad=1.1 vowels=0.356 common=0.556 stop=0.022 qFree=3 aFree=5
+  A. PUMPKIN (PUMPKIN)  Orange squash with a carved face
+  B. BADGER (BADGER)  Stripe-faced digger of long tunnels
+  C. OCTOPUS (OCTOPUS)  Three hearts and eight arms
+  D. CASHEW (CASHEW)  Nut that grows outside its fruit
+  E. PROBE (PROBE)  A robot sent so we need not go
+  F. IDEA (I-EA)  It arrives in the shower
+  G. LID (-ID)  It keeps the steam inside
+  H. DUE (D-E)  Expected, or what the library wants back
+  I. LOT (L-T)  An auction item, or a great deal
+  J. SET (S-T)  A collection, or what jelly does
+#8  Older Than The Oldest Tree  [hard]  score=160.9
+  quote    : A Greenland shark can live for hundreds of years in cold water.
+  unnumbered: A G...NLAND SHA.K CAN L.V. FO. HUND..DS OF Y.A.S .N COLD WA....
+  hidden   : R E I T  (29% of cells)
+  levers   : letters=51 clues=11 distinct=19 pairLoad=1.01 vowels=0.353 common=0.667 stop=0.216 qFree=3 aFree=6
+  A. GRAVITY (GRAVITY)  Why nothing here floats away
+  B. WAFFLE (WAFFLE)  Grid you pour syrup into
+  C. KITCHEN (KI-CHEN)  The room the house revolves around
+  D. CUSTARD (CUS-ARD)  Eggs and milk, gently thickened
+  E. HYENA (H-ENA)  It laughs, but not with you
+  F. SALAD (SALAD)  Raw vegetables making an effort
+  G. NEEDS (NEEDS)  The things you cannot do without
+  H. NOD (NOD)  Silent yes
+  I. OWL (O-L)  Night bird with a rotating stare
+  J. ORE (O-E)  Rock worth digging up
+  K. RUN (R-N)  Jog, or what a tap does
+#9  A Tongue Heavier Than You  [hard]  score=168.4
+  quote    : The tongue of a blue whale weighs about as much as a full grown elephant.
+  unnumbered: .H. ..NGU. .F A BLU. WHAL. W.IGH. AB.U. A. MUCH A. A FULL GR.WN .L.PHAN..
+  hidden   : E T O S  (31% of cells)
+  levers   : letters=58 clues=11 distinct=18 pairLoad=1.46 vowels=0.414 common=0.603 stop=0.276 qFree=3 aFree=6
+  A. TRUFFLE (TRUFFLE)  Fungus dogs are trained to find
+  B. WOMBAT (WOMBAT)  Its burrow has separate rooms
+  C. PENGUIN (PENGUIN)  A bird that swims instead
+  D. WILLOW (W-LLOW)  Tree that weeps by the water
+  E. SHUTTLE (SHUTTLE)  Reusable ride up to orbit
+  F. BALANCE (BALANCE)  The inner ear keeps it for you
+  G. DOUGH (-OUGH)  It rises when you leave it alone
+  H. SQUASH (S-UASH)  Crush it, or roast it
+  I. TOGA (-OGA)  Cloth worn with great confidence
+  J. HAY (HA-)  Dried grass stacked for winter
+  K. HAT (HA-)  Chefs wear a tall white one
+#10  The Immortal Jellyfish  [hard]  score=178.9
+  quote    : One jellyfish can reverse its own life cycle and begin again as a polyp.
+  unnumbered: ON. J.LLYF... CAN R.V.R.. .T. OWN L.F. CYCL. AND ..G.N AGA.N A. A POLYP.
+  hidden   : E I S H B  (33% of cells)
+  levers   : letters=58 clues=12 distinct=20 pairLoad=1.33 vowels=0.379 common=0.621 stop=0.259 qFree=3 aFree=8
+  A. JELLY (JELLY)  It wobbles with confidence
+  B. GRAVITY (GRAVITY)  Why nothing here floats away
+  C. WAFFLE (WAFFLE)  Grid you pour syrup into
+  D. PAPYRUS (PAPYR-S)  Reed that carried the first writing
+  E. DOLPHIN (DOL-HIN)  It sleeps with half its brain awake
+  F. ICING (ICING)  Sweet coat on a cake
+  G. SCRIBE (SC-IBE)  The one in the room who could write
+  H. FALCON (-ALCON)  The fastest thing wearing feathers
+  I. OASIS (OAS-S)  Water in the middle of nowhere
+  J. NAP (NA-)  A short guilt-free sleep
+  K. NET (NE-)  It catches fish and stops goals
+  L. EVE (E-E)  The night before the big day
