@@ -873,7 +873,6 @@ function openPuzzle(index) {
   );
   /* likewise a board saved before the quote finished the puzzle for you */
   const quoteAlreadyDone = quoteComplete();
-  if (quoteAlreadyDone) settleWordsFromQuote();
   S.sel = firstOpenSlot();
   S.ctx = "clue";
   S.busy = false;
@@ -882,7 +881,12 @@ function openPuzzle(index) {
   S.overlay = S.p.strikes <= 0 ? "fail" : null;
   render();
   if (S.overlay) return;
-  if (quoteAlreadyDone) return void setTimeout(win, 600);
+  if (quoteAlreadyDone) {
+    S.busy = true;
+    const board = S.p;
+    return void setTimeout(() => winIfStillPlaying(board),
+      settleWordsFromQuote(QUOTE_LEAD) + 700);
+  }
   /* the board has to exist before the burst can animate across it */
   fireIntroBurst();
 }
@@ -1128,19 +1132,64 @@ function settleQuoteFromWords(rows) {
  * The mirror of settleQuoteFromWords: once the quote is whole it has already
  * told you every answer, so the remaining answer cells fall into place rather
  * than asking the player to type out a foregone conclusion.
+ *
+ * This is the payoff of the whole puzzle, so it plays as a cascade down the
+ * clue list instead of dropping the board at once: each word takes its letters
+ * in turn, scrolls itself into view and flashes the solved sweep, then the next
+ * word starts. How much is left varies enormously -- a player who worked the
+ * quote directly can leave every answer empty -- so the pace is fitted to the
+ * work remaining rather than fixed per letter, keeping the run inside
+ * CASCADE_MS either way. Returns the moment it finishes, so the caller knows
+ * when the win screen may follow.
  */
-function settleWordsFromQuote() {
+const CASCADE_MS = 2400;
+const CASCADE_MAX_STEP = 45;
+/* how long the quote keeps the stage to itself before the answers start */
+const QUOTE_LEAD = 600;
+
+function settleWordsFromQuote(startAt) {
   const p = S.p;
-  let k = 0;
-  p.slots.forEach(s => {
-    if (s.clue >= 0 && !s.locked) {
+  const runs = [];
+  let cells = 0;
+  p.clues.forEach((row, i) => {
+    const open = row.slots.filter(id => !p.slots[id].locked);
+    if (!open.length) return;
+    runs.push({ i: i, row: row, open: open });
+    cells += open.length;
+  });
+  if (!runs.length) return startAt;
+
+  /* the row gap is worth two letters, so budget for both together */
+  const step = Math.min(CASCADE_MAX_STEP, CASCADE_MS / (cells + runs.length * 2));
+  let t = startAt;
+
+  /* a few seconds is long enough for the player to walk out, so every step
+     checks it is still animating the board it was started for */
+  runs.forEach((r, k) => {
+    r.open.forEach((id, j) => setTimeout(() => {
+      if (S.p !== p) return;
+      const s = p.slots[id];
       s.value = s.correct;
       s.locked = true;
-      const wait = Math.min(k++ * 25, 260);
-      setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
-    }
+      bump(s, "pop");
+      syncCells();
+    }, t + j * step));
+
+    const span = r.open.length * step;
+    setTimeout(() => {
+      if (S.p !== p) return;
+      r.row.solved = true;
+      syncCells();
+      flashRow(r.i);
+      scrollRowIntoView(r.i);
+      buzz(720 + k * 26, 50);
+    }, t + span);
+
+    t += span + step * 2;
   });
-  refreshSolved();
+
+  vibrate([18, 60, 18]);
+  return t;
 }
 
 /* returns the rows that came out on this keystroke, so the caller can applaud */
@@ -1164,14 +1213,16 @@ function quoteComplete() {
  * with a ripple and a light burst. The quote cheer is the last beat before the
  * win screen, so it has to feel smaller than the full screen one that follows.
  */
+function flashRow(i) {
+  const node = document.getElementById("row" + i);
+  if (!node) return;
+  node.classList.add("justSolved");
+  setTimeout(() => node.classList.remove("justSolved"), 720);
+}
+
 function celebrateRows(rows) {
   if (!rows.length) return;
-  rows.forEach((i, k) => setTimeout(() => {
-    const node = document.getElementById("row" + i);
-    if (!node) return;
-    node.classList.add("justSolved");
-    setTimeout(() => node.classList.remove("justSolved"), 720);
-  }, k * 90));
+  rows.forEach((i, k) => setTimeout(() => flashRow(i), k * 90));
   buzz(880, 70);
   vibrate(25);
 }
@@ -1186,7 +1237,8 @@ function afterFill(fresh, quoteWasDone) {
   const quoteJustDone = !quoteWasDone && quoteComplete();
   if (quoteJustDone) {
     S.p.quoteHailed = true;
-    settleWordsFromQuote();
+    /* the board finishes itself from here, so typing is closed off */
+    S.busy = true;
   }
   saveProgress();
   syncCells();
@@ -1194,11 +1246,15 @@ function afterFill(fresh, quoteWasDone) {
   if (quoteJustDone) {
     celebrateRows(fresh);
     cheerQuote();
-    setTimeout(win, 1500);
+    /* the answers start filling while the quote is still rippling, so the
+       cascade reads as the quote handing the words over */
+    const board = S.p;
+    setTimeout(() => winIfStillPlaying(board), settleWordsFromQuote(QUOTE_LEAD) + 700);
     return true;
   }
   if (isWon()) {
-    setTimeout(win, 260);
+    const board = S.p;
+    setTimeout(() => winIfStillPlaying(board), 260);
     return true;
   }
   celebrateRows(fresh);
@@ -1241,7 +1297,7 @@ function hintLabel() {
 
 function useHint() {
   const p = S.p;
-  if (!p || S.overlay) return;
+  if (!p || S.overlay || S.busy) return;
   if (!UNLIMITED_HINTS && S.profile.hints <= 0) return toast("No hints left");
   const s = slotOf(S.sel);
   if (!s || s.locked) return toast("Pick an empty cell first");
@@ -1380,6 +1436,12 @@ function abandon() {
 }
 
 /* ============================================================= flow: win */
+
+/* the cascade takes seconds, and leaving the board in the middle of it must not
+   land the player on a win screen for a puzzle they walked away from */
+function winIfStillPlaying(p) {
+  if (S.p === p && S.screen === "puzzle") win();
+}
 
 function win() {
   const p = S.p;
@@ -1941,7 +2003,11 @@ function syncCells() {
 function scrollClueIntoView() {
   const sel = S.p.slots[S.sel];
   if (!sel || sel.clue < 0) return;
-  const row = document.getElementById("row" + sel.clue);
+  scrollRowIntoView(sel.clue);
+}
+
+function scrollRowIntoView(i) {
+  const row = document.getElementById("row" + i);
   const box = app.querySelector(".clueScroll");
   if (!row || !box) return;
   const top = row.offsetTop, bot = top + row.offsetHeight;
