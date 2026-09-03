@@ -273,6 +273,15 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .cell.broke .breakMark{position:absolute;inset:0;display:grid;place-items:center}
 .cell.broke .breakMark svg{width:70%;height:70%}
 
+/* names the half of the screen the puzzle is really about, and states the win
+   condition once so the two grids do not have to explain themselves */
+.quoteHead{flex:none;margin:0 14px 6px}
+.qhTitle{
+  font-size:12px;font-weight:900;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--primary);
+}
+.qhSub{font-size:11.5px;font-weight:700;color:var(--muted);margin-top:1px}
+
 .quoteCard{
   flex:none;margin:2px 14px 12px;padding:14px 12px;
   background:var(--card);border:2px solid var(--line);
@@ -307,8 +316,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 }
 .cell.free .ix{color:#C4B3A0}
 /* every other cell of the selected letter, in the quote and in the clue list.
-   It has to carry real contrast, because it is the only thing showing where a
-   letter goes when auto-fill is off. */
+   Part of the key guide rather than plain play, so it can carry real contrast
+   alongside the key it lights up. */
 .cell.peer{background:var(--cell-link);border-color:#E9A055;border-width:2px}
 .cell.peer .ix{color:#B4661C}
 .cell.sel{border-color:var(--primary);border-width:2.5px;background:#fff;
@@ -391,8 +400,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 }
 .hintBtn:active{transform:translateY(2px)}
 .hintBtn.empty{color:var(--muted)}
-.hintBtn .bolt{width:28px;height:28px;display:block}
-
 /* keyboard */
 .kb{flex:none;padding:8px 6px 6px;display:flex;flex-direction:column;gap:6px}
 .krow{display:flex;gap:5px;justify-content:center}
@@ -638,7 +645,7 @@ const HEARTBREAK = `<span class="breakMark"><svg viewBox="0 0 24 22"><path fill=
 function blankProfile() {
   return {
     streak: 0, best: 0, hints: START_HINTS, coins: START_COINS,
-    done: {}, progress: {}, power: {}, glow: {}
+    done: {}, progress: {}, power: {}, glow: {}, burst: {}
   };
 }
 
@@ -649,6 +656,7 @@ function load() {
     const p = Object.assign(blankProfile(), JSON.parse(raw));
     if (typeof p.coins !== "number") p.coins = START_COINS;
     if (!p.glow) p.glow = {};
+    if (!p.burst) p.burst = {};
     return p;
   } catch (e) {
     return blankProfile();
@@ -863,6 +871,9 @@ function openPuzzle(index) {
       .map((c, i) => i)
       .filter(i => S.p.clues[i].slots.every(id => S.p.slots[id].locked))
   );
+  /* likewise a board saved before the quote finished the puzzle for you */
+  const quoteAlreadyDone = quoteComplete();
+  if (quoteAlreadyDone) settleWordsFromQuote();
   S.sel = firstOpenSlot();
   S.ctx = "clue";
   S.busy = false;
@@ -870,6 +881,10 @@ function openPuzzle(index) {
   /* closing the tab on the fail popup must not hand back three fresh strikes */
   S.overlay = S.p.strikes <= 0 ? "fail" : null;
   render();
+  if (S.overlay) return;
+  if (quoteAlreadyDone) return void setTimeout(win, 600);
+  /* the board has to exist before the burst can animate across it */
+  fireIntroBurst();
 }
 
 function firstOpenSlot() {
@@ -940,6 +955,29 @@ function selectSlot(id, ctx) {
   scrollClueIntoView();
 }
 
+function firstOpenQuoteSlot() {
+  const p = S.p;
+  for (let c = 0; c < p.cellSlot.length; c++) {
+    const id = p.cellSlot[c];
+    if (id != null && !p.slots[id].locked) return id;
+  }
+  return null;
+}
+
+function firstOpenClueSlot() {
+  const p = S.p;
+  for (const row of p.clues) {
+    for (const id of row.slots) if (!p.slots[id].locked) return id;
+  }
+  return null;
+}
+
+/*
+ * Typing walks along whichever grid the cursor is working in. When that grid
+ * runs out the cursor crosses to the other one rather than stalling, so
+ * finishing every answer drops you into the quote, and finishing the quote
+ * brings you back to the answers.
+ */
 function advance() {
   const p = S.p, cur = slotOf(S.sel);
   if (!cur) return;
@@ -953,6 +991,9 @@ function advance() {
       const next = p.clues[(cur.clue + c) % p.clues.length];
       for (const id of next.slots) if (!p.slots[id].locked) return selectSlot(id);
     }
+    const intoQuote = firstOpenQuoteSlot();
+    if (intoQuote != null) selectSlot(intoQuote, "quote");
+    return;
   }
 
   /* a quote-only cell simply walks to the next open cell along the quote */
@@ -960,8 +1001,10 @@ function advance() {
     const id = p.cellSlot[c];
     if (id != null && !p.slots[id].locked) return selectSlot(id);
   }
-  const open = p.slots.find(s => !s.locked);
-  if (open) selectSlot(open.id);
+  const wrapped = firstOpenQuoteSlot();
+  if (wrapped != null) return selectSlot(wrapped, "quote");
+  const intoClues = firstOpenClueSlot();
+  if (intoClues != null) selectSlot(intoClues, "clue");
 }
 
 function retreat() {
@@ -993,10 +1036,7 @@ function typeLetter(ch) {
     fillLetter(s);
     const fresh = lockCompletedWords();
     settleQuoteFromWords(fresh);
-    saveProgress();
-    syncCells();
-    if (isWon()) return void setTimeout(win, 260);
-    celebrate(fresh, quoteWasDone);
+    if (afterFill(fresh, quoteWasDone)) return;
     advance();
   } else {
     missLetter(s);
@@ -1044,25 +1084,15 @@ function backspace() {
 }
 
 /*
- * With the auto-fill powerup a correct letter settles that cell and every
- * matching cell in the quote. Clue-word peers stay empty unless the player
- * types them, which is what the powerup no longer buys.
+ * A correct letter settles only the cell it was typed into. Everything else
+ * spreads through the two settle rules: a solved answer reveals its quote
+ * cells, and a solved quote reveals the answers.
  */
 function fillLetter(slot) {
-  const ch = slot.correct;
-  const same = [slot];
-  /* the powerup spreads into the quote, but never for an unindexed (?) letter */
-  if (S.power && S.p.num[ch]) {
-    S.p.slots.forEach(s => {
-      if (s.id !== slot.id && s.clue < 0 && s.correct === ch) same.push(s);
-    });
-  }
-  same.forEach((s, i) => {
-    s.value = ch;
-    s.locked = true;
-    const wait = Math.min(i * 25, 200);
-    setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
-  });
+  slot.value = slot.correct;
+  slot.locked = true;
+  bump(slot, "pop");
+  syncCells();
 }
 
 /*
@@ -1094,6 +1124,25 @@ function settleQuoteFromWords(rows) {
   });
 }
 
+/*
+ * The mirror of settleQuoteFromWords: once the quote is whole it has already
+ * told you every answer, so the remaining answer cells fall into place rather
+ * than asking the player to type out a foregone conclusion.
+ */
+function settleWordsFromQuote() {
+  const p = S.p;
+  let k = 0;
+  p.slots.forEach(s => {
+    if (s.clue >= 0 && !s.locked) {
+      s.value = s.correct;
+      s.locked = true;
+      const wait = Math.min(k++ * 25, 260);
+      setTimeout(() => { bump(s, "pop"); syncCells(); }, wait);
+    }
+  });
+  refreshSolved();
+}
+
 /* returns the rows that came out on this keystroke, so the caller can applaud */
 function lockCompletedWords() {
   const fresh = [];
@@ -1111,27 +1160,49 @@ function quoteComplete() {
 }
 
 /*
- * Three sizes of applause: a row sweep for a word, the quote card reacting with
- * a ripple and a light burst for the quote, and the full screen cheer for the
- * puzzle. Each one has to feel smaller than the next, which is why the quote is
- * skipped when the same keystroke also wins the puzzle.
+ * Two sizes of applause: a row sweep for a word, and the quote card reacting
+ * with a ripple and a light burst. The quote cheer is the last beat before the
+ * win screen, so it has to feel smaller than the full screen one that follows.
  */
-function celebrate(rows, quoteWasDone) {
-  if (rows.length) {
-    rows.forEach((i, k) => setTimeout(() => {
-      const node = document.getElementById("row" + i);
-      if (!node) return;
-      node.classList.add("justSolved");
-      setTimeout(() => node.classList.remove("justSolved"), 720);
-    }, k * 90));
-    buzz(880, 70);
-    vibrate(25);
-  }
+function celebrateRows(rows) {
+  if (!rows.length) return;
+  rows.forEach((i, k) => setTimeout(() => {
+    const node = document.getElementById("row" + i);
+    if (!node) return;
+    node.classList.add("justSolved");
+    setTimeout(() => node.classList.remove("justSolved"), 720);
+  }, k * 90));
+  buzz(880, 70);
+  vibrate(25);
+}
 
-  if (!quoteWasDone && quoteComplete()) {
+/*
+ * Shared tail for every move that fills cells. Completing the quote completes
+ * the puzzle, so the quote cheer plays while the remaining answer cells settle
+ * behind it, and only then does the win screen arrive. Returns true when the
+ * puzzle is over, so the caller knows not to move the cursor on.
+ */
+function afterFill(fresh, quoteWasDone) {
+  const quoteJustDone = !quoteWasDone && quoteComplete();
+  if (quoteJustDone) {
     S.p.quoteHailed = true;
-    cheerQuote();
+    settleWordsFromQuote();
   }
+  saveProgress();
+  syncCells();
+
+  if (quoteJustDone) {
+    celebrateRows(fresh);
+    cheerQuote();
+    setTimeout(win, 1500);
+    return true;
+  }
+  if (isWon()) {
+    setTimeout(win, 260);
+    return true;
+  }
+  celebrateRows(fresh);
+  return false;
 }
 
 function cheerQuote() {
@@ -1180,34 +1251,47 @@ function useHint() {
   fillLetter(s);
   const fresh = lockCompletedWords();
   settleQuoteFromWords(fresh);
-  saveProgress();
   save();
-  syncCells();
-  if (isWon()) return void setTimeout(win, 260);
-  celebrate(fresh, quoteWasDone);
+  if (afterFill(fresh, quoteWasDone)) return;
   advance();
 }
 
-function useBurst() {
+/*
+ * The letter burst is bought once on the intro screen and spends itself the
+ * moment the board opens: three random quote cells light up in turn. It fires
+ * at most once per attempt, so reopening a part-played board does not keep
+ * handing out letters.
+ */
+const BURST_LETTERS = 3;
+
+function fireIntroBurst() {
   const p = S.p;
-  if (!p || S.overlay || S.busy) return;
-  const open = p.slots.filter(s => s.clue >= 0 && !s.locked);
-  if (!open.length) return toast("Nothing left to burst");
+  if (!p || !S.power) return;
+  const id = keyOf(p.data);
+  if (S.profile.burst[id]) return;
+
+  const pool = p.slots.filter(s => s.clue < 0 && !s.locked);
+  if (!pool.length) return;
   const picks = [];
-  const pool = open.slice();
-  while (picks.length < 3 && pool.length) {
+  while (picks.length < BURST_LETTERS && pool.length) {
     picks.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
   }
-  const quoteWasDone = S.p.quoteHailed;
-  playAd("w2e", () => {
-    picks.forEach(s => fillLetter(s));
+
+  S.profile.burst[id] = true;
+  const quoteWasDone = p.quoteHailed;
+
+  /* revealed one at a time so the gift is watched rather than just found */
+  picks.forEach((s, i) => setTimeout(() => {
+    s.value = s.correct;
+    s.locked = true;
+    bump(s, "pop");
+    syncCells();
+    if (i < picks.length - 1) return;
     const fresh = lockCompletedWords();
     settleQuoteFromWords(fresh);
-    saveProgress();
-    syncCells();
-    if (isWon()) return void setTimeout(win, 260);
-    celebrate(fresh, quoteWasDone);
-  });
+    save();
+    afterFill(fresh, quoteWasDone);
+  }, 280 + i * 170));
 }
 
 const bumps = {};
@@ -1277,14 +1361,18 @@ function doRetry() {
   S.p.retried = true;
   S.sel = firstOpenSlot();
   S.overlay = null;
+  /* a fresh board earns the burst it was already paid for */
+  delete S.profile.burst[keyOf(S.p.data)];
   clearProgress(keyOf(S.p.data));
   render();
+  fireIntroBurst();
 }
 
 function abandon() {
   S.profile.streak = 0;
   delete S.profile.power[keyOf(S.p.data)];
   delete S.profile.glow[keyOf(S.p.data)];
+  delete S.profile.burst[keyOf(S.p.data)];
   clearProgress(keyOf(S.p.data));
   save();
   S.overlay = null;
@@ -1301,6 +1389,7 @@ function win() {
 
   delete S.profile.power[keyOf(p.data)];
   delete S.profile.glow[keyOf(p.data)];
+  delete S.profile.burst[keyOf(p.data)];
   const reward = S.profile.streak % HINT_EVERY === 0;
   if (reward) S.profile.hints++;
   S.streakInfo = { streak: S.profile.streak, reward: reward };
@@ -1579,14 +1668,14 @@ function soonCards() {
 
 function powerCopy() {
   return S.powerPick
-    ? "A correct letter fills every matching cell in the quote."
-    : "Turn it on and a correct letter fills matching cells in the quote.";
+    ? "Three letters in the quote are revealed the moment you start."
+    : "Turn it on and three quote letters are revealed the moment you start.";
 }
 
 function glowCopy() {
   return S.glowPick
-    ? "The right key lights up for the cell you are on."
-    : "Spend 5 coins and the right key lights up for the cell you are on.";
+    ? "The right key lights up, and so does every cell that letter fills."
+    : "Spend 5 coins to light the right key and every cell that letter fills.";
 }
 
 function socialProof(d) {
@@ -1632,13 +1721,13 @@ function introHtml() {
       <div class="powerRow">
         <button class="powerSquare ${S.powerPick ? "on" : ""}" data-act="power">
           <div class="psBadge">W2E</div>
-          <div class="psTitle">Auto-fill</div>
-          <div class="psWatch">Quote only</div>
+          <div class="psTitle">Letter burst</div>
+          <div class="psWatch">3 free letters</div>
           <div class="sw"><i></i><span>${S.powerPick ? "W2E" : "Off"}</span></div>
         </button>
         <button class="powerSquare ${S.glowPick ? "on" : ""}" data-act="glow">
           <div class="psBadge">5</div>
-          <div class="psTitle">Key glow</div>
+          <div class="psTitle">Key guide</div>
           <div class="psWatch">5 coins</div>
           <div class="sw"><i></i><span>${S.glowPick ? "On" : "Off"}</span></div>
         </button>
@@ -1731,6 +1820,11 @@ function puzzleHtml() {
       <div class="lives">${lives}</div>
     </div>
 
+    <div class="quoteHead">
+      <div class="qhTitle">Quote</div>
+      <div class="qhSub">Solve the quote to complete the puzzle</div>
+    </div>
+
     <div class="quoteCard"><div class="quoteGrid">${groups.join("")}</div></div>
 
     <div class="clueWrap">
@@ -1738,11 +1832,6 @@ function puzzleHtml() {
       <div class="rail"><div class="thumb"></div></div>
       <div class="hintStack">
         <button class="hintBtn ${S.profile.hints ? "" : "empty"}" data-act="hint" aria-label="Hint">&#128161;</button>
-        <button class="hintBtn" data-act="burst" aria-label="Letter burst">
-          <svg class="bolt" viewBox="0 0 16 20" fill="none" aria-hidden="true">
-            <path d="M9.2 1.2 2.4 11h5.2L6.6 18.8 14 8.4H8.6L9.2 1.2z" fill="#FF8A3D" stroke="#C85A12" stroke-width="1.2" stroke-linejoin="round"/>
-          </svg>
-        </button>
       </div>
     </div>
 
@@ -1799,11 +1888,12 @@ function syncCells() {
   const selClue = sel ? sel.clue : -2;
 
   /* one slot, one cell: a clue letter draws in the list, a quote letter in the
-     quote. Every other cell holding the selected letter is marked as a peer,
-     across both grids, which is how a shared index reads before it is solved.
-     An unnumbered letter never marks peers: with no index on show, revealing
-     where it goes would hand back the difficulty that hiding it bought. */
-  const spread = !!(sel && p.num[sel.correct]);
+     quote. Marking every other cell that holds the selected letter is what the
+     key guide buys, so ordinary play leaves the board plain and the player has
+     to carry the index in their head. An unnumbered letter never marks peers:
+     with no index on show, revealing where it goes would hand back the
+     difficulty that hiding it bought. */
+  const spread = !!(sel && S.glow && p.num[sel.correct]);
   p.slots.forEach(s => {
     const node = s.clue >= 0
       ? document.getElementById("a" + s.id)
@@ -2018,7 +2108,6 @@ app.addEventListener("click", e => {
   switch (act.dataset.act) {
     case "home": if (S.p) saveProgress(); goHome(); break;
     case "hint": useHint(); break;
-    case "burst": useBurst(); break;
     case "revive": doRevive(); break;
     case "retry": doRetry(); break;
     case "askQuit": S.overlay = "confirm"; paintOverlay(); break;
